@@ -6,6 +6,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="user")
 // hi remus
+// hi alfred
 public class User {
 
 }
