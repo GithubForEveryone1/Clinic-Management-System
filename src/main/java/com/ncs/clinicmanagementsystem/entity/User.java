@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name="user")
 
@@ -36,6 +38,7 @@ public class User {
 	@Column(name="account_type")
 	private String account_type;
 	@Column(name="date_created")
+	@CreationTimestamp
 	private Date date_created;
 	public int getUser_id() {
 		return user_id;
