@@ -4,12 +4,14 @@ import com.ncs.clinicmanagementsystem.entity.User;
 import com.ncs.clinicmanagementsystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+@CrossOrigin("http://localhost:4200")
 @Service
 public class UserService {
 
