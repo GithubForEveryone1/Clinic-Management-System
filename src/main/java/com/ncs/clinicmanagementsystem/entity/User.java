@@ -129,5 +129,10 @@ public class User {
 	}
 	
 	
+	// default User constructor
+	public User() {
+
+	}
+	
 	
 }
