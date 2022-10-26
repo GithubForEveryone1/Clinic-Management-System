@@ -128,6 +128,6 @@ public class User {
 		this.date_created = date_created;
 	}
 	
-	
+	public User() {};
 	
 }
