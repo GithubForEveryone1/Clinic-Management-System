@@ -1,3 +1,5 @@
+/*
+
 package com.ncs.clinicmanagementsystem.controller;
 
 import java.util.List;
@@ -25,3 +27,5 @@ public class UserController {
     }
 
 }
+
+*/
