@@ -14,5 +14,4 @@ public interface UserService {
 	
 	public void deleteByEmail(String theEmail);
 	
-	
 }
