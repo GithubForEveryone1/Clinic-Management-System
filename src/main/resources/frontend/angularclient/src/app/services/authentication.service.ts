@@ -7,13 +7,13 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AuthenicationService {
   
   private baseUrl = 'http://localhost:8080/api';
 
   constructor(private httpClient: HttpClient) { }
 
-  getUserList(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.baseUrl}/user`);
+  authenticateUser(user: any): Observable<User> {
+    return this.httpClient.post<User>(`${this.baseUrl}/user/login`, user);
   }
 }
