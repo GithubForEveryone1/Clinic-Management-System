@@ -1,10 +1,10 @@
-package com.ncs.clinicmanagementsystem.service;
+package com.ncs.clinicmanagementsystem.dao;
 
 import java.util.List;
 
 import com.ncs.clinicmanagementsystem.entity.User;
 
-public interface UserService {
+public interface UserDAO {
 
 	public List<User> findAll();
 	
@@ -13,6 +13,5 @@ public interface UserService {
 	public void save(User theUser);
 	
 	public void deleteByEmail(String theEmail);
-	
 	
 }
