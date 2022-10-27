@@ -128,11 +128,6 @@ public class User {
 		this.date_created = date_created;
 	}
 	
-	
-	// default User constructor
-	public User() {
-
-	}
-	
+	public User() {};
 	
 }
