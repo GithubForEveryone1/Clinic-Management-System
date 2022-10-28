@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DummyComponent } from './components/dummy/dummy.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { RouteGuardService } from './services/route-guard.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'user-list', component: UserListComponent}, 
+  {path: 'logout', component: LogoutComponent, canActivate: [RouteGuardService]},
+  {path: 'user-list', component: UserListComponent, canActivate: [RouteGuardService]},
+  {path: 'test', component: DummyComponent, canActivate: [RouteGuardService]},
   {path: '**', component: ErrorComponent} 
 ];
 

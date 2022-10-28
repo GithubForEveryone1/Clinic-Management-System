@@ -62,8 +62,6 @@ public class UserRestController {
 	public User login(@RequestBody User theUser) {
 		String userEmail = theUser.getEmail();
 		String userPassword = theUser.getPassword();
-		System.out.println(userEmail);
-		System.out.println(userPassword);
 
 		User tempUser = userService.findByEmail(userEmail);
 		System.out.println(tempUser);

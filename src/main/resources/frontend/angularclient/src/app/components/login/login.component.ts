@@ -12,7 +12,6 @@ export class LoginComponent implements OnInit {
 
   email = "";
   password = "";
-  loginResult = "";
 
   constructor(private router: Router, private authenticationService: AuthenicationService) { }
 
@@ -34,7 +33,7 @@ export class LoginComponent implements OnInit {
           console.log("Wrong password");
         }
         else {
-          this.router.navigate(['user-list']);
+          this.router.navigate(['test']);
           sessionStorage.setItem("firstName", data.first_name);
           sessionStorage.setItem("email", data.email);
           sessionStorage.setItem("gender", data.gender);
