@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
 
   submitLogin() {  
     const formData = {
-      "email": this.email,
-      "password": this.password
+      'email': this.email,
+      'password': this.password
     }
 
     this.authenticationService.authenticateUser(formData).subscribe(

@@ -16,4 +16,12 @@ export class UserService {
   getUserList(): Observable<User[]> {
     return this.httpClient.get<User[]>(`${this.baseUrl}/user`);
   }
+
+  createUser(user: any): Observable<User> {
+    return this.httpClient.post<User>(`${this.baseUrl}/user/create`, user);
+  }
+  
+  deleteUser(email: any) {
+    return this.httpClient.delete(`${this.baseUrl}/user/delete`, {body: email});
+  }
 }
