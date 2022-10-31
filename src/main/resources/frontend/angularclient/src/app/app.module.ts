@@ -12,6 +12,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { AuthenticationService } from './services/authentication.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { DummyComponent } from './components/dummy/dummy.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DummyComponent } from './components/dummy/dummy.component';
     LoginComponent,
     ErrorComponent,
     LogoutComponent,
-    DummyComponent
+    DummyComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
