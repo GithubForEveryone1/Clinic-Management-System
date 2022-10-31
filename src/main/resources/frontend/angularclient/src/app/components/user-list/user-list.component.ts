@@ -10,6 +10,10 @@ import { UserService } from 'src/app/services/user.service';
 export class UserListComponent implements OnInit {
 
   users: User[] = [];
+  firstName = sessionStorage.getItem("firstName")
+  email = sessionStorage.getItem("email")
+  gender = sessionStorage.getItem("gender")
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {

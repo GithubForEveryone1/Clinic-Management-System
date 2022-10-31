@@ -9,11 +9,11 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
   
-  private baseUrl = 'http://localhost:8080/';
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private httpClient: HttpClient) { }
 
   getUserList(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.baseUrl}user`);
+    return this.httpClient.get<User[]>(`${this.baseUrl}/user`);
   }
 }
