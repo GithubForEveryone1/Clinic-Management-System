@@ -24,3 +24,4 @@ export class UserService {
   deleteUser(email: any) {
     return this.httpClient.delete(`${this.baseUrl}/user/delete`, {body: email});
   }
+}
