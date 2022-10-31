@@ -46,10 +46,6 @@ public class UserRestController {
 	// add mapping for POST /users - add new user
 	@PostMapping("/user/create")
 	public User addUser(@RequestBody User theUser) {
-
-		// Salty password
-		theUser.setPassword(BCrypt.hashpw(theUser.getPassword(), BCrypt.gensalt()));
-		userService.save(theUser);
 		
 		// check if email already exist.
 		User tempUser = userService.findByEmail(theUser.getEmail());
@@ -57,6 +53,10 @@ public class UserRestController {
 		if (tempUser != null) { // Throw exception if email already exist.
 			throw new RuntimeException("This email address has already been registered.");
 		}
+		
+		// Salty password
+		theUser.setPassword(BCrypt.hashpw(theUser.getPassword(), BCrypt.gensalt()));
+		userService.save(theUser);
 		
 		return theUser;
 	}
