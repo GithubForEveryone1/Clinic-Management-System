@@ -14,6 +14,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RegisterComponent } from './components/register/register.component';
     LogoutComponent,
     DummyComponent,
     NavbarComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
