@@ -3,7 +3,9 @@ package com.ncs.clinicmanagementsystem.restcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.ncs.clinicmanagementsystem.entity.User;
@@ -22,7 +24,7 @@ public class UserRestController {
 		userService = theUserService;
 	}
 	
-	// expose "/employees" and return list of employees
+	// expose "/user" and return list of users
 	@GetMapping("/user")
 	public List<User> findAll() {
 		return userService.findAll();
@@ -44,15 +46,17 @@ public class UserRestController {
 	// add mapping for POST /users - add new user
 	@PostMapping("/user/create")
 	public User addUser(@RequestBody User theUser) {
-		
-		// also just in case they pass an id in JSON ... set id to 0
-		// this is to force a save of new item ... instead of update
-		
-		//theUser.setUser_id(0); //this is to force id to 0 if somehow id was given to preventing updating of record.
 
 		// Salty password
 		theUser.setPassword(BCrypt.hashpw(theUser.getPassword(), BCrypt.gensalt()));
 		userService.save(theUser);
+		
+		// check if email already exist.
+		User tempUser = userService.findByEmail(theUser.getEmail());
+		
+		if (tempUser != null) { // Throw exception if email already exist.
+			throw new RuntimeException("This email address has already been registered.");
+		}
 		
 		return theUser;
 	}
@@ -69,7 +73,10 @@ public class UserRestController {
 		// If email does not exist in DB
 		if (tempUser == null) {
 			System.out.println("User not found");
-			return null;
+			
+			//throw new ResponseStatusException(HttpStatus.CONFLICT, "Email does not exist");
+			throw new RuntimeException("Email does not exist.");
+			//return null;
 		}
 
 		boolean emailMatch;
@@ -87,7 +94,8 @@ public class UserRestController {
 		} else {
 			tempUser.setPassword("");
 			System.out.println("Wrong password");
-			return tempUser;
+			throw new RuntimeException("Email or password does not match.");
+			//return null;
 		}
 
 	}
