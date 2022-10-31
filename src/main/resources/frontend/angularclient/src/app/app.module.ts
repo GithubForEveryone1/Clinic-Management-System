@@ -9,7 +9,7 @@ import { UserService } from './services/user.service';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ErrorComponent } from './components/error/error.component';
-import { AuthenicationService } from './services/authentication.service';
+import { AuthenticationService } from './services/authentication.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 
