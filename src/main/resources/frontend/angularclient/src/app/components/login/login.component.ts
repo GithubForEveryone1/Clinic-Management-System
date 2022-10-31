@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/user';
@@ -12,6 +13,8 @@ export class LoginComponent implements OnInit {
 
   email = "";
   password = "";
+
+  errorMsg = "";
 
   constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
@@ -38,8 +41,16 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem("email", data.email);
           sessionStorage.setItem("gender", data.gender);
         }
-      }
+      },
+      error => this.handleErrorResponse(error)
     )
-
   }
+
+  handleErrorResponse(error:HttpErrorResponse) {
+    console.log(error);
+    console.log(error.error);
+    console.log(error.error.message);
+    this.errorMsg = error.error.message;
+  }
+
 }

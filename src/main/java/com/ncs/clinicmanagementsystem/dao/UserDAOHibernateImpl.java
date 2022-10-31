@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.hibernate.Criteria;
+import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
@@ -50,16 +51,9 @@ public class UserDAOHibernateImpl implements UserDAO {
 		Session currentSession = entityManager.unwrap(Session.class);
 		
 		// get the user
-		//User theUser = currentSession.get(User.class, theEmail); //only gets from the primary key id?
-		//Query theQuery = currentSession.createQuery("SELECT user_id, first_name, last_name, email, address, contact_number, password, dob, gender, account_type, date_created FROM user WHERE email=:userEmail"); //not working... kiv..
-		//theQuery.setParameter("userEmail", theEmail);
-		//List<User> theUser = (List<User>) theQuery.uniqueResult();
 		Criteria criteria = currentSession.createCriteria(User.class);
 		User theUser = (User) criteria.add(Restrictions.eq("email", theEmail)).uniqueResult();
 		
-		//List<User> theUser = currentSession.createQuery("from user u where u.email=:theEmail").list();
-		
-		// return the user
 		return theUser;
 	}
 
@@ -68,10 +62,22 @@ public class UserDAOHibernateImpl implements UserDAO {
 	public void save(User theUser) {
 		// get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
-				
-		// save user
-		currentSession.saveOrUpdate(theUser); //need to check the pre-defined saving condition ...
-	
+		
+		// Save user.
+		currentSession.saveOrUpdate(theUser);
+		
+		
+		/* checking where to park validation logic... maybe should park at RestController.
+		// Check if email already exist.
+		ScrollableResults res = currentSession.createCriteria(User.class).add(Restrictions.eq("email", theUser.getEmail())).scroll();
+		if (res.next()) { // Returns -1 if email exist.
+			return -1;
+		}
+		else { // Save user. Returns 1 for successfully adding a new user.
+			currentSession.saveOrUpdate(theUser);
+			return 1;
+		}
+		*/
 	}
 
 	
@@ -80,7 +86,7 @@ public class UserDAOHibernateImpl implements UserDAO {
 		// get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
 		
-		// delete user with primary key???
+		// delete user with primary key??? //work in progress...
 		Query theQuery = currentSession.createQuery("delete from user where email=:userEmail");
 		theQuery.setParameter("userEmail", theEmail);
 		theQuery.executeUpdate();
