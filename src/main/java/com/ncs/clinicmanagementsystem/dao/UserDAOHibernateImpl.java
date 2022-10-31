@@ -87,7 +87,7 @@ public class UserDAOHibernateImpl implements UserDAO {
 		Session currentSession = entityManager.unwrap(Session.class);
 		
 		// delete user with primary key??? //work in progress...
-		Query theQuery = currentSession.createQuery("delete from user where email=:userEmail");
+		Query theQuery = currentSession.createQuery("delete from User where email=:userEmail");
 		theQuery.setParameter("userEmail", theEmail);
 		theQuery.executeUpdate();
 		

@@ -97,7 +97,18 @@ public class UserRestController {
 			throw new RuntimeException("Email or password does not match.");
 			//return null;
 		}
-
 	}
+<<<<<<< HEAD
+=======
+
+	// This mapping is temporary just to delete emails by giving the front-end an email address
+	@DeleteMapping("user/delete")
+	public void delete(@RequestBody User theUser) {
+		System.out.println("hello =)");
+		userService.deleteByEmail(theUser.getEmail());
+	}
+	
+	
+>>>>>>> branch 'main' of https://github.com/GithubForEveryone1/Clinic-Management-System
 	
 }
