@@ -13,7 +13,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ErrorComponent,
     LogoutComponent,
     DummyComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
