@@ -1,5 +1,7 @@
 <h1 class="mt-5">🤒💊 Clinic 😷🦠</h1>
 
+<p *ngIf="errorMsg">{{ errorMsg }}</p>
+
 <form (ngSubmit)="submitLogin()">
     <div class="form-group mt-5">
         <label for="email">Email address</label>
