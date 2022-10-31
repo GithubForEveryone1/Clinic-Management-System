@@ -6,9 +6,10 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { RouteGuardService } from './services/route-guard.service';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent, canActivate: [RouteGuardService]},
   {path: 'user-list', component: UserListComponent, canActivate: [RouteGuardService]},
