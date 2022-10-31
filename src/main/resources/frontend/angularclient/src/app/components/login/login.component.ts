@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -112,4 +111,3 @@ export class LoginComponent implements OnInit {
   }
 
 }
->>>>>>> 0eb1b2f6 (Add registration component)
