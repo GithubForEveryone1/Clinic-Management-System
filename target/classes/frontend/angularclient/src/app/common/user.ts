@@ -6,10 +6,12 @@ export class User {
                 public address: string,
                 public contact_number: any,
                 public password: string,
-                public dob: Date,
+                //public dob: Date,
+                public dob: string,
                 public gender: string,
                 public account_type: string,
-                public date_created: Date
+                //public date_created: Date
+                public date_created: string
     ) {
 
     }

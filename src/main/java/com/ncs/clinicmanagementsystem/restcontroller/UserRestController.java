@@ -3,6 +3,7 @@ package com.ncs.clinicmanagementsystem.restcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ncs.clinicmanagementsystem.dao.UserDAO;
 import com.ncs.clinicmanagementsystem.entity.User;
 import com.ncs.clinicmanagementsystem.service.UserService;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class UserRestController {
@@ -26,7 +27,7 @@ public class UserRestController {
 		userService = theUserService;
 	}
 	
-	// expose "/employees" and return list of employees
+	// expose "/users" and return list of users
 	@GetMapping("/users")
 	public List<User> findAll() {
 		return userService.findAll();
@@ -60,7 +61,7 @@ public class UserRestController {
 
 	// add mapping for POST /users/login - user login
 	@PostMapping("/users/login")
-	public String login(@RequestBody User theUser) {
+	public User login(@RequestBody User theUser) {
 		
 		String userEmail = theUser.getEmail();
 		String userpassword = theUser.getPassword();
@@ -68,10 +69,12 @@ public class UserRestController {
 		User tempUser = userService.findByEmail(userEmail);
 		
 		if (tempUser.getEmail().equals(userEmail) && tempUser.getPassword().equals(userpassword)) {
-			return "You have successfully logged in.";
+			//return "You have successfully logged in.";
+			return tempUser;
 		}
 		
-		return "You have not successfully logged in.";
+		//return "You have not successfully logged in.";
+		return null;
 		
 	}
 	

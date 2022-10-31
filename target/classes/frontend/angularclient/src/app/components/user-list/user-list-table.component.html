@@ -1,0 +1,34 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>user_id</th>
+            <th>first_name</th>
+            <th>last_name</th>
+            <th>email</th>
+            <th>address</th>
+            <th>contact_number</th>
+            <th>password</th>
+            <th>dob</th>
+            <th>gender</th>
+            <th>account_type</th>
+            <th>date_created</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td class="align-middle">{{ user.user_id }}</td>
+            <td class="align-middle">{{ user.first_name }}</td>
+            <td class="align-middle">{{ user.last_name }}</td>
+            <td class="align-middle">{{ user.email }}</td>
+            <td class="align-middle">{{ user.address }}</td>
+            <td class="align-middle">{{ user.contact_number }}</td>
+            <td class="align-middle">{{ user.password }}</td>
+            <td class="align-middle">{{ user.dob }}</td>
+            <td class="align-middle">{{ user.gender }}</td>
+            <td class="align-middle">{{ user.account_type }}</td>
+            <td class="align-middle">{{ user.date_created }}</td>
+        </tr>
+    </tbody>
+
+</table>
