@@ -12,6 +12,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { AuthenticationService } from './services/authentication.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { DummyComponent } from './components/dummy/dummy.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { DummyComponent } from './components/dummy/dummy.component';
     LoginComponent,
     ErrorComponent,
     LogoutComponent,
-    DummyComponent
+    DummyComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
