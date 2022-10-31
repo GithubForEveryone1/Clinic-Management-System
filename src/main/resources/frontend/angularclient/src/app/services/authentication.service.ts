@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenicationService {
+export class AuthenticationService {
   
   private baseUrl = 'http://localhost:8080/api';
 
