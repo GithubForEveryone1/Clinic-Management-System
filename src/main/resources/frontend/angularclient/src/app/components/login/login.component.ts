@@ -36,10 +36,18 @@ export class LoginComponent implements OnInit {
           console.log("Wrong password");
         }
         else {
+<<<<<<< HEAD
           this.router.navigate(['user']);
           sessionStorage.setItem("firstName", data.first_name);
           sessionStorage.setItem("email", data.email);
           sessionStorage.setItem("gender", data.gender);
+=======
+          this.router.navigate(['test']);
+          //sessionStorage.setItem("firstName", data.first_name);
+          //sessionStorage.setItem("email", data.email);
+          //sessionStorage.setItem("gender", data.gender);
+          sessionStorage.setItem("loggedInUser", JSON.stringify(data));
+>>>>>>> 8ed7a3b4 (change to store User object on session sotrage, updated authentication service, update register page to show error)
         }
       },
       error => this.handleErrorResponse(error)
@@ -47,9 +55,9 @@ export class LoginComponent implements OnInit {
   }
 
   handleErrorResponse(error:HttpErrorResponse) {
-    console.log(error);
-    console.log(error.error);
-    console.log(error.error.message);
+    //console.log(error);
+    //console.log(error.error);
+    //console.log(error.error.message);
     this.errorMsg = error.error.message;
   }
 
