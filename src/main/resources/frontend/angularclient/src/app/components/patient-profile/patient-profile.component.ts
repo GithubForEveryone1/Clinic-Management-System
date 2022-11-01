@@ -8,15 +8,17 @@ import { User } from 'src/app/common/user';
 })
 export class PatientProfileComponent implements OnInit {
   
-  //firstName = sessionStorage.getItem("firstName")
-  //email = sessionStorage.getItem("email")
-  //gender = sessionStorage.getItem("gender")
   loggedInUserStr: string | null = sessionStorage.getItem("loggedInUser");
 
   //parse JSON back to User object
   loggedInUser = this.loggedInUserStr ? JSON.parse(this.loggedInUserStr) : null;
 
+  patientId = this.loggedInUser.user_id;
   firstName = this.loggedInUser.first_name;
+  lastName = this.loggedInUser.last_name;
+  dob = this.loggedInUser.dob;
+  address = this.loggedInUser.address;
+  contactNo = this.loggedInUser.contact_number;
   email = this.loggedInUser.email;
   gender = this.loggedInUser.gender;
 
