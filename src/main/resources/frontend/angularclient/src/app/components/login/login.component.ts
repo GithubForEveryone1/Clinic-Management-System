@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
     'date_created': ""
   }
 
-  formValidity = false;
   badLoginAttempted = false;
   errorMsg = "";
 
