@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -18,6 +19,8 @@ export class RegisterComponent implements OnInit {
   dob: Date = new Date();
   gender = "";
   
+  registerErrorMsg = "";
+
   emailForDelete = "";
 
   constructor(private router: Router, private userService: UserService) { }
@@ -40,8 +43,16 @@ export class RegisterComponent implements OnInit {
     }
 
     this.userService.createUser(formData).subscribe(
-      data => {}
-      )
+      data => {},
+      error => this.handleRegisterErrorResponse(error)
+    )
+  }
+
+  handleRegisterErrorResponse(error:HttpErrorResponse) {
+    //console.log(error);
+    //console.log(error.error);
+    //console.log(error.error.message);
+    this.registerErrorMsg = error.error.message;
   }
 
   submitDelete() {

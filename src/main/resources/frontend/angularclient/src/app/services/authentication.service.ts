@@ -18,12 +18,14 @@ export class AuthenticationService {
   }
 
   isUserLoggedIn(): boolean {
-    return sessionStorage.getItem("email") !== null;
+    //return sessionStorage.getItem("email") !== null;
+    return sessionStorage.getItem("loggedInUser") !== null;
   }
 
   logout() {
-    sessionStorage.removeItem("firstName");
-    sessionStorage.removeItem("email");
-    sessionStorage.removeItem("gender");
+    //sessionStorage.removeItem("firstName");
+    //sessionStorage.removeItem("email");
+    //sessionStorage.removeItem("gender");
+    sessionStorage.removeItem("loggedInUser");
   }
 }

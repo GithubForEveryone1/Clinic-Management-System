@@ -37,9 +37,10 @@ export class LoginComponent implements OnInit {
         }
         else {
           this.router.navigate(['test']);
-          sessionStorage.setItem("firstName", data.first_name);
-          sessionStorage.setItem("email", data.email);
-          sessionStorage.setItem("gender", data.gender);
+          //sessionStorage.setItem("firstName", data.first_name);
+          //sessionStorage.setItem("email", data.email);
+          //sessionStorage.setItem("gender", data.gender);
+          sessionStorage.setItem("loggedInUser", JSON.stringify(data));
         }
       },
       error => this.handleErrorResponse(error)
@@ -47,9 +48,9 @@ export class LoginComponent implements OnInit {
   }
 
   handleErrorResponse(error:HttpErrorResponse) {
-    console.log(error);
-    console.log(error.error);
-    console.log(error.error.message);
+    //console.log(error);
+    //console.log(error.error);
+    //console.log(error.error.message);
     this.errorMsg = error.error.message;
   }
 

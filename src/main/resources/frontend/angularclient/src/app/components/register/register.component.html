@@ -4,6 +4,8 @@
         <div class="col">
             <h1 class="mt-5">Register</h1>
 
+            <p *ngIf="registerErrorMsg">{{ registerErrorMsg }}</p>
+            
             <form (ngSubmit)="submitRegister()">
                 <div class="form-group mt-5">
                     <label for="first-name">First Name</label>
