@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
           console.log("Wrong password");
         }
         else {
-          this.router.navigate(['test']);
+          this.router.navigate(['user']);
           sessionStorage.setItem("firstName", data.first_name);
           sessionStorage.setItem("email", data.email);
           sessionStorage.setItem("gender", data.gender);

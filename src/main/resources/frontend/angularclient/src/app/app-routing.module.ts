@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DummyComponent } from './components/dummy/dummy.component';
+import { PatientProfileComponent } from './components/patient-profile/patient-profile.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent, canActivate: [RouteGuardService]},
   {path: 'user-list', component: UserListComponent, canActivate: [RouteGuardService]},
-  {path: 'test', component: DummyComponent, canActivate: [RouteGuardService]},
+  {path: 'user', component: PatientProfileComponent, canActivate: [RouteGuardService]},
   {path: '**', component: ErrorComponent} 
 ];
 

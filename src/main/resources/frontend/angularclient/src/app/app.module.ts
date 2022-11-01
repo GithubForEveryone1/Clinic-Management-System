@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ErrorComponent } from './components/error/error.component';
 import { AuthenticationService } from './services/authentication.service';
 import { LogoutComponent } from './components/logout/logout.component';
-import { DummyComponent } from './components/dummy/dummy.component';
+import { PatientProfileComponent } from './components/patient-profile/patient-profile.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
@@ -23,7 +23,7 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     ErrorComponent,
     LogoutComponent,
-    DummyComponent,
+    PatientProfileComponent,
     NavbarComponent,
     RegisterComponent,
     HomeComponent

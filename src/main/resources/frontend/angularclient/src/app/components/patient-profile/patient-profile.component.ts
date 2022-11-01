@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-dummy',
-  templateUrl: './dummy.component.html',
-  styleUrls: ['./dummy.component.css']
+  selector: 'app-patient-profile',
+  templateUrl: './patient-profile.component.html',
+  styleUrls: ['./patient-profile.component.css']
 })
-export class DummyComponent implements OnInit {
+export class PatientProfileComponent implements OnInit {
   
   firstName = sessionStorage.getItem("firstName")
   email = sessionStorage.getItem("email")
