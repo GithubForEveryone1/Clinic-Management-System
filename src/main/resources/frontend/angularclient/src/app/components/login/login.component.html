@@ -1,18 +1,60 @@
 <div class="login">
     <div class="side-image"></div>
-    <p *ngIf="errorMsg">{{ errorMsg }}</p>
     
     <form (ngSubmit)="submitLogin()" style="width: 30%;">
-        <h1 class="mt-5">Login</h1> 
-        <div class="form-group mt-5">
+        <h1 class="mt-5 mb-5">Login</h1> 
+
+        <!-- Warning messages -->
+        <p *ngIf="errorMsg" class="alert alert-danger mb-0" role="alert">
+            {{ errorMsg }}
+        </p>
+
+        <div *ngIf="(email.invalid || password.invalid) && badLoginAttempted && !errorMsg" class="alert alert-danger">
+            <p *ngIf="email.errors?.['required']" class="mb-0">
+                Please enter an email address.
+            </p>
+
+            <p *ngIf="email.errors?.['pattern']" class="mb-0">
+                Please enter a valid email address.
+            </p>
+
+            <p *ngIf="password.errors?.['required'] && email.valid" class="mb-0">
+                Please enter a password.
+            </p>
+        </div>
+        <!-- End warning messages -->
+
+        <!-- Email Input -->
+        <div class="form-group mt-3">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="email">
+            <input
+                type="email"
+                class="form-control"
+                name="email" id="email"
+                placeholder="Email"
+                #email="ngModel"
+                [(ngModel)]="user.email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                required>
         </div>
-        <div class="form-group">
+
+        <!-- Password Input -->
+        <div class="form-group mt-3">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="password">
+            <input 
+                type="password"
+                class="form-control"
+                name="password"
+                placeholder="Password"
+                #password="ngModel"
+                [(ngModel)]="user.password"
+                required>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Log In</button>
+
+        <!-- 1st btn is a fake btn that won't log in, but will display errors -->
+        <!-- 2nd btn is the real one the shows when form is valid -->
+        <!-- In the initial view, error messages won't show so the user won't be bugged -->
+        <button *ngIf="!email.valid || !password.valid" type="button" class="btn btn-primary mt-3" (click)="fakeLogin()">Log In</button>
+        <button *ngIf="email.valid && password.valid" type="submit" class="btn btn-primary mt-3">Log In</button>
     </form>
 </div>
- 

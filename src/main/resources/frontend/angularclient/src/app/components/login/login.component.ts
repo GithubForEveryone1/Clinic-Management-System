@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -11,9 +12,22 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  email = "";
-  password = "";
+  user: User = {
+    'user_id': 0,
+    'first_name': "",
+    'last_name': "",
+    'email': "",
+    'address': "",
+    'contact_number': 0,
+    'password': "",
+    'dob': "",
+    'gender': "",
+    'account_type': "",
+    'date_created': ""
+  }
 
+  formValidity = false;
+  badLoginAttempted = false;
   errorMsg = "";
 
   constructor(private router: Router, private authenticationService: AuthenticationService) { }
@@ -21,13 +35,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitLogin() {  
-    const formData = {
-      'email': this.email,
-      'password': this.password
-    }
+  fakeLogin() {
+    this.badLoginAttempted = true;
+    this.errorMsg = "";
+  }
 
-    this.authenticationService.authenticateUser(formData).subscribe(
+  submitLogin() {
+    this.badLoginAttempted = false;
+    this.authenticationService.authenticateUser(this.user).subscribe(
       data => {
         if (data === null) {
           console.log("Wrong email / Wrong password");
@@ -37,9 +52,6 @@ export class LoginComponent implements OnInit {
         }
         else {
           this.router.navigate(['user']);
-          //sessionStorage.setItem("firstName", data.first_name);
-          //sessionStorage.setItem("email", data.email);
-          //sessionStorage.setItem("gender", data.gender);
           sessionStorage.setItem("loggedInUser", JSON.stringify(data));
         }
       },
@@ -48,9 +60,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleErrorResponse(error:HttpErrorResponse) {
-    //console.log(error);
-    //console.log(error.error);
-    //console.log(error.error.message);
     this.errorMsg = error.error.message;
   }
 
