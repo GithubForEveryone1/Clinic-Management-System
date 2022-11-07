@@ -4,51 +4,45 @@
     <form (ngSubmit)="submitLogin()" style="width: 30%;">
         <h1 class="mt-5 mb-5">Login</h1> 
 
-        <!-- Warning messages -->
+        <!-- Alert messages -->
         <p *ngIf="errorMsg" class="alert alert-danger mb-0" role="alert">
             {{ errorMsg }}
         </p>
-
-        <div *ngIf="(email.invalid || password.invalid) && badLoginAttempted && !errorMsg" class="alert alert-danger">
-            <p *ngIf="email.errors?.['required']" class="mb-0">
-                Please enter an email address.
-            </p>
-
-            <p *ngIf="email.errors?.['pattern']" class="mb-0">
-                Please enter a valid email address.
-            </p>
-
-            <p *ngIf="password.errors?.['required'] && email.valid" class="mb-0">
-                Please enter a password.
-            </p>
-        </div>
-        <!-- End warning messages -->
-
+        <!-- End alert messages -->
+        
         <!-- Email Input -->
         <div class="form-group mt-3">
             <label for="email">Email address</label>
-            <input
-                type="email"
-                class="form-control"
-                name="email" id="email"
-                placeholder="Email"
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                 #email="ngModel"
                 [(ngModel)]="user.email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                required>
+                [ngClass]="
+                    email.errors &&
+                    badLoginAttempted ?
+                    'form-control is-invalid' : 'form-control'
+                ">
+                
+            <div class="invalid-feedback">
+                    Please provide a valid email address.
+            </div>
         </div>
 
         <!-- Password Input -->
         <div class="form-group mt-3">
             <label for="password">Password</label>
-            <input 
-                type="password"
-                class="form-control"
-                name="password"
-                placeholder="Password"
+            <input name="password" id="password" type="password" placeholder="Password" required
                 #password="ngModel"
-                [(ngModel)]="user.password"
-                required>
+                [(ngModel)]="user.password"  
+                [ngClass]="
+                    password.errors &&
+                    badLoginAttempted ?
+                    'form-control is-invalid' : 'form-control'
+                ">
+                
+            <div class="invalid-feedback">
+                    Please provide a valid password.
+            </div>
         </div>
 
         <!-- 1st btn is a fake btn that won't log in, but will display errors -->
