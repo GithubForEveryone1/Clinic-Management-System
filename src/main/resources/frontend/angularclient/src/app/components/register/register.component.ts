@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/common/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,17 +11,26 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  first_name = "";
-  last_name = "";
-  email = "";
-  address = "";
-  password = "";
-  contact_number?: number;
-  dob: Date = new Date();
-  gender = "";
-  
-  registerErrorMsg = "";
+  user: User = {
+    'user_id': NaN,
+    'first_name': "",
+    'last_name': "",
+    'email': "",
+    'address': "",
+    'contact_number': NaN,
+    'password': "",
+    'dob': "",
+    'gender': "",
+    'account_type': "",
+    'date_created': ""
+  }
 
+  badRegisterAttempted = false;
+  errorMsg = "";
+  successMsg = "";
+
+  // This is for the delete user part, not to be included once we're done with it
+  // It's just for easily deleting accounts on the frontend for now
   emailForDelete = "";
 
   constructor(private router: Router, private userService: UserService) { }
@@ -28,22 +38,18 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitRegister() {  
-    const formData = {
-      'first_name': this.first_name,
-      'last_name': this.last_name,
-      'email': this.email,
-      'address': this.address,
-      'contact_number': this.contact_number,
-      'password': this.password,
-      'dob': this.dob,
-      'dateCreated': new Date(),
-      'account_type': "patient",
-      'gender': this.gender,
-    }
+  fakeRegister() {
+    this.badRegisterAttempted = true;
+    this.successMsg = "";
+    this.errorMsg = "Please verify all fields again.";
+  }
 
-    this.userService.createUser(formData).subscribe(
-      data => {},
+  submitRegister() { 
+    this.userService.createUser(this.user).subscribe(
+      data => {
+        this.successMsg = "User created!"; 
+        this.errorMsg = "";
+      },
       error => this.handleRegisterErrorResponse(error)
     )
   }
@@ -52,7 +58,8 @@ export class RegisterComponent implements OnInit {
     //console.log(error);
     //console.log(error.error);
     //console.log(error.error.message);
-    this.registerErrorMsg = error.error.message;
+    this.successMsg = "";
+    this.errorMsg = error.error.message;
   }
 
   submitDelete() {

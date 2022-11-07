@@ -1,0 +1,11 @@
+.register {
+    display: flex;
+    gap: 100px;
+}
+.side-image {
+	background-image: url(https://s3.ap-southeast-1.amazonaws.com/cdn.deccanchronicle.com/sites/default/files/sleepydoc_0.jpg);
+	background-size: cover;
+    background-position: bottom;
+	/* height: 90vh; */
+	width: 40%;
+}
