@@ -42,7 +42,6 @@ public class UserRestController {
 		}
 		
 		return theUsers;
-		
 	}
 	
 	// add mapping for GET /user/{userEmail}

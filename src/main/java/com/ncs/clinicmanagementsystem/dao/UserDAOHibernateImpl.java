@@ -57,6 +57,19 @@ public class UserDAOHibernateImpl implements UserDAO {
 		return theUser;
 	}
 
+	@Override
+	public User findById(int theUserId) {
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+				
+		// get the user
+		Criteria criteria = currentSession.createCriteria(User.class);
+		User theUser = (User) criteria.add(Restrictions.eq("user_id", theUserId)).uniqueResult();
+				
+		return theUser;
+	}
+	
+	
 	
 	@Override
 	public void save(User theUser) {

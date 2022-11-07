@@ -23,6 +23,8 @@ public class Appointment {
 	private int doctor_id;
 	@Column(name="date_visited")
 	private Date date_visited;
+	@Column(name="timeslot")
+	private int timeslot;
 	@Column(name="diagnosis")
 	private String diagnosis;
 	@Column(name="prescription")
@@ -51,6 +53,12 @@ public class Appointment {
 	public void setDate_visited(Date date_visited) {
 		this.date_visited = date_visited;
 	}
+	public int getTimeslot() {
+		return timeslot;
+	}
+	public void setTimeslot(int timeslot) {
+		this.timeslot = timeslot;
+	}
 	public String getDiagnosis() {
 		return diagnosis;
 	}
@@ -66,17 +74,18 @@ public class Appointment {
 	@Override
 	public String toString() {
 		return "Appointment [appt_id=" + appt_id + ", patient_id=" + patient_id + ", doctor_id=" + doctor_id
-				+ ", date_visited=" + date_visited + ", diagnosis=" + diagnosis + ", prescription=" + prescription
-				+ "]";
+				+ ", date_visited=" + date_visited + ", timeslot=" + timeslot + ", diagnosis=" + diagnosis
+				+ ", prescription=" + prescription + "]";
 	}
-	public Appointment(int patient_id, int doctor_id, Date date_visited, String diagnosis, String prescription) {
+	public Appointment(int patient_id, int doctor_id, Date date_visited, int timeslot, String diagnosis,
+			String prescription) {
 		super();
 		this.patient_id = patient_id;
 		this.doctor_id = doctor_id;
 		this.date_visited = date_visited;
+		this.timeslot = timeslot;
 		this.diagnosis = diagnosis;
 		this.prescription = prescription;
 	}
-	
 	
 }
