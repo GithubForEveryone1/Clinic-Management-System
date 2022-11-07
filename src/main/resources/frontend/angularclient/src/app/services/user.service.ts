@@ -5,23 +5,30 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class UserService {
-  
-  private baseUrl = 'http://localhost:8080/api';
 
-  constructor(private httpClient: HttpClient) { }
+	private baseUrl = 'http://localhost:8080/api';
 
-  getUserList(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.baseUrl}/user`);
-  }
+	constructor(private httpClient: HttpClient) { }
 
-  createUser(user: any): Observable<User> {
-    return this.httpClient.post<User>(`${this.baseUrl}/user/create`, user);
-  }
-  
-  deleteUser(email: any) {
-    return this.httpClient.delete(`${this.baseUrl}/user/delete`, {body: email});
-  }
+	getUserList(): Observable<User[]> {
+		return this.httpClient.get<User[]>(`${this.baseUrl}/user`);
+	}
+
+	createUser(user: any): Observable<User> {
+		return this.httpClient.post<User>(`${this.baseUrl}/user/create`, user);
+	}
+
+	deleteUser(email: any) {
+		return this.httpClient.delete(`${this.baseUrl}/user/delete`, { body: email });
+	}
+
+	get loggedInUser(): User {
+		return this.loggedInUser;
+	}
+	set loggedInUser(user: User) {
+		this.loggedInUser = user;
+	}
 }
