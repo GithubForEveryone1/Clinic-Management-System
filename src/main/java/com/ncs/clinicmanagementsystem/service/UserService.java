@@ -10,6 +10,8 @@ public interface UserService {
 	
 	public User findByEmail(String theEmail);
 	
+	public User findById(int theUserId);
+	
 	public void save(User theUser);
 	
 	public void deleteByEmail(String theEmail);
