@@ -13,12 +13,12 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class LoginComponent implements OnInit {
 
   user: User = {
-    'user_id': 0,
+    'user_id': NaN,
     'first_name': "",
     'last_name': "",
     'email': "",
     'address': "",
-    'contact_number': 0,
+    'contact_number': NaN,
     'password': "",
     'dob': "",
     'gender': "",
@@ -36,24 +36,16 @@ export class LoginComponent implements OnInit {
 
   fakeLogin() {
     this.badLoginAttempted = true;
-    this.errorMsg = "";
+    this.errorMsg = "Please verify all fields again.";
   }
 
   submitLogin() {
     this.badLoginAttempted = false;
     this.authenticationService.authenticateUser(this.user).subscribe(
       data => {
-        if (data === null) {
-          console.log("Wrong email / Wrong password");
-        }
-        else if (data.password === "") {
-          console.log("Wrong password");
-        }
-        else {
           this.router.navigate(['user']);
  
           sessionStorage.setItem("loggedInUser", JSON.stringify(data));
-        }
       },
       error => this.handleErrorResponse(error)
     )
