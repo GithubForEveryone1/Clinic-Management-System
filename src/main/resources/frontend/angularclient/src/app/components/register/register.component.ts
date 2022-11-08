@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
     'last_name': "",
     'email': "",
     'address': "",
-    'contact_number': NaN,
+    'contact_number': "",
     'password': "",
     'dob': "",
     'gender': "",
@@ -45,10 +45,16 @@ export class RegisterComponent implements OnInit {
   }
 
   submitRegister() { 
+    // Trim whitespace from all fields
+    for (var field in this.user) {
+      if (field != 'password') {
+        field = field.trim();
+      }
+    }
+
     this.userService.createUser(this.user).subscribe(
       data => {
-        this.successMsg = "User created!"; 
-        this.errorMsg = "";
+        this.router.navigate(['login'], {queryParams: { registered: 'true' } });
       },
       error => this.handleRegisterErrorResponse(error)
     )

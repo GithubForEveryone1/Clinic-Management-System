@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     'last_name': "",
     'email': "",
     'address': "",
-    'contact_number': NaN,
+    'contact_number': "",
     'password': "",
     'dob': "",
     'gender': "",
@@ -28,10 +28,16 @@ export class LoginComponent implements OnInit {
 
   badLoginAttempted = false;
   errorMsg = "";
+  userCreatedMsg = "";
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) { }
+  constructor(private router: Router, private authenticationService: AuthenticationService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if(params['registered'] !== undefined && params['registered'] === 'true') {
+        this.userCreatedMsg = 'Account created successfully!';
+      }
+    });
   }
 
   fakeLogin() {
