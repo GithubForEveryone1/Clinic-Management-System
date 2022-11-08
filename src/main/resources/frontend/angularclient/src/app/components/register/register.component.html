@@ -13,34 +13,40 @@
         <div class="form-group mt-3">
             <label for="first-name">First Name</label>
             <input name="first-name" id="first-name"  type="text" placeholder="First Name" required
-                pattern="^[a-zA-Z1-9].*"
+                pattern="^[a-zA-Z]*"
                 #firstName="ngModel"
                 [(ngModel)]="user.first_name"
                 [ngClass]="
-                    firstName.errors &&
-                    badRegisterAttempted ?
+                    (firstName.errors && firstName.touched) || badRegisterAttempted ?
                     'form-control is-invalid' : 'form-control'
-                ">
-                
-            <div class="invalid-feedback">
-                    Please provide a first name.
+                "
+            >
+
+            <div *ngIf="firstName.errors?.['required']" class="invalid-feedback">
+                Please enter your first name.
+            </div>
+            <div *ngIf="firstName.errors?.['pattern']" class="invalid-feedback">
+                Invalid characters found in first name.
             </div>
         </div>
 
         <div class="form-group mt-3">
-            <label for="last-name">last Name</label>
+            <label for="last-name">Last Name</label>
             <input name="last-name" id="last-name" type="text"  placeholder="Last Name" required
-            pattern="^[a-zA-Z1-9].*"
+            pattern="^[a-zA-Z].*"
                 #lastName="ngModel"
                 [(ngModel)]="user.last_name"
                 [ngClass]="
-                    lastName.errors &&
-                    badRegisterAttempted ?
+                    (lastName.errors && lastName.touched) || badRegisterAttempted ?
                     'form-control is-invalid' : 'form-control'
-                ">
+                "
+            >
                 
-            <div class="invalid-feedback">
-                    Please provide a last name.
+            <div *ngIf="lastName.errors?.['required']" class="invalid-feedback">
+                Please enter your last name.
+            </div>
+            <div *ngIf="lastName.errors?.['pattern']" class="invalid-feedback">
+                Invalid characters found in last name.
             </div>
         </div>
 
@@ -53,13 +59,16 @@
                 #email="ngModel"
                 [(ngModel)]="user.email"
                 [ngClass]="
-                    email.errors &&
-                    badRegisterAttempted ?
+                    (email.errors && email.touched) || badRegisterAttempted ?
                     'form-control is-invalid' : 'form-control'
-                ">
+                "
+            >
                 
-            <div class="invalid-feedback">
-                    Please provide a valid email.
+            <div *ngIf="email.errors?.['required']" class="invalid-feedback">
+                Please enter your email address.
+            </div>
+            <div *ngIf="email.errors?.['pattern']" class="invalid-feedback">
+                Please provide a valid email address.
             </div>
         </div>
 
@@ -70,13 +79,16 @@
                 #address="ngModel"
                 [(ngModel)]="user.address"
                 [ngClass]="
-                    address.errors &&
-                    badRegisterAttempted ?
+                    (address.errors && address.touched) || badRegisterAttempted ?
                     'form-control is-invalid' : 'form-control'
-                ">
-                
-            <div class="invalid-feedback">
-                    Please provide a valid address.
+                "
+            >
+
+            <div *ngIf="address.errors?.['required']" class="invalid-feedback">
+                Please enter your address.
+            </div>
+            <div *ngIf="address.errors?.['pattern']" class="invalid-feedback">
+                Leading blank spaces found in address.
             </div>
         </div>
 
@@ -92,13 +104,16 @@
                     #contactNumber="ngModel"
                     [(ngModel)]="user.contact_number"
                     [ngClass]="
-                        contactNumber.errors &&
-                        badRegisterAttempted ?
+                        (contactNumber.errors && contactNumber.touched) || badRegisterAttempted ?
                         'form-control is-invalid' : 'form-control'
-                    ">
+                    "
+                >
 
-                <div class="invalid-feedback">
-                        Please provide a valid contact number.
+                <div *ngIf="contactNumber.errors?.['required']" class="invalid-feedback">
+                    Please enter your contact number.
+                </div>
+                <div *ngIf="contactNumber.errors?.['pattern']" class="invalid-feedback">
+                    Please provide a valid contact number.
                 </div>
             </div>
 
@@ -111,29 +126,34 @@
                 #password="ngModel"
                 [(ngModel)]="user.password"  
                 [ngClass]="
-                    password.errors &&
-                    badRegisterAttempted ?
+                    (password.errors && password.touched) || badRegisterAttempted ?
                     'form-control is-invalid' : 'form-control'
-                ">
-                
-            <div class="invalid-feedback">
-                    Please provide a valid password.
+                "
+            >
+
+            <div *ngIf="password.errors?.['required']" class="invalid-feedback">
+                Please enter a password.
+            </div>
+            <div *ngIf="password.errors?.['pattern']" class="invalid-feedback">
+                Leading blank spaces found in password.
             </div>
         </div>
         
         <div class="form-group mt-3">
             <label for="dob">Date of Birth</label>
-            <input name="dob" id="dob" type="date" max="9999-12-31" required
+            <input name="dob" id="dob" type="date" [max]="max" [min]="min" (focusout)="enforceBoundsAndCheckForError()" required
                 #dob="ngModel"
                 [(ngModel)]="user.dob"
                 [ngClass]="
-                    dob.errors &&
-                    badRegisterAttempted ?
+                    ((dob.errors || userUnder18) && dob.touched) || badRegisterAttempted ?
                     'form-control is-invalid' : 'form-control'
                 ">
-                
-            <div class="invalid-feedback">
-                    Please provide a valid date of birth.
+
+            <div *ngIf="dob.errors?.['required']" class="invalid-feedback">
+                    Please provide a date of birth.
+            </div>
+            <div *ngIf="userUnder18" class="invalid-feedback">
+                    A minimum age of 18 is required to create an account.
             </div>
         </div>
 

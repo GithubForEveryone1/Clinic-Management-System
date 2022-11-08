@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Query } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 import { UserService } from 'src/app/services/user.service';
@@ -28,6 +28,9 @@ export class RegisterComponent implements OnInit {
   badRegisterAttempted = false;
   errorMsg = "";
   successMsg = "";
+  max = new Date().toISOString().split('T')[0];
+  min = "1900-01-01";
+  userUnder18 = false;
 
   // This is for the delete user part, not to be included once we're done with it
   // It's just for easily deleting accounts on the frontend for now
@@ -41,7 +44,7 @@ export class RegisterComponent implements OnInit {
   fakeRegister() {
     this.badRegisterAttempted = true;
     this.successMsg = "";
-    this.errorMsg = "Please verify all fields again.";
+    this.errorMsg = "Please verify that all fields have been filled in correctly.";
   }
 
   submitRegister() {
@@ -69,5 +72,31 @@ export class RegisterComponent implements OnInit {
     this.userService.deleteUser(formData).subscribe(
       data => {}
       )
+  }
+
+// Sets the DOB max because the HTML nonsense is dumb
+// Put error class if age is not at least 18
+  enforceBoundsAndCheckForError() {
+    if (this.user.dob != "") {
+      if (this.user.dob > this.max) {
+        this.user.dob = this.max;
+      }
+      else if (this.user.dob < this.min) {
+        this.user.dob = this.min;
+      }
+      
+      else if (
+        new Date(new Date(this.max).setFullYear(new Date(this.max).getFullYear() - 18)) <
+        new Date(this.user.dob)
+        ) 
+        {
+        console.log(new Date(new Date(this.max).setFullYear(new Date(this.max).getFullYear() - 18)));
+        this.userUnder18 = true;
+      } 
+      
+      else {
+        this.userUnder18 = false;
+      }
+    }
   }
 }
