@@ -3,7 +3,7 @@
     gap: 100px;
 }
 .side-image {
-	background-image: url(https://s3.ap-southeast-1.amazonaws.com/cdn.deccanchronicle.com/sites/default/files/sleepydoc_0.jpg);
+	background-image: url(https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1083&q=80);
 	background-size: cover;
     background-position: bottom;
 	/* height: 90vh; */
