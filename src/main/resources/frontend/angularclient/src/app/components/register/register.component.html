@@ -13,7 +13,7 @@
         <div class="form-group mt-3">
             <label for="first-name">First Name</label>
             <input name="first-name" id="first-name"  type="text" placeholder="First Name" required
-                pattern=".*\S+.*"
+                pattern="^[a-zA-Z1-9].*"
                 #firstName="ngModel"
                 [(ngModel)]="user.first_name"
                 [ngClass]="
@@ -30,7 +30,7 @@
         <div class="form-group mt-3">
             <label for="last-name">last Name</label>
             <input name="last-name" id="last-name" type="text"  placeholder="Last Name" required
-                pattern=".*\S+.*"
+            pattern="^[a-zA-Z1-9].*"
                 #lastName="ngModel"
                 [(ngModel)]="user.last_name"
                 [ngClass]="
@@ -66,7 +66,7 @@
         <div class="form-group mt-3">
             <label for="address">Address</label>
             <input name="address" id="address" type="text" placeholder="Address" required
-                pattern=".*\S+.*"
+                pattern="^[a-zA-Z1-9].*"
                 #address="ngModel"
                 [(ngModel)]="user.address"
                 [ngClass]="
@@ -107,7 +107,7 @@
         <div class="form-group mt-3">
             <label for="password">Password</label>
             <input name="password" id="password" type="password" placeholder="Password" required
-                pattern=".*\S+.*"
+                pattern="^[a-zA-Z1-9].*"
                 #password="ngModel"
                 [(ngModel)]="user.password"  
                 [ngClass]="
@@ -142,7 +142,7 @@
 
             <div class="form-check">                
                 <input class="form-check-input" type="radio" name="gender-male" id="gender-male" value="male" required
-                    pattern=".*\S+.*"
+                    pattern="^[a-zA-Z1-9].*"
                     #maleGender="ngModel"
                     [(ngModel)]="user.gender"
                     [ngClass]="

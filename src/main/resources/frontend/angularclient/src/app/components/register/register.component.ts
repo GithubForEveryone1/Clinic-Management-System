@@ -44,20 +44,13 @@ export class RegisterComponent implements OnInit {
     this.errorMsg = "Please verify all fields again.";
   }
 
-  submitRegister() { 
-    // Trim whitespace from all fields
-    for (var field in this.user) {
-      if (field != 'password') {
-        field = field.trim();
-      }
-    }
-
+  submitRegister() {
     this.userService.createUser(this.user).subscribe(
       data => {
         this.router.navigate(['login'], {queryParams: { registered: 'true' } });
       },
       error => this.handleRegisterErrorResponse(error)
-    )
+    ) 
   }
 
   handleRegisterErrorResponse(error:HttpErrorResponse) {
