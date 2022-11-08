@@ -8,6 +8,9 @@
         <p *ngIf="errorMsg" class="alert alert-danger mb-0" role="alert">
             {{ errorMsg }}
         </p>
+        <p *ngIf="userCreatedMsg && !errorMsg" class="alert alert-success mb-0" role="alert">
+            {{ userCreatedMsg }}
+        </p>
         <!-- End alert messages -->
         
         <!-- Email Input -->
@@ -41,7 +44,7 @@
                 ">
                 
             <div class="invalid-feedback">
-                    Please provide a valid password.
+                    Please provide a password.
             </div>
         </div>
 

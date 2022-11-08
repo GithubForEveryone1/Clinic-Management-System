@@ -6,7 +6,7 @@ export class User {
                 public email: string,
                 public address: string,
                 //public contact_number: any,
-                public contact_number: number,
+                public contact_number: string,
                 public password: string,
                 //public dob: Date,
                 public dob: string,

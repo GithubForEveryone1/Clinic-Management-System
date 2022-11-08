@@ -8,14 +8,12 @@
         <p *ngIf="errorMsg && !successMsg" class="alert alert-danger mb-0" role="alert">
             {{ errorMsg }}
         </p>
-        <p *ngIf="successMsg && !errorMsg" class="alert alert-success mb-0" role="alert">
-            {{ successMsg }}
-        </p>
         <!-- End alert messages -->
 
         <div class="form-group mt-3">
             <label for="first-name">First Name</label>
             <input name="first-name" id="first-name"  type="text" placeholder="First Name" required
+                pattern="^[a-zA-Z1-9].*"
                 #firstName="ngModel"
                 [(ngModel)]="user.first_name"
                 [ngClass]="
@@ -32,6 +30,7 @@
         <div class="form-group mt-3">
             <label for="last-name">last Name</label>
             <input name="last-name" id="last-name" type="text"  placeholder="Last Name" required
+            pattern="^[a-zA-Z1-9].*"
                 #lastName="ngModel"
                 [(ngModel)]="user.last_name"
                 [ngClass]="
@@ -67,6 +66,7 @@
         <div class="form-group mt-3">
             <label for="address">Address</label>
             <input name="address" id="address" type="text" placeholder="Address" required
+                pattern="^[a-zA-Z1-9].*"
                 #address="ngModel"
                 [(ngModel)]="user.address"
                 [ngClass]="
@@ -82,23 +82,32 @@
 
         <div class="form-group mt-3">
             <label for="contact-number">Contact Number</label>
-            <input name="contact-number" id="contact-number" type="number" placeholder="Contact Number" required
-                #contactNumber="ngModel"
-                [(ngModel)]="user.contact_number"
-                [ngClass]="
-                    contactNumber.errors &&
-                    badRegisterAttempted ?
-                    'form-control is-invalid' : 'form-control'
-                ">
-                
-            <div class="invalid-feedback">
-                    Please provide a valid contact number.
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">+65</span>
+                </div>
+                <input name="contact-number" id="contact-number" type="text" placeholder="Contact Number" maxlength="8" required
+                    pattern="[689][0-9]{7}"
+                    #contactNumber="ngModel"
+                    [(ngModel)]="user.contact_number"
+                    [ngClass]="
+                        contactNumber.errors &&
+                        badRegisterAttempted ?
+                        'form-control is-invalid' : 'form-control'
+                    ">
+
+                <div class="invalid-feedback">
+                        Please provide a valid contact number.
+                </div>
             </div>
+
         </div>
 
         <div class="form-group mt-3">
             <label for="password">Password</label>
             <input name="password" id="password" type="password" placeholder="Password" required
+                pattern="^[a-zA-Z1-9].*"
                 #password="ngModel"
                 [(ngModel)]="user.password"  
                 [ngClass]="
@@ -114,7 +123,7 @@
         
         <div class="form-group mt-3">
             <label for="dob">Date of Birth</label>
-            <input name="dob" id="dob" type="date" required
+            <input name="dob" id="dob" type="date" max="9999-12-31" required
                 #dob="ngModel"
                 [(ngModel)]="user.dob"
                 [ngClass]="
@@ -133,6 +142,7 @@
 
             <div class="form-check">                
                 <input class="form-check-input" type="radio" name="gender-male" id="gender-male" value="male" required
+                    pattern="^[a-zA-Z1-9].*"
                     #maleGender="ngModel"
                     [(ngModel)]="user.gender"
                     [ngClass]="

@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
     'last_name': "",
     'email': "",
     'address': "",
-    'contact_number': NaN,
+    'contact_number': "",
     'password': "",
     'dob': "",
     'gender': "",
@@ -44,14 +44,13 @@ export class RegisterComponent implements OnInit {
     this.errorMsg = "Please verify all fields again.";
   }
 
-  submitRegister() { 
+  submitRegister() {
     this.userService.createUser(this.user).subscribe(
       data => {
-        this.successMsg = "User created!"; 
-        this.errorMsg = "";
+        this.router.navigate(['login'], {queryParams: { registered: 'true' } });
       },
       error => this.handleRegisterErrorResponse(error)
-    )
+    ) 
   }
 
   handleRegisterErrorResponse(error:HttpErrorResponse) {
