@@ -28,7 +28,7 @@ public class User {
 	@Column(name="address")
 	private String address;
 	@Column(name="contact_number")
-	private int contact_number;
+	private String contact_number;
 	@Column(name="password")
 	private String password;
 	@Column(name="dob")
@@ -70,10 +70,10 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getContact_number() {
+	public String getContact_number() {
 		return contact_number;
 	}
-	public void setContact_number(int contact_number) {
+	public void setContact_number(String contact_number) {
 		this.contact_number = contact_number;
 	}
 	public String getPassword() {
@@ -113,7 +113,7 @@ public class User {
 				+ ", dob=" + dob + ", gender=" + gender + ", account_type=" + account_type + ", date_created="
 				+ date_created + "]";
 	}
-	public User(String first_name, String last_name, String email, String address, int contact_number, String password,
+	public User(String first_name, String last_name, String email, String address, String contact_number, String password,
 			Date dob, String gender, String account_type, Date date_created) {
 		super();
 		this.first_name = first_name;
