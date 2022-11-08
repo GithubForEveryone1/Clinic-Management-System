@@ -77,7 +77,7 @@ public class AppointmentDAOHibernateImpl implements AppointmentDAO {
 		Session currentSession = entityManager.unwrap(Session.class);
 				
 		// delete appointment with appointment id
-		Query theQuery = currentSession.createQuery("delete from Appointmnet where appt_id=:apptId");
+		Query theQuery = currentSession.createQuery("delete from Appointment where appt_id=:apptId");
 		theQuery.setParameter("apptId", theApptId);
 		theQuery.executeUpdate();
 

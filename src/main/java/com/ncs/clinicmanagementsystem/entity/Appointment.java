@@ -87,5 +87,6 @@ public class Appointment {
 		this.diagnosis = diagnosis;
 		this.prescription = prescription;
 	}
+	public Appointment() {}
 	
 }
