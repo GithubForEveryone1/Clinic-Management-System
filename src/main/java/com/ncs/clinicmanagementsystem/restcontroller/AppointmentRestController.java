@@ -3,6 +3,7 @@ package com.ncs.clinicmanagementsystem.restcontroller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,7 @@ public class AppointmentRestController {
 			theAppts = apptService.findAll();
 		}
 		catch(Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
 		}
 		
@@ -111,5 +113,29 @@ public class AppointmentRestController {
 		return theAppt;
 	}
 	
+	// add mapping for POST /appt/edit
+	@PostMapping("/appt/edit")
+	public Appointment editAppt(@RequestBody Appointment theAppt) {
+		
+		// what are the fields that will be edited? perhaps it is better to split into individual methods. kiv..
+		// - patient reschedules to change doctor, date, timeslot
+		// - doctor updates diagnosis
+		// - doctor updates prescriptions
+
+		return theAppt;
+		
+	}
+	
+	// add mapping for DELETE /appt/delete
+	@DeleteMapping("/appt/delete")
+	public void deleteAppt(@RequestBody Appointment theAppt) {
+		try {
+			apptService.deleteApptByApptId(theAppt.getAppt_id());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Opps something happened. Please try again.");
+		}
+	}
 	
 }
