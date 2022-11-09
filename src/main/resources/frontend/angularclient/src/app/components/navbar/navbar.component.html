@@ -20,10 +20,13 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">Your appointments</a></li>
 				</div>
+				<div *ngIf="authenticationService.isUserSuperAdmin()">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="#">Create account</a></li>
+				</div>
 			</ul>
 			<div *ngIf="authenticationService.isUserLoggedIn(); else noUser">
-				<a routerLink="/logout" class="dropdown-item"><button
-						class="btn btn-primary">Logout</button></a>
+				<a routerLink="/logout"><button class="btn btn-primary">Logout</button></a>
 			</div>
 			<ng-template #noUser> <a routerLink="/login"><button
 					class="btn btn-primary mx-3">Login</button></a> <a
