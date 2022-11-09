@@ -4,7 +4,7 @@
         <table class="table">
             <tbody>
               <tr>
-                <th scope="row">First Name</th>
+                <th scope="row" style="width: 40%">First Name</th>
                 <td>{{firstName}}</td>
               </tr>
               <tr>
@@ -13,7 +13,7 @@
               </tr>
               <tr>
                 <th scope="row">Date of Birth</th>
-                <td>{{dob}}</td>
+                <td>{{dob.split('T')[0]}}</td>
               </tr>
               <tr>
                 <th scope="row">Email</th>
@@ -32,6 +32,12 @@
                 <td>{{gender}}</td>
               </tr>
             </tbody>
-          </table>
+        </table>
+        
+      <div class="row mt-3 mb-3 text-center">
+        <div class="col">
+          <button class="btn btn-primary">Make Appointment</button>
+        </div>
+      </div>
     </div>
 </div>
