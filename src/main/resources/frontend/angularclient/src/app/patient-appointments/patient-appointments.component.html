@@ -1,0 +1,92 @@
+<!--display patient full name and id-->
+<div class="container">
+    <div class="row mt-5 mb-5 justify-content-center">
+        <table class="table w-auto">
+            <tbody>
+                <tr>
+                    <th scope="row" class="borderless">Patient Name :</th>
+                    <td class="borderless">{{firstName}} {{lastName}}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="borderless">Patient ID :</th>
+                    <td class="borderless">{{patientId}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--display patient's upcoming and past appointments-->
+<div class="container">
+    <ul class="nav nav-tabs mb-5 justify-content-center" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link {{upcomingTabStatus}}" data-toggle="tab" role="tab" (click)="switchToUpcomingTab()">Upcoming</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link {{pastTabStatus}}" data-toggle="tab" role="tab" (click)="switchToPastTab()">Past</button>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane container fade {{upcomingTabContentStatus}}" role="tabpanel">
+
+            <div class="container">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Appointment ID</th>
+                            <th>Doctor ID</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                
+                    <p *ngIf="upcomingAppts.length == 0">You do not have upcoming appointments.</p>
+
+                    <tbody>
+                        <tr *ngFor="let appt of upcomingAppts">
+                            <td class="align-middle">{{ appt.appt_id }}</td>
+                            <td class="align-middle">{{ appt.doctor_id }}</td>
+                            <td class="align-middle">{{ appt.date_visited.split('T')[0] }}</td>
+                            <td class="align-middle">{{ appt.timeslot }}</td>
+                        </tr>
+                    </tbody>
+                
+                </table>
+            </div>
+
+        </div>
+        <div class="tab-pane container fade {{pastTabContentStatus}}" role="tabpanel">
+
+            <div class="container">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Appointment ID</th>
+                            <th>Doctor ID</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Diagnosis</th>
+                            <th>Prescription</th>
+                        </tr>
+                    </thead>
+                
+                    <p *ngIf="pastAppts.length == 0">You do not have any past appointments.</p>
+
+                    <tbody>
+                        <tr *ngFor="let appt of pastAppts">
+                            <td class="align-middle">{{ appt.appt_id }}</td>
+                            <td class="align-middle">{{ appt.doctor_id }}</td>
+                            <td class="align-middle">{{ appt.date_visited.split('T')[0] }}</td>
+                            <td class="align-middle">{{ appt.timeslot }}</td>
+                            <td class="align-middle">{{ appt.diagnosis }}</td>
+                            <td class="align-middle">{{ appt.prescription }}</td>
+                        </tr>
+                    </tbody>
+                
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

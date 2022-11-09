@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { RouteGuardService } from './services/route-guard.service';
 import { HomeComponent } from './components/home/home.component';
+import { PatientAppointmentsComponent } from './patient-appointments/patient-appointments.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'logout', component: LogoutComponent, canActivate: [RouteGuardService]},
   {path: 'user-list', component: UserListComponent, canActivate: [RouteGuardService]},
   {path: 'user', component: PatientProfileComponent, canActivate: [RouteGuardService]},
+  {path: 'user/appointments', component: PatientAppointmentsComponent, canActivate: [RouteGuardService]},
   {path: '**', component: ErrorComponent} 
 ];
 
