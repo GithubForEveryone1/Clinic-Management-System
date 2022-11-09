@@ -18,7 +18,7 @@
 					aria-current="page" href="#">Other services</a></li>
 				<div *ngIf="authenticationService.isUserLoggedIn()">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Your appointments</a></li>
+						aria-current="page" routerLink="/patient/appointments">Your appointments</a></li>
 				</div>
 				<div *ngIf="authenticationService.isUserSuperAdmin()">
 					<li class="nav-item"><a class="nav-link active"

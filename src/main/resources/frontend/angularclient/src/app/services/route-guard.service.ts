@@ -17,20 +17,6 @@ export class RouteGuardService implements CanActivate{
     private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    // routing to the different pages based on the user account types
-    // Hi Eunice, I commented this part out temporarily so that the routing works first =P
-    // if (this.authenticationService.isUserLoggedIn() && this.loggedInUser.account_type == 'admin') {
-    //   this.router.navigate(['admin']);
-     
-    // } else if(this.authenticationService.isUserLoggedIn() && this.loggedInUser.account_type == 'doctor') {
-    //   this.router.navigate(['doctor']);
-    //   console.log(this.loggedInUser.account_type);
-    // } else if(this.authenticationService.isUserLoggedIn() && this.loggedInUser.account_type == 'nurse') {
-    //   this.router.navigate(['nurse']);
-      
-    // } else if(this.authenticationService.isUserLoggedIn() && this.loggedInUser.account_type == 'patient') {
-    //   this.router.navigate(['patient']);
-    // }
     if (this.authenticationService.isUserLoggedIn()) {
       return true;
     }

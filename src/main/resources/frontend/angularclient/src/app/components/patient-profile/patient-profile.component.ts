@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 
 @Component({
@@ -21,11 +22,14 @@ export class PatientProfileComponent implements OnInit {
   contactNo = this.loggedInUser.contact_number;
   email = this.loggedInUser.email;
   gender = this.loggedInUser.gender;
+  accountType = this.loggedInUser.account_type;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.loggedInUser);
+    if (this.accountType != 'patient') {
+      this.router.navigate(['error']);
+    }
   }
 
 }

@@ -45,16 +45,30 @@ export class LoginComponent implements OnInit {
 		this.errorMsg = "Please verify all fields again.";
 	}
 
-	submitLogin() {
-		this.badLoginAttempted = false;
-		this.authenticationService.authenticateUser(this.user).subscribe(
-			data => {
-				sessionStorage.setItem("type", data.account_type);
-				sessionStorage.setItem("loggedInUser", JSON.stringify(data));
-			},
-			error => this.handleErrorResponse(error)
-		)
-	}
+  submitLogin() {
+    this.badLoginAttempted = false;
+    this.authenticationService.authenticateUser(this.user).subscribe(
+      data => {
+          sessionStorage.setItem("loggedInUser", JSON.stringify(data));
+          console.log(this.user)
+          switch (data.account_type) {
+            case "patient":
+              this.router.navigate(['patient']);
+              break
+            case "doctor":
+              this.router.navigate(['doctor']);
+              break
+            case "nurse":
+              this.router.navigate(['nurse']);
+              break
+              
+            default:
+              console.log("Something went wrong");
+            }
+      },
+      error => this.handleErrorResponse(error)
+    )
+  }
 
 	handleErrorResponse(error: HttpErrorResponse) {
 		this.errorMsg = error.error.message;

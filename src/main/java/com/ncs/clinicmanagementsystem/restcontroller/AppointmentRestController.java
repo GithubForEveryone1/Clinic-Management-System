@@ -57,6 +57,7 @@ public class AppointmentRestController {
 		
 		try {
 			theAppts = apptService.getApptsByUserId(userId);
+			System.out.println(theAppts);
 		}
 		catch(Exception e) {
 			throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
