@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
     this.badLoginAttempted = false;
     this.authenticationService.authenticateUser(this.user).subscribe(
       data => {
-          this.router.navigate(['user']);
- 
+          // this.router.navigate(['user']);
+          console.log(this.user)
           sessionStorage.setItem("loggedInUser", JSON.stringify(data));
       },
       error => this.handleErrorResponse(error)

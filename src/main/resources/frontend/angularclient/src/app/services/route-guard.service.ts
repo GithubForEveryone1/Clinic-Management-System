@@ -20,11 +20,13 @@ export class RouteGuardService implements CanActivate{
     // routing to the different pages based on the user account types
     if (this.authenticationService.isUserLoggedIn() && this.loggedInUser.account_type == 'admin') {
       this.router.navigate(['admin']);
-      // return true;
+     
     } else if(this.authenticationService.isUserLoggedIn() && this.loggedInUser.account_type == 'doctor') {
       this.router.navigate(['doctor']);
+      console.log(this.loggedInUser.account_type);
     } else if(this.authenticationService.isUserLoggedIn() && this.loggedInUser.account_type == 'nurse') {
       this.router.navigate(['nurse']);
+      
     } else if(this.authenticationService.isUserLoggedIn() && this.loggedInUser.account_type == 'patient') {
       this.router.navigate(['patient']);
     }
