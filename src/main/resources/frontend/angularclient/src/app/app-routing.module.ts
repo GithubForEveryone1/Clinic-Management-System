@@ -8,6 +8,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { RouteGuardService } from './services/route-guard.service';
 import { HomeComponent } from './components/home/home.component';
+import { SuperAdminComponent } from './components/super-admin/super-admin.component';
+import { DoctorComponent } from './components/doctor/doctor.component';
+import { NurseComponent } from './components/nurse/nurse.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,7 +18,10 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent, canActivate: [RouteGuardService]},
   {path: 'user-list', component: UserListComponent, canActivate: [RouteGuardService]},
-  {path: 'user', component: PatientProfileComponent, canActivate: [RouteGuardService]},
+  {path: 'patient', component: PatientProfileComponent, canActivate: [RouteGuardService]},
+  {path: 'admin', component: SuperAdminComponent, canActivate: [RouteGuardService]},
+  {path: 'doctor', component: DoctorComponent, canActivate: [RouteGuardService]},
+  {path: 'nurse', component: NurseComponent, canActivate: [RouteGuardService]},
   {path: '**', component: ErrorComponent} 
 ];
 
