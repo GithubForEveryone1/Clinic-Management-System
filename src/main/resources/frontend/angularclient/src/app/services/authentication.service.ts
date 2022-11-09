@@ -21,6 +21,16 @@ export class AuthenticationService {
     //return sessionStorage.getItem("email") !== null;
     return sessionStorage.getItem("loggedInUser") !== null;
   }
+  
+  isUserSuperAdmin(): boolean {
+	const account_type = sessionStorage.getItem("type");
+	if(account_type == "admin") {
+		return sessionStorage.getItem("type") !== null;	
+	} else {
+		return false;
+	}
+}
+  
 
   logout() {
     //sessionStorage.removeItem("firstName");
