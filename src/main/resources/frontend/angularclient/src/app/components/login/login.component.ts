@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
     this.badLoginAttempted = false;
     this.authenticationService.authenticateUser(this.user).subscribe(
       data => {
+		sessionStorage.setItem("type", (data.account_type));
           sessionStorage.setItem("loggedInUser", JSON.stringify(data));
           console.log(this.user)
           switch (data.account_type) {

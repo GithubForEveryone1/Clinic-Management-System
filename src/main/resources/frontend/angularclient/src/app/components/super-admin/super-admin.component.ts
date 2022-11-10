@@ -20,14 +20,14 @@ export class SuperAdminComponent implements OnInit {
 	
 	user: User = {
 		'user_id': NaN,
-		'first_name': "a",
-		'last_name': "a",
+		'first_name': "",
+		'last_name': "",
 		'email': "",
-		'address': "q",
-		'contact_number': "88888888",
+		'address': "n/a",
+		'contact_number': "99999999",
 		'password': "",
 		'dob': "",
-		'gender': "N/a",
+		'gender': "n/a",
 		'account_type': "",
 		'date_created': ""
 	}
@@ -47,8 +47,6 @@ export class SuperAdminComponent implements OnInit {
 
 	ngOnInit(): void {
 	}
-
-	trying = "test";
 
 	fakeRegister() {
 		this.badRegisterAttempted = true;
