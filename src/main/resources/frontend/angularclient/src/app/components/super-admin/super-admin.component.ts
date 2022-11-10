@@ -17,7 +17,6 @@ export class SuperAdminComponent implements OnInit {
 		"nurse"
 	];
 	
-	
 	user: User = {
 		'user_id': NaN,
 		'first_name': "",
