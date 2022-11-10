@@ -1,1 +1,41 @@
-<p>super-admin works!</p>
+
+<div class="container w-50 mx-auto mt-5">
+	<form (ngSubmit)="submitRegister()" class="row g-3">
+		<div class="col-md-6">
+			<label for="inputEmail4" class="form-label">First Name</label> <input
+				type="text" class="form-control" id="inputEmail4"
+				placeholder="First Name" [(ngModel)]="user.first_name" name="first_name">
+		</div>
+		<div class="col-md-6">
+			<label for="inputPassword4" class="form-label">Last Name</label> <input
+				type="text" class="form-control" id="inputPassword4"
+				placeholder="Last Name" [(ngModel)]="user.last_name" name="last_name">
+		</div>
+		<div class="col-12">
+			<label for="exampleInputEmail1" class="form-label">Email
+				address</label> <input type="email" class="form-control"
+				id="exampleInputEmail1" placeholder="email@email.com"
+				aria-describedby="emailHelp" [(ngModel)]="user.email" name="email">
+			<div id="emailHelp" class="form-text"></div>
+		</div>
+		<div class="col-12">
+			<label for="exampleInputPassword1" class="form-label">Password</label>
+			<input type="password" class="form-control"
+				id="exampleInputPassword1" placeholder="Password"
+				[(ngModel)]="user.password" name="password">
+		</div>
+		<div class="col-12">
+			<label class="form-label">Choose an option</label> <select
+				class="col-10" [(ngModel)]="user.account_type" name="account_type"
+				class="form-select mt-4" aria-label="Default select example"
+				style="margin: 0 !important;">
+				<option *ngFor="let c of role" [ngValue]="c">{{c}}</option>
+			</select>
+		</div>
+		<div class="col-12">
+			<button type="submit" class="btn btn-primary mt-3 col-3">Submit</button>
+		</div>
+
+	</form>
+</div>
+

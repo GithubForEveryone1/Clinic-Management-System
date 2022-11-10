@@ -12,8 +12,7 @@ export class NavbarComponent implements OnInit {
 	constructor(public authenticationService: AuthenticationService) { }
 	
 	ngOnInit() {	
-		
+		console.log(sessionStorage.getItem("type"));
+		console.log(sessionStorage.getItem("loggedInUser"));
 	}
-	
-	
 }
