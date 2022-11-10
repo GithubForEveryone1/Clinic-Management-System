@@ -1,3 +1,4 @@
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Query } from '@angular/core';
 import { Router } from '@angular/router';
@@ -106,3 +107,4 @@ export class SuperAdminComponent implements OnInit {
 		}
 	}
 }
+

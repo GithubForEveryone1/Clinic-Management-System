@@ -51,5 +51,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 		apptDAO.deleteApptByApptId(theApptId);
 
 	}
+	
+	@Override
+	@Transactional
+	public List<Appointment> getApptsByDoctorId(int theDoctorId) {
+		return apptDAO.getApptsByDoctorId(theDoctorId);
+	}
 
 }

@@ -81,8 +81,19 @@ public class AppointmentDAOHibernateImpl implements AppointmentDAO {
 		theQuery.setParameter("apptId", theApptId);
 		theQuery.executeUpdate();
 
-
+	}
+	
+	// to get the appointments based on doctorID
+	@Override
+	public List<Appointment> getApptsByDoctorId(int theDoctorId) {
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
 		
+		// get the appts for user id
+		Criteria criteria = currentSession.createCriteria(Appointment.class);
+		List<Appointment> docAppts = criteria.add(Restrictions.eqOrIsNull("doctor_id", theDoctorId)).list();
+		
+		return docAppts;
 	}
 
 }

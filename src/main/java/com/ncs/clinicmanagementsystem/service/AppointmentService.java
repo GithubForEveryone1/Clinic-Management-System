@@ -15,4 +15,6 @@ public List<Appointment> findAll();
 	public void editApptByApptId(Appointment theAppt);
 	
 	public void deleteApptByApptId(int theApptId);
+	
+	public List<Appointment> getApptsByDoctorId(int theDoctorId);
 }

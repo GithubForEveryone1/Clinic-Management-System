@@ -48,6 +48,8 @@ export class PatientAppointmentsComponent implements OnInit {
         this.filterApptsAfterToday();
         console.log(this.todayDate);
         console.log(Date.parse("2022-11-08T00:00:00.000+00:00"));
+        console.log(new Date("2022-11-08T00:00:00.000+00:00").getDay());
+        console.log(new Date("2022-11-08T00:00:00.000+00:00").toISOString());
         console.log(this.appts);
         console.log(this.upcomingAppts);
         console.log(this.pastAppts);
@@ -92,6 +94,79 @@ export class PatientAppointmentsComponent implements OnInit {
     });
   }
 
+  initialiseDate(strDate: string): Date {
+    return new Date(strDate);
+  }
+
+  displayDay(day: number):string {
+    switch(day) {
+      case 0: {
+        return "SUN";
+      }
+      case 1: {
+        return "MON";
+      }
+      case 2: {
+        return "TUE";
+      }
+      case 3: {
+        return "WED";
+      }
+      case 4: {
+        return "THU";
+      }
+      case 5: {
+        return "FRI";
+      }
+      case 6: {
+        return "SAT";
+      }
+      default: {
+        return "ERROR"
+      }
+    }
+  }
+
+  displayTimeslot(slot: number):string {
+    switch(slot) {
+      case 1: {
+        return "08:00 AM";
+      }
+      case 2: {
+        return "09:00 AM";
+      }
+      case 3: {
+        return "10:00 AM";
+      }
+      case 4: {
+        return "11:00 AM";
+      }
+      case 5: {
+        return "01:00 PM";
+      }
+      case 6: {
+        return "02:00 PM";
+      }
+      case 7: {
+        return "03:00 PM";
+      }
+      case 8: {
+        return "04:00 PM";
+      }
+      case 9: {
+        return "06:00 PM";
+      }
+      case 10: {
+        return "07:00 PM";
+      }
+      case 11: {
+        return "08:00 PM";
+      }
+      default: {
+        return "ERROR"
+      }
+    }
+  }
 }
 
 
