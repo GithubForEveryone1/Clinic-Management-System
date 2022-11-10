@@ -2,11 +2,14 @@ package com.ncs.clinicmanagementsystem.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,10 +20,21 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="appt_id")
 	private int appt_id;
+	
 	@Column(name="patient_id")
 	private int patient_id;
+	
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="patient_id", insertable=false, updatable=false)
+	private User patient;
+	
 	@Column(name="doctor_id")
 	private int doctor_id;
+	
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="doctor_id", insertable=false, updatable=false)
+	private User doctor;
+	
 	@Column(name="date_visited")
 	private Date date_visited;
 	@Column(name="timeslot")
@@ -71,6 +85,22 @@ public class Appointment {
 	public void setPrescription(String prescription) {
 		this.prescription = prescription;
 	}
+	
+	
+	public User getPatient() {
+		return patient;
+	}
+	public void setPatient(User patient) {
+		this.patient = patient;
+	}
+	public User getDoctor() {
+		return doctor;
+	}
+	public void setDoctor(User doctor) {
+		this.doctor = doctor;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Appointment [appt_id=" + appt_id + ", patient_id=" + patient_id + ", doctor_id=" + doctor_id
