@@ -16,4 +16,6 @@ public interface AppointmentDAO {
 	
 	public void deleteApptByApptId(int theApptId);
 	
+	public List<Appointment> getApptsByDoctorId(int theDoctorId);
+	
 }
