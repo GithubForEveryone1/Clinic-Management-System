@@ -1,5 +1,8 @@
 package com.ncs.clinicmanagementsystem.restcontroller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -70,21 +73,56 @@ public class AppointmentRestController {
 		return theAppts;
 	}
 	
+	// add mapping for GET /appt/getbydate/{strDate} //yyyy-mm-dd //for example "/appt/getbydate/2022-11-08"
+	@GetMapping("/appt/getbydate/{strDate}")
+	public List<Appointment> getApptsByDate(@PathVariable String strDate) {
+		//System.out.println(strDate);
+		
+		Date theDate;
+		List<Appointment> theAppts;
+		
+		try {
+			theDate = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+			//System.out.println(theDate);
+			theAppts = apptService.getApptsByDate(theDate);
+			//System.out.println(theAppts);
+		}
+		catch(Exception e) {
+			throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
+		}
+		
+		if (theAppts.isEmpty()) { // throws error msg if user has no appointments.
+			throw new RuntimeException("You have no appointments."); 
+		}
+		
+		return theAppts;
+	}
+	
+	// add mapping for POST /appt/test //test for duplicates.
+	@PostMapping("/appt/test")
+	public Appointment testDup(@RequestBody Appointment theAppt) {
+		System.out.println(theAppt);
+		return apptService.checkForDupAppt(theAppt);
+	}
+	
 	// add mapping for POST /appt/create
 	@PostMapping("/appt/create")
 	public Appointment createAppt(@RequestBody Appointment theAppt) {
 		
-		// check if doctor's available timeslots taken not in place. kiv.
+		// check if doctor's available timeslots already taken.
+		Appointment tempAppt;
 		
 		// check if patient and doctor id is valid
 		User tempPatient;
 		User tempDoctor;
 		
 		try {
+			tempAppt = apptService.checkForDupAppt(theAppt);
 			tempPatient = userService.findById(theAppt.getPatient_id());
 			tempDoctor = userService.findById(theAppt.getDoctor_id());
 			System.out.println(tempPatient);
 			System.out.println(tempDoctor);
+			System.out.println(tempAppt);
 		}
 		catch(Exception e) {
 			//throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
@@ -101,6 +139,10 @@ public class AppointmentRestController {
 			//throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if patient is not patient or doctor is not doctor.
 			throw new RuntimeException("tempPatient or tempDoctor is not account type patient or doctor."); //test...
 		}
+		else if (tempAppt != null) {
+			throw new RuntimeException("This slot is no longer available. Please select another slot."); //throws error msg if patient is not patient or doctor is not doctor.
+		}
+		
 		
 		// save new appt to db.
 		try {
