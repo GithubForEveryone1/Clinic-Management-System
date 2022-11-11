@@ -1,5 +1,8 @@
 package com.ncs.clinicmanagementsystem.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -96,4 +99,57 @@ public class AppointmentDAOHibernateImpl implements AppointmentDAO {
 		return docAppts;
 	}
 
+	// to get the appointments based on date.
+	@Override
+	public List<Appointment> getApptsByDate(Date theDate) {
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+				
+		// get the appts based on date
+		Criteria criteria = currentSession.createCriteria(Appointment.class);
+		List<Appointment> theAppts = criteria.add(Restrictions.eqOrIsNull("date_visited", theDate)).list();
+				
+		return theAppts;
+	}
+
+	// to check for duplicated appointment.
+	@Override
+	public Appointment checkForDupAppt(Appointment theAppt) {
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date theDate;
+		Appointment dupAppt;
+		
+		try {
+			theDate = new SimpleDateFormat("yyyy-MM-dd").parse(formatter.format(theAppt.getDate_visited()));
+			
+			// get the appt based on appt
+			Criteria criteria = currentSession.createCriteria(Appointment.class);
+			criteria.add(Restrictions.eq("patient_id", theAppt.getPatient_id()));
+			criteria.add(Restrictions.eq("doctor_id", theAppt.getDoctor_id()));
+			criteria.add(Restrictions.eq("date_visited", theDate));
+			criteria.add(Restrictions.eq("timeslot", theAppt.getTimeslot()));
+			dupAppt = (Appointment) criteria.setMaxResults(1).uniqueResult();
+			
+			/*
+			Appointment dupAppt = (Appointment) criteria
+						.add(Restrictions.eq("patient_id", theAppt.getPatient_id()))
+						.add(Restrictions.eq("doctor_id", theAppt.getDoctor_id()))
+						.add(Restrictions.eq("date_visited", theAppt.getDate_visited()))
+						.add(Restrictions.eq("timeslot", theAppt.getTimeslot()))
+						.uniqueResult();
+			*/
+			
+			// return the duplicated appointment.
+			return dupAppt;
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return null; //not looking right. kiv.
+	}
+	
 }
