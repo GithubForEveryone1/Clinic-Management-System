@@ -51,6 +51,7 @@ public class AppointmentRestController {
 	}
 	
 	// add mapping for GET /appt/{userId}
+	// for patients appts
 	@GetMapping("/appt/{userId}")
 	public List<Appointment> getApptsByUserId(@PathVariable int userId) {
 		List<Appointment> theAppts;
@@ -137,6 +138,27 @@ public class AppointmentRestController {
 			e.printStackTrace();
 			throw new RuntimeException("Opps something happened. Please try again.");
 		}
+	}
+	
+	// add mapping for GET /appt/{userId}
+	// for doctors appt
+	@GetMapping("/appt/{userId}")
+	public List<Appointment> getApptsByDoctorId(@PathVariable int userId) {
+		List<Appointment> docAppts;
+			
+		try {
+			docAppts = apptService.getApptsByDoctorId(userId);
+			System.out.println(docAppts);
+		}
+		catch(Exception e) {
+			throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
+		}
+			
+		if (docAppts.isEmpty()) { // throws error msg if user has no appointments.
+			throw new RuntimeException("You have no appointments."); 
+		}
+			
+		return docAppts;
 	}
 	
 }

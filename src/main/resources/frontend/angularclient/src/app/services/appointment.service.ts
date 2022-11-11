@@ -17,4 +17,8 @@ export class AppointmentService {
     return this.httpClient.get<Appointment[]>(`${this.baseUrl}/appt/` + userId);
   }
 
+  getApptsByDoctorId(userId: number): Observable<Appointment[]> {
+    return this.httpClient.get<Appointment[]>(`${this.baseUrl}/appt/` + userId);
+  }
+
 }
