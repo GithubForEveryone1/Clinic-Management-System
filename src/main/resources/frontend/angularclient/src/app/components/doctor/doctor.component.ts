@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Appointment } from 'src/app/common/appointment';
+import { AppointmentService } from 'src/app/services/appointment.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-doctor',
@@ -22,12 +25,33 @@ export class DoctorComponent implements OnInit {
   gender = this.loggedInUser.gender;
   accountType = this.loggedInUser.account_type;
 
-  constructor(private router: Router) { }
+  //today's date
+  today = new Date();
+  todayDate = this.today.valueOf();
+
+  //Appointments
+  appts: Appointment[] = [];
+  pastAppts: Appointment[] = [];
+  upcomingAppts: Appointment[] = [];
+
+  //Error message from backend server
+  errorMsg = "";
+
+  constructor(private router: Router, private appointmentService: AppointmentService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    if (this.accountType != 'doctor') {
-      this.router.navigate(['error']);
-    }
+    this.appointmentService.getApptsByDoctorId(this.doctorId).subscribe(
+      data => {
+        this.appts = data;
+        console.log(this.appts);
+       
+      },
+      error => this.handleErrorResponse(error),
+    );
+  }
+
+  handleErrorResponse(error:HttpErrorResponse) {
+    this.errorMsg = error.error.message;
   }
 
 }
