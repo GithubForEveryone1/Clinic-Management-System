@@ -12,6 +12,7 @@ import { PatientAppointmentsComponent } from './patient-appointments/patient-app
 import { SuperAdminComponent } from './components/super-admin/super-admin.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { NurseComponent } from './components/nurse/nurse.component';
+import { DoctorAppointmentsComponent } from './components/doctor-appointments/doctor-appointments.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'patient', component: PatientProfileComponent, canActivate: [RouteGuardService]},
   {path: 'admin', component: SuperAdminComponent, canActivate: [RouteGuardService]},
   {path: 'doctor', component: DoctorComponent, canActivate: [RouteGuardService]},
+  {path: 'doctor/appointments', component: DoctorAppointmentsComponent, canActivate: [RouteGuardService]},
   {path: 'nurse', component: NurseComponent, canActivate: [RouteGuardService]},
   {path: '**', component: ErrorComponent} 
 ];

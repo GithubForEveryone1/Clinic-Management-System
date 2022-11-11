@@ -20,6 +20,7 @@ import { PatientAppointmentsComponent } from './patient-appointments/patient-app
 import { SuperAdminComponent } from './components/super-admin/super-admin.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { NurseComponent } from './components/nurse/nurse.component';
+import { DoctorAppointmentsComponent } from './components/doctor-appointments/doctor-appointments.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NurseComponent } from './components/nurse/nurse.component';
     PatientAppointmentsComponent,
     SuperAdminComponent,
     DoctorComponent,
-    NurseComponent
+    NurseComponent,
+    DoctorAppointmentsComponent
   ],
   imports: [
     BrowserModule,
