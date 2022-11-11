@@ -20,6 +20,8 @@ import { PatientAppointmentsComponent } from './patient-appointments/patient-app
 import { SuperAdminComponent } from './components/super-admin/super-admin.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { NurseComponent } from './components/nurse/nurse.component';
+import { PatientMakeAppointmentComponent } from './components/patient-make-appointment/patient-make-appointment.component';
+import { PatientMakeAppointmentSuccessComponent } from './components/patient-make-appointment-success/patient-make-appointment-success.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { NurseComponent } from './components/nurse/nurse.component';
     PatientAppointmentsComponent,
     SuperAdminComponent,
     DoctorComponent,
-    NurseComponent
+    NurseComponent,
+    PatientMakeAppointmentComponent,
+    PatientMakeAppointmentSuccessComponent
   ],
   imports: [
     BrowserModule,
