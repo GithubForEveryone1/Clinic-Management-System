@@ -16,9 +16,13 @@
 					aria-current="page" href="#">Book an appt</a></li>
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="#">Other services</a></li>
-				<div *ngIf="authenticationService.isUserLoggedIn()">
+				<div *ngIf="authenticationService.isUserLoggedIn() && authenticationService.isUserPatient()">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" routerLink="/patient/appointments">Your appointments</a></li>
+				</div>
+				<div *ngIf="authenticationService.isUserLoggedIn() && authenticationService.isUserDoctor()">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" routerLink="/doctor/appointments">Your appointments</a></li>
 				</div>
 				<div *ngIf="authenticationService.isUserSuperAdmin()">
 					<li class="nav-item"><a class="nav-link active"
