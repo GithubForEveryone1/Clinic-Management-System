@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     'password': "",
     'dob': "",
     'gender': "",
-    'account_type': "",
+    'account_type': "patient",
     'date_created': ""
   }
 
