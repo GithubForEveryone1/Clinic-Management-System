@@ -13,6 +13,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SuperAdminComponent implements OnInit {
 	
+	message!: string;
+	errorMessage!: string;
+	
 	role = [
 		"doctor",
 		"nurse"
@@ -57,7 +60,8 @@ export class SuperAdminComponent implements OnInit {
 	submitRegister() {
 		this.userService.createUser(this.user).subscribe(
 			data => {
-				this.router.navigate(['login'], { queryParams: { registered: 'true' } });
+				this.message = "User has been created successfully!"
+				/* this.router.navigate(['login'], { queryParams: { registered: 'true' } }); */
 			},
 			error => this.handleRegisterErrorResponse(error)
 		)
@@ -67,17 +71,21 @@ export class SuperAdminComponent implements OnInit {
 		//console.log(error);
 		//console.log(error.error);
 		//console.log(error.error.message);
-		this.successMsg = "";
-		this.errorMsg = error.error.message;
+		this.errorMessage = "Email already exists";
+		
 	}
 
 	submitDelete() {
 		const formData = {
-			'email': this.emailForDelete
+			'email': this.user.email
 		}
 		console.log("Deleting " + formData.email);
 		this.userService.deleteUser(formData).subscribe(
-			data => { }
+			response => { 
+				console.log(response);
+				this.message = "User has been deleted successfully!"
+			},
+			error => this.errorMessage = "Email does not exist"
 		)
 	}
 

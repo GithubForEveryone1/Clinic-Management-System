@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void deleteByEmail(String theEmail) {
+		
 		userDAO.deleteByEmail(theEmail);
 
 	}
