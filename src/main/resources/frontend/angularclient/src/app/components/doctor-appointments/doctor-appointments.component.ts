@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Appointment } from 'src/app/common/appointment';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
-import { UserService } from 'src/app/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-doctor',
-  templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.css']
+  selector: 'app-doctor-appointments',
+  templateUrl: './doctor-appointments.component.html',
+  styleUrls: ['./doctor-appointments.component.css']
 })
-export class DoctorComponent implements OnInit {
+export class DoctorAppointmentsComponent implements OnInit {
+
   loggedInUserStr: string | null = sessionStorage.getItem("loggedInUser");
 
   //parse JSON back to User object
@@ -19,6 +19,11 @@ export class DoctorComponent implements OnInit {
   doctorId = this.loggedInUser.user_id;
   firstName = this.loggedInUser.first_name;
   lastName = this.loggedInUser.last_name;
+  dob = this.loggedInUser.dob;
+  address = this.loggedInUser.address;
+  contactNo = this.loggedInUser.contact_number;
+  email = this.loggedInUser.email;
+  gender = this.loggedInUser.gender;
   accountType = this.loggedInUser.account_type;
 
   //today's date
@@ -30,30 +35,17 @@ export class DoctorComponent implements OnInit {
   pastAppts: Appointment[] = [];
   upcomingAppts: Appointment[] = [];
 
-  //Patient Info
-  patientFirstName = "";
-  patientLastName = "";
-  dob = "";
-  patientAddress = "";
-  contact = "";
-  email = "";
-  
   //Error message from backend server
   errorMsg = "";
 
-  constructor(
-    private router: Router, 
-    private appointmentService: AppointmentService, 
-    private userService: UserService, 
-    private route: ActivatedRoute) { }
+  constructor(private router: Router, private appointmentService: AppointmentService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.appointmentService.getApptsByDoctorId(this.doctorId).subscribe(
       data => {
         this.appts = data;
         console.log(this.appts);
-        this.displayPatientInfo();
-        // console.log(this.patientFirstName);
+       
       },
       error => this.handleErrorResponse(error),
     );
@@ -61,18 +53,6 @@ export class DoctorComponent implements OnInit {
 
   handleErrorResponse(error:HttpErrorResponse) {
     this.errorMsg = error.error.message;
-  }
-
-  displayPatientInfo() {
-    this.appts.forEach((value) => {
-      const patient = value.patient;
-      this.patientFirstName = patient.first_name;
-      this.patientLastName = patient.last_name;
-      this.dob = patient.dob;
-      this.patientAddress = patient.address;
-      this.contact = patient.contact_number;
-      this.email = patient.email;
-    })
   }
 
 }

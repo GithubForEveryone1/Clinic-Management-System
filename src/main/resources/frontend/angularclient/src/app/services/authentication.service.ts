@@ -21,17 +21,36 @@ export class AuthenticationService {
     //return sessionStorage.getItem("email") !== null;
     return sessionStorage.getItem("loggedInUser") !== null;
   }
-  
+    
   isUserSuperAdmin(): boolean {
 	const account_type = sessionStorage.getItem("type");
-	if(account_type == "admin") {
-		return sessionStorage.getItem("type") !== null;	
-	} else {
-		return false;
-	}
-}
-  
+    if(account_type == "admin") {
+      return sessionStorage.getItem("type") !== null;	
+    } else {
+      return false;
+    }
+  }
 
+  isUserDoctor(): boolean {
+    const account_type = sessionStorage.getItem("type");
+
+    if(account_type == "doctor") {
+      return sessionStorage.getItem("type") !== null;	
+    } else {
+      return false;
+    }
+  }
+
+  isUserPatient(): boolean {
+    const account_type = sessionStorage.getItem("type");
+
+    if(account_type == "patient") {
+      return sessionStorage.getItem("type") !== null;	
+    } else {
+      return false;
+    }
+  }
+  
   logout() {
     //sessionStorage.removeItem("firstName");
     //sessionStorage.removeItem("email");

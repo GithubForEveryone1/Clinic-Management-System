@@ -48,8 +48,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void deleteByEmail(String theEmail) {
+		
 		userDAO.deleteByEmail(theEmail);
 
 	}
 
+	@Override
+	@Transactional
+	public List<User> findDoctors() {
+		return userDAO.findDoctors();
+	}
 }
