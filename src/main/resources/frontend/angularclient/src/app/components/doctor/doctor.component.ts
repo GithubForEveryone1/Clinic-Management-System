@@ -29,6 +29,7 @@ export class DoctorComponent implements OnInit {
   appts: Appointment[] = [];
   pastAppts: Appointment[] = [];
   upcomingAppts: Appointment[] = [];
+  bookedAppt: Appointment[] = [];
 
   //Patient Info
   patientFirstName = "";
@@ -38,7 +39,7 @@ export class DoctorComponent implements OnInit {
   contact = "";
   email = "";
   diagnosis = "";
-  
+
   //Error message from backend server
   errorMsg = "";
 
@@ -53,10 +54,11 @@ export class DoctorComponent implements OnInit {
       data => {
         this.appts = data;
         console.log(this.appts);
-        
+        // console.log(this.isBooked(this.slot));
         // this.filterPatientTimeslot();
         // this.displayPatientInfo();
         // console.log();
+        
       },
       error => this.handleErrorResponse(error),
     );
@@ -69,7 +71,7 @@ export class DoctorComponent implements OnInit {
   displayPatientInfo(slot: number) {
     this.appts.forEach((value) => {
       if (value.timeslot === slot) {
-        console.log(value.timeslot === slot);
+        // console.log(value.timeslot === slot);
         const patient = value.patient;
         this.patientFirstName = patient.first_name;
         this.patientLastName = patient.last_name;
@@ -87,13 +89,22 @@ export class DoctorComponent implements OnInit {
         this.contact = "";
         this.email = "";
         this.diagnosis = "";
+        // this.booked = "";
       }
     })
   }
-  // method to filter based on timeslot
-  // filterPatientTimeslot(){
-  //   this.appts.forEach((value) => {
-  //     this.patientTimeslot = value.timeslot;
-  //   })
-  // }
+  // 
+  // to indicate on the calendar which slots are taken
+  isBooked(slot: number): string{
+    let res = "false";
+    
+    this.appts.forEach((value) => {
+      if(value.timeslot === slot){
+        console.log(value.timeslot === slot);
+        res = "true";
+      }
+    })
+    return res;
+  }
+  
 }
