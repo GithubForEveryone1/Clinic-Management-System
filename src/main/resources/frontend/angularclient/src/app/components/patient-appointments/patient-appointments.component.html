@@ -1,4 +1,4 @@
-<!--display patient full name and id-->
+<!--display patient's full name and id-->
 <div class="container">
     <div class="row mt-5 mb-5 justify-content-center">
         <table class="table-borderless w-auto">
@@ -65,7 +65,7 @@
                     <div class="col-9 bg-light p-4 my-2">
                         <h6 class="my-0">Appointment ID: {{ appt.appt_id }}</h6>
                         <h6 class="my-0">Time: {{ displayTimeslot(appt.timeslot) }}</h6>
-                        <h6 class="my-0">Doctor ID: {{ appt.doctor_id }}</h6>
+                        <h6 class="my-0">Doctor: Dr. <span class="text-capitalize">{{ appt.doctor.first_name }} {{ appt.doctor.last_name }}</span></h6>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                     <div class="col-9 bg-light p-4 my-2">
                         <h6 class="my-0">Appointment ID: {{ appt.appt_id }}</h6>
                         <h6 class="my-0">Time: {{ displayTimeslot(appt.timeslot) }}</h6>
-                        <h6 class="my-0">Doctor ID: {{ appt.doctor_id }}</h6>
+                        <h6 class="my-0">Doctor: Dr. <span class="text-capitalize">{{ appt.doctor.first_name }} {{ appt.doctor.last_name }}</span></h6>
                         <p>Diagnosis: {{ appt.diagnosis }}</p>
                         <p>Prescription: {{ appt.prescription }}</p>
                     </div>

@@ -1,10 +1,9 @@
-
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Query } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 import { UserService } from 'src/app/services/user.service';
-import {FormGroup, FormControl, Validators} from '@angular/forms'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 
 @Component({
@@ -13,20 +12,20 @@ import {FormGroup, FormControl, Validators} from '@angular/forms'
 	styleUrls: ['./super-admin.component.css']
 })
 export class SuperAdminComponent implements OnInit {
-	
+
 	message!: string;
 	errorMessage!: string;
-	
+
 	role = [
 		"doctor",
 		"nurse"
 	];
-	
+
 	/* createForm = new FormGroup({
 		user: new FormControl('',[Validators.required]),
 		password: new FormControl(''),
 	})  */
-	
+
 	user: User = {
 		'user_id': NaN,
 		'first_name': "",
@@ -40,7 +39,7 @@ export class SuperAdminComponent implements OnInit {
 		'account_type': "",
 		'date_created': ""
 	}
-	
+
 	/* get newUser() {
 		return this.createForm.get('user');
 	} */
@@ -82,7 +81,7 @@ export class SuperAdminComponent implements OnInit {
 		//console.log(error.error);
 		//console.log(error.error.message);
 		this.errorMessage = "Email already exists";
-		
+
 	}
 
 	submitDelete() {
@@ -91,7 +90,7 @@ export class SuperAdminComponent implements OnInit {
 		}
 		console.log("Deleting " + formData.email);
 		this.userService.deleteUser(formData).subscribe(
-			response => { 
+			response => {
 				console.log(response);
 				this.message = "User has been deleted successfully!"
 			},
@@ -124,4 +123,5 @@ export class SuperAdminComponent implements OnInit {
 		}
 	}
 }
+
 

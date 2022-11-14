@@ -1,1 +1,39 @@
-<p>nurse works!</p>
+<!--display nurse's full name and id-->
+<div class="container">
+    <div class="row mt-5 mb-5 justify-content-center">
+        <table class="table-borderless w-auto">
+            <tbody>
+                <tr>
+                    <th scope="row">Nurse Name :</th>
+                    <td class="text-capitalize">{{firstName}} {{lastName}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Nurse ID :</th>
+                    <td>{{nurseId}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--dropdown menus for doctors and date picker for date-->
+<div class="container mt-3 ">
+    <div class="d-flex justify-content-center">
+        <div class="btn-group ">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Dr. <span class="text-capitalize">{{ selectedDoctor.first_name }} {{ selectedDoctor.last_name }}</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div *ngFor="let doctor of doctors">
+                        <button class="dropdown-item" type="button" (click)="changeSelectedDoctor(doctor.user_id)"> Dr. <span class="text-capitalize">{{ doctor.first_name }} {{ doctor.last_name }}</span></button>
+                    </div> 
+                </div>
+            </div>
+            <div class="input-group date">
+                <input type="date" class="form-control" [(ngModel)]="selectedDate">
+            </div>
+        </div>
+    </div> 
+</div>
+

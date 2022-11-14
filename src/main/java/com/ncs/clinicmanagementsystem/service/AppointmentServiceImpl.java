@@ -1,5 +1,6 @@
 package com.ncs.clinicmanagementsystem.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +59,16 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return apptDAO.getApptsByDoctorId(theDoctorId);
 	}
 
+	@Override
+	@Transactional
+	public List<Appointment> getApptsByDate(Date theDate) {
+		return apptDAO.getApptsByDate(theDate);
+	}
+
+	@Override
+	@Transactional
+	public Appointment checkForDupAppt(Appointment theAppt) {
+		return apptDAO.checkForDupAppt(theAppt);
+	}
+	
 }
