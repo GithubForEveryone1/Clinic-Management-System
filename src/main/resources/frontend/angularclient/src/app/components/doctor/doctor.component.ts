@@ -54,11 +54,6 @@ export class DoctorComponent implements OnInit {
       data => {
         this.appts = data;
         console.log(this.appts);
-        // console.log(this.isBooked(this.slot));
-        // this.filterPatientTimeslot();
-        // this.displayPatientInfo();
-        // console.log();
-        
       },
       error => this.handleErrorResponse(error),
     );
@@ -89,7 +84,6 @@ export class DoctorComponent implements OnInit {
         this.contact = "";
         this.email = "";
         this.diagnosis = "";
-        // this.booked = "";
       }
     })
   }
@@ -100,7 +94,7 @@ export class DoctorComponent implements OnInit {
     
     this.appts.forEach((value) => {
       if(value.timeslot === slot){
-        console.log(value.timeslot === slot);
+        // console.log(value.timeslot === slot);
         res = "true";
       }
     })
