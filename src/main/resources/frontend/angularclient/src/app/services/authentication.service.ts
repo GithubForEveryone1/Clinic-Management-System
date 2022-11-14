@@ -51,16 +51,6 @@ export class AuthenticationService {
     }
   }
   
-  isUserSuperAdmin(): boolean {
-	const account_type = sessionStorage.getItem("type");
-	if(account_type == "admin") {
-		return sessionStorage.getItem("type") !== null;	
-	} else {
-		return false;
-	}
-}
-  
-
   logout() {
     //sessionStorage.removeItem("firstName");
     //sessionStorage.removeItem("email");

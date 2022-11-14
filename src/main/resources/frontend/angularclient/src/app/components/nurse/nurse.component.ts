@@ -36,6 +36,9 @@ export class NurseComponent implements OnInit {
 		'date_created': ""
 	};
   
+  //Date
+  selectedDate = (new Date().toISOString().split('T')[0]);
+
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
