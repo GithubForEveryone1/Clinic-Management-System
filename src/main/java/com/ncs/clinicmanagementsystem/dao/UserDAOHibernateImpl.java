@@ -103,7 +103,6 @@ public class UserDAOHibernateImpl implements UserDAO {
 		}
 		*/
 	}
-
 	
 	@Override
 	public void deleteByEmail(String theEmail) {

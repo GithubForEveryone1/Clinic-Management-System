@@ -29,6 +29,10 @@ export class UserService {
 		return this.httpClient.delete(`${this.baseUrl}/user/delete`, { body: email });
 	}
 
+	deleteUserAsAdmin(email: any) {
+		return this.httpClient.delete(`${this.baseUrl}//delete`, { body: email });
+	}
+
 	get loggedInUser(): User {
 		return this.loggedInUser;
 	}

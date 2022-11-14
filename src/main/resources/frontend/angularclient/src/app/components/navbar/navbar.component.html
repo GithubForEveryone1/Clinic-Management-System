@@ -26,7 +26,7 @@
 				</div>
 				<div *ngIf="authenticationService.isUserSuperAdmin()">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" routerLink="/admin">Create account</a></li>
+						aria-current="page" routerLink="/admin">Administrator</a></li>
 				</div>
 			</ul>
 			<div *ngIf="authenticationService.isUserLoggedIn(); else noUser">

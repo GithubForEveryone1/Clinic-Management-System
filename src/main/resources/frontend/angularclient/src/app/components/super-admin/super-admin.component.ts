@@ -1,23 +1,31 @@
-
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Query } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 import { UserService } from 'src/app/services/user.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 
 @Component({
-  selector: 'app-super-admin',
-  templateUrl: './super-admin.component.html',
-  styleUrls: ['./super-admin.component.css']
+	selector: 'app-super-admin',
+	templateUrl: './super-admin.component.html',
+	styleUrls: ['./super-admin.component.css']
 })
 export class SuperAdminComponent implements OnInit {
-	
+
+	message!: string;
+	errorMessage!: string;
+
 	role = [
 		"doctor",
 		"nurse"
 	];
-	
+
+	/* createForm = new FormGroup({
+		user: new FormControl('',[Validators.required]),
+		password: new FormControl(''),
+	})  */
+
 	user: User = {
 		'user_id': NaN,
 		'first_name': "",
@@ -31,6 +39,10 @@ export class SuperAdminComponent implements OnInit {
 		'account_type': "",
 		'date_created': ""
 	}
+
+	/* get newUser() {
+		return this.createForm.get('user');
+	} */
 
 	badRegisterAttempted = false;
 	errorMsg = "";
@@ -48,5 +60,68 @@ export class SuperAdminComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
+	fakeRegister() {
+		this.badRegisterAttempted = true;
+		this.successMsg = "";
+		this.errorMsg = "Please verify that all fields have been filled in correctly.";
+	}
+
+	submitRegister() {
+		this.userService.createUser(this.user).subscribe(
+			data => {
+				this.message = "User has been created successfully!"
+				/* this.router.navigate(['login'], { queryParams: { registered: 'true' } }); */
+			},
+			error => this.handleRegisterErrorResponse(error)
+		)
+	}
+
+	handleRegisterErrorResponse(error: HttpErrorResponse) {
+		//console.log(error);
+		//console.log(error.error);
+		//console.log(error.error.message);
+		this.errorMessage = "Email already exists";
+
+	}
+
+	submitDelete() {
+		const formData = {
+			'email': this.user.email
+		}
+		console.log("Deleting " + formData.email);
+		this.userService.deleteUser(formData).subscribe(
+			response => {
+				console.log(response);
+				this.message = "User has been deleted successfully!"
+			},
+			error => this.errorMessage = "Email does not exist"
+		)
+	}
+
+	// Sets the DOB max because the HTML nonsense is dumb
+	// Put error class if age is not at least 18
+	enforceBoundsAndCheckForError() {
+		if (this.user.dob != "") {
+			if (this.user.dob > this.max) {
+				this.user.dob = this.max;
+			}
+			else if (this.user.dob < this.min) {
+				this.user.dob = this.min;
+			}
+
+			else if (
+				new Date(new Date(this.max).setFullYear(new Date(this.max).getFullYear() - 18)) <
+				new Date(this.user.dob)
+			) {
+				console.log(new Date(new Date(this.max).setFullYear(new Date(this.max).getFullYear() - 18)));
+				this.userUnder18 = true;
+			}
+
+			else {
+				this.userUnder18 = false;
+			}
+		}
+	}
 }
+
 
