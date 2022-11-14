@@ -16,4 +16,6 @@ public interface UserService {
 	
 	public void deleteByEmail(String theEmail);
 	
+	public List<User> findDoctors();
+	
 }
