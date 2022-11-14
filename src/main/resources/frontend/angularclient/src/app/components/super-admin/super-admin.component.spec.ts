@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SuperAdminComponent } from './super-admin.component';
 
 describe('SuperAdminComponent', () => {
@@ -21,3 +21,5 @@ describe('SuperAdminComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
