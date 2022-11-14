@@ -41,7 +41,7 @@ import { PatientMakeAppointmentFailureComponent } from './components/patient-mak
     SuperAdminComponent,
     DoctorComponent,
     NurseComponent,
-    DoctorAppointmentsComponent
+    DoctorAppointmentsComponent,
     PatientMakeAppointmentComponent,
     PatientMakeAppointmentSuccessComponent,
     PatientMakeAppointmentFailureComponent
