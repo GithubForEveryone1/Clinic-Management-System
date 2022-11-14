@@ -7,9 +7,9 @@ import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
-	selector: 'app-super-admin',
-	templateUrl: './super-admin.component.html',
-	styleUrls: ['./super-admin.component.css']
+  selector: 'app-super-admin',
+  templateUrl: './super-admin.component.html',
+  styleUrls: ['./super-admin.component.css']
 })
 export class SuperAdminComponent implements OnInit {
 	
@@ -48,62 +48,5 @@ export class SuperAdminComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	fakeRegister() {
-		this.badRegisterAttempted = true;
-		this.successMsg = "";
-		this.errorMsg = "Please verify that all fields have been filled in correctly.";
-	}
-
-	submitRegister() {
-		this.userService.createUser(this.user).subscribe(
-			data => {
-				this.router.navigate(['login'], { queryParams: { registered: 'true' } });
-			},
-			error => this.handleRegisterErrorResponse(error)
-		)
-	}
-
-	handleRegisterErrorResponse(error: HttpErrorResponse) {
-		//console.log(error);
-		//console.log(error.error);
-		//console.log(error.error.message);
-		this.successMsg = "";
-		this.errorMsg = error.error.message;
-	}
-
-	submitDelete() {
-		const formData = {
-			'email': this.emailForDelete
-		}
-		console.log("Deleting " + formData.email);
-		this.userService.deleteUser(formData).subscribe(
-			data => { }
-		)
-	}
-
-	// Sets the DOB max because the HTML nonsense is dumb
-	// Put error class if age is not at least 18
-	enforceBoundsAndCheckForError() {
-		if (this.user.dob != "") {
-			if (this.user.dob > this.max) {
-				this.user.dob = this.max;
-			}
-			else if (this.user.dob < this.min) {
-				this.user.dob = this.min;
-			}
-
-			else if (
-				new Date(new Date(this.max).setFullYear(new Date(this.max).getFullYear() - 18)) <
-				new Date(this.user.dob)
-			) {
-				console.log(new Date(new Date(this.max).setFullYear(new Date(this.max).getFullYear() - 18)));
-				this.userUnder18 = true;
-			}
-
-			else {
-				this.userUnder18 = false;
-			}
-		}
-	}
 }
 

@@ -7,6 +7,7 @@
     <!-- Display of appointment schedule for the day -->
     <div class="row mx-auto p-3">
         <h4 class="mb-3">Appointments for today</h4>
+        <a routerLink="/doctor/appointments">view all appointments</a>
         <div class="col-4">
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="slot-1" data-bs-toggle="list" href="#slot-1-patient" role="tab" aria-controls="slot-1-patient">1. 8 - 9 AM</a>
@@ -25,7 +26,26 @@
         </div>
         <div class="col-8">
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="slot-1-patient" role="tabpanel" aria-labelledby="slot-1">bla bla bla to show patients stuff blabla</div>
+                <div class="tab-pane fade show active" id="slot-1-patient" role="tabpanel" aria-labelledby="slot-1">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">8AM-9AM</h5>
+                          <p class="card-text">Patient got lao sai</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                          <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                          <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                          <li class="list-group-item">Address: {{patientAddress}}</li>
+                          <li class="list-group-item">Contact: {{contact}}</li>
+                          <li class="list-group-item">Email: {{email}}</li>
+                        </ul>
+                        <div class="card-body">
+                          <a href="#" class="card-link">Add Diagnosis</a>
+                          <a href="#" class="card-link">Add Prescription</a>
+                        </div>
+                      </div>
+                </div>
                 <div class="tab-pane fade" id="slot-2-patient" role="tabpanel" aria-labelledby="slot-2">blablabla info aboout patient 2</div>
                 <div class="tab-pane fade" id="slot-3-patient" role="tabpanel" aria-labelledby="slot-3">blablabla info aboout patient 3</div>
                 <div class="tab-pane fade" id="slot-4-patient" role="tabpanel" aria-labelledby="slot-4">blablabla info aboout patient 4</div>
