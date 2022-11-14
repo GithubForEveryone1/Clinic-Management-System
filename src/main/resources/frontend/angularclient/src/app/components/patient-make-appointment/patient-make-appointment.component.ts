@@ -4,6 +4,7 @@ import { Appointment } from 'src/app/common/appointment';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { ClosingService } from 'src/app/services/closing.service';
 
 @Component({
   selector: 'app-patient-make-appointment',
@@ -48,7 +49,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
     11: '8:00 PM'
   }
 
-  constructor(private appointmentService: AppointmentService, private userService: UserService, private router: Router) { }
+  constructor(private appointmentService: AppointmentService, private userService: UserService, private closingService: ClosingService, private router: Router) { }
 
   ngOnInit(): void {
     // // Get all appointments from DB
@@ -122,6 +123,21 @@ export class PatientMakeAppointmentComponent implements OnInit {
         break;
     }
 
+    // Check closing dates table to see if clinic is closed
+    let closedToday = false;
+
+    this.closingService.getClosingDatesList().subscribe(
+      data => {
+        for (let closingDate in data) {
+          let tempDate = new Date(new Date(Object.values(data[closingDate])[0]).toLocaleDateString());
+          let selectedDate = new Date(new Date(this.selectedDate).toLocaleDateString());
+          if (selectedDate.valueOf() == tempDate.valueOf()) {
+            closedToday = true;
+          }
+        }
+      })
+    
+
     /* 
     Get list of appointments for selected date
     format is:
@@ -163,10 +179,57 @@ export class PatientMakeAppointmentComponent implements OnInit {
         for (let timeslot in this.timeslots) {
   
           // Disable this timeslot row if it's a weekend
-          // Sunday   = disable all
-          // Saturday = disable timeslots past 12pm
-          if (isSun) {
+          // Sunday or closed        = disable all
+          // Timeslot already passed = disable timeslots since you can't go back in time
+          // Saturday                = disable timeslots past 12pm
+          
+          // Yes I hard coded the timeslot to the timing, don't @ me
+          let timeslotHour = "";
+          switch (timeslot) {
+            case '1':
+              timeslotHour = "08:00:00";
+              break;
+            case '2':
+              timeslotHour = "09:00:00";
+              break;
+            case '3':
+              timeslotHour = "10:00:00";
+              break;
+            case '4':
+              timeslotHour = "11:00:00";
+              break;
+            case '5':
+              timeslotHour = "13:00:00";
+              break;
+            case '6':
+              timeslotHour = "14:00:00";
+              break;
+            case '7':
+              timeslotHour = "15:00:00";
+              break;
+            case '8':
+              timeslotHour = "16:00:00";
+              break;
+            case '9':
+              timeslotHour = "18:00:00";
+              break;
+            case '10':
+              timeslotHour = "19:00:00";
+              break;
+            case '11':
+              timeslotHour = "20:00:00";
+              break;
+          }
+          
+          const timeslotTime = new Date(this.selectedDate + 'T' + timeslotHour); // In ISO format
+          
+          console.log(timeslotTime);
+
+          if (isSun || closedToday) {
             disable = "disabled";
+          }
+          else if (new Date() > timeslotTime) {
+            disable = "disabled;"
           }
           else if (isSat) {
             if (parseInt(timeslot) > 4) {
