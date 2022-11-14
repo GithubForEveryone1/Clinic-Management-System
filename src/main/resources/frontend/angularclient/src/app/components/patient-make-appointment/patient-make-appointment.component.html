@@ -2,18 +2,27 @@
     <h1 class="text-center m-5">Make an Appointment</h1>
 
     <div class="mb-3">
-        <textarea class="form-control" id="description" rows="5" placeholder="What would you like to see the doctor for?" [(ngModel)]="description"></textarea>
-    </div>
-
-    <div class="row mt-3 p-3">
-        <div class="col text-center">
-            <label class="p-2 bg-info" for="date">Select a date and time for your appointment 😡</label>
+        <textarea class="form-control" id="description" rows="5" placeholder="What would you like to see the doctor for?" required
+            #textarea="ngModel"
+            [(ngModel)]="description"
+            [ngClass]="
+                (textarea.errors && textarea.touched) || 
+                (textarea.errors && datepicker.dirty) ? 'form-control is-invalid' : 'form-control'">
+        </textarea>
+        <div *ngIf="textarea.errors?.['required']" class="invalid-feedback">
+                Please provide the details for your visit.
         </div>
     </div>
 
+    <!-- <div class="row mt-3 p-3"> -->
+        <!-- <div class="col text-center"> -->
+            <h4 class="text-center p-2 mt-5" for="date">Select a date and time</h4>
+        <!-- </div> -->
+    <!-- </div> -->
+
     <div class="row p-3 text-center">
         <div class="col">
-            <input name="date" id="date" type="date" class="p-3" [(ngModel)]="selectedDate" [max]="max" [min]="min" onkeydown="return false" (change)="enforceBoundsAndCheckForError(); updateApptTimeslots()">
+            <input name="date" id="date" type="date" class="p-3" [(ngModel)]="selectedDate" [max]="max" [min]="min" onkeydown="return false" (change)="enforceBoundsAndCheckForError(); updateApptTimeslots()" #datepicker="ngModel">
         </div>
     </div> 
 
@@ -55,14 +64,28 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let doctor of doctors">
-                        <td><input class="form-check-input" name="doctors" type="radio" value="{{ doctor[0] }}" [(ngModel)]="selectedDr" [disabled]="doctor[2] == 'disabled'"></td>
+                        <td><input class="form-check-input" name="doctors" type="radio" value="{{ doctor[0] + ':' + doctor[1] }}" [(ngModel)]="selectedDr" [disabled]="doctor[2] == 'disabled'"></td>
                         <td [ngClass]="doctor[2] == 'disabled' ? 'text-black-50' : ''">Dr. {{ doctor[1] }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="row text-center" *ngIf="selectedDr">
+        <!-- Disabled button if description is blank -->
+        <div class="row text-center fadeInDown" *ngIf="selectedDr && textarea.invalid">
+            <div class="col">
+                <button class="btn btn-secondary" disabled>Submit</button>
+            </div>
+        </div>
+        <!-- Warning message -->
+        <div class="row text-center mt-3 fadeInDown" *ngIf="selectedDr && textarea.invalid">
+            <div class="col alert alert-danger">
+                Please provide the details for your visit in the text box above.
+            </div>
+        </div>
+        
+        <!-- Real button -->
+        <div class="row text-center fadeInDown" *ngIf="selectedDr && !textarea.invalid">
             <div class="col">
                 <button class="btn btn-primary" (click)="makeAppt()">Submit</button>
             </div>

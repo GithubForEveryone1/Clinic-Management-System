@@ -27,11 +27,11 @@ export class PatientMakeAppointmentComponent implements OnInit {
   allApptsOnSelectedDate: Appointment[] = []; // All appointments that fall on the date selected by the user
 
   // These are binded to the input fields to get the user's selections
-  description = "";   // The description provided by the user in the textarea
-  selectedDate = "";  // The date that the user has picked
-
-  selectedAppt = "";  // The timeslot radio button that user has selected
-  selectedDr = "";    // The doctor radio button that user has selected
+  description = "";    // The description provided by the user in the textarea
+  selectedDate = "";   // The date that the user has picked
+ 
+  selectedAppt = "";   // The timeslot radio button that user has selected
+  selectedDr = "";     // The doctor radio button that user has selected
 
   // Hardcode 11 timeslots that the clinic will use
   timeslots: {[key: number]: string} = {
@@ -233,18 +233,33 @@ export class PatientMakeAppointmentComponent implements OnInit {
   }
 
   makeAppt() {
+    let timeslotNumber = parseInt(this.selectedAppt.split(",")[4]);
+    let patientId = JSON.parse(sessionStorage.getItem("loggedInUser")!).user_id;
+    let doctorId = parseInt(this.selectedDr.split(':')[0]);
+    let doctorName = this.selectedDr.split(':')[1];
+
+    // This is POSTed to the backend
     let appt = {
-        "patient_id": JSON.parse(sessionStorage.getItem("loggedInUser")!).user_id,
-        "doctor_id": parseInt(this.selectedDr),
-        "date_visited": this.selectedDate,
-        "timeslot": parseInt(this.selectedAppt.split(",")[4]),
-        "diagnosis": this.description,
-        "prescription": null
+      "patient_id": patientId,
+      "doctor_id": doctorId,
+      "date_visited": this.selectedDate,
+      "timeslot": timeslotNumber,
+      "diagnosis": this.description,
+      "prescription": null
     };
     
+    // This is sent to display on the success page
+    let query = {
+      "Consultation with": "Dr. " + doctorName,
+      "Date": this.timeslots[timeslotNumber] + ", " + new Date(this.selectedDate).toLocaleDateString("en-SG",{weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}),
+    }
+
     this.appointmentService.createAppt(appt).subscribe(
       data => {
-        this.router.navigate(['patient/appointments/success'], {queryParams: appt});
+        this.router.navigate(['patient/appointments/success'], {queryParams: query});
+      },
+      error => {
+        this.router.navigate(['patient/appointments/failure']);
       }
     )
   }

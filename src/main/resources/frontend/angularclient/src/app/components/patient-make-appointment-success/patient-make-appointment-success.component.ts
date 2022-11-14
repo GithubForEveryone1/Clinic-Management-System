@@ -10,17 +10,11 @@ export class PatientMakeAppointmentSuccessComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
 
-  apptDetails: any[] = [];
+  apptDetails = {};
 
   ngOnInit(): void {
 		this.route.queryParams.subscribe(params => {
-      let counter = 0;
-      for (var key in params) {
-        this.apptDetails.push(
-          Object.keys(params)[counter++] + ": " + params[key]
-          )
-      }
-		});
+      this.apptDetails = params;
+      });
   }
-
 }

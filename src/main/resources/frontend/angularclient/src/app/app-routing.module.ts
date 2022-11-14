@@ -14,6 +14,7 @@ import { DoctorComponent } from './components/doctor/doctor.component';
 import { NurseComponent } from './components/nurse/nurse.component';
 import { PatientMakeAppointmentComponent } from './components/patient-make-appointment/patient-make-appointment.component';
 import { PatientMakeAppointmentSuccessComponent } from './components/patient-make-appointment-success/patient-make-appointment-success.component';
+import { PatientMakeAppointmentFailureComponent } from './components/patient-make-appointment-failure/patient-make-appointment-failure.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'patient/appointments', component: PatientAppointmentsComponent, canActivate: [RouteGuardService]},
   {path: 'patient/appointments/new', component: PatientMakeAppointmentComponent, canActivate: [RouteGuardService]},
   {path: 'patient/appointments/success', component: PatientMakeAppointmentSuccessComponent, canActivate: [RouteGuardService]},
+  {path: 'patient/appointments/failure', component: PatientMakeAppointmentFailureComponent, canActivate: [RouteGuardService]},
   {path: 'patient', component: PatientProfileComponent, canActivate: [RouteGuardService]},
   {path: 'admin', component: SuperAdminComponent, canActivate: [RouteGuardService]},
   {path: 'doctor', component: DoctorComponent, canActivate: [RouteGuardService]},
