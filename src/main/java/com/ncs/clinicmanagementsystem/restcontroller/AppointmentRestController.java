@@ -142,7 +142,7 @@ public class AppointmentRestController {
 	
 	// add mapping for GET /appt/{userId}
 	// for doctors appt
-	@GetMapping("/appt/{userId}")
+	@GetMapping("/docAppt/{userId}")
 	public List<Appointment> getApptsByDoctorId(@PathVariable int userId) {
 		List<Appointment> docAppts;
 			
