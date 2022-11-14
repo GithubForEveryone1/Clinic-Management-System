@@ -3,8 +3,9 @@
 }
 
 .details {
-    height: 100vh;
+    min-height: 100vh;
 }
+
 .appt-details {
     background-color: #C6CAC7;
     border-radius: 4px;

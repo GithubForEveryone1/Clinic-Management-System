@@ -17,6 +17,11 @@ export class AppointmentService {
 		return this.httpClient.get<Appointment[]>(`${this.baseUrl}/appt`);
 	}
 
+  // example "/appt/getbydate/2022-11-08"
+  getApptsByDate(date: string): Observable<Appointment[]> {
+    return this.httpClient.get<Appointment[]>(`${this.baseUrl}/appt/getbydate/` + date)
+  }
+
   getApptsByUserId(userId: number): Observable<Appointment[]> {
     return this.httpClient.get<Appointment[]>(`${this.baseUrl}/appt/` + userId);
   }
