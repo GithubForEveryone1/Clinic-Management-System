@@ -43,7 +43,13 @@ export class PatientAppointmentsComponent implements OnInit {
   ngOnInit(): void {
     this.appointmentService.getApptsByUserId(this.patientId).subscribe(
       data => {
-        this.appts = data;
+        for (let appt in data) {
+          let currentAppt = data[appt];
+          let localizedDate = new Date(data[appt].date_visited).toLocaleDateString();
+          
+          currentAppt.date_visited = localizedDate;
+          this.appts.push(currentAppt);
+        }
         this.filterApptsBeforeToday();
         this.filterApptsAfterToday();
         console.log(this.todayDate);
