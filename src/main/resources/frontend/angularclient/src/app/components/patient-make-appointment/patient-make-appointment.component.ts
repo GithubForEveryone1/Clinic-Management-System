@@ -35,18 +35,19 @@ export class PatientMakeAppointmentComponent implements OnInit {
   selectedDr = "";     // The doctor radio button that user has selected
 
   // Hardcode 11 timeslots that the clinic will use
-  timeslots: {[key: number]: string} = {
-    1:  '8:00 AM',
-    2:  '9:00 AM',
-    3:  '10:00 AM',
-    4:  '11:00 AM',
-    5:  '1:00 PM',
-    6:  '2:00 PM',
-    7:  '3:00 PM',
-    8:  '4:00 PM',
-    9:  '6:00 PM',
-    10: '7:00 PM',
-    11: '8:00 PM'
+  // Yes I like to hardcode stuff, what are you gonna do about it?
+  timeslots: {[key: number]: string[]} = {
+    1:  ['8:00 AM', '08:00:00'],
+    2:  ['9:00 AM', '09:00:00'],
+    3:  ['10:00 AM','10:00:00'],
+    4:  ['11:00 AM','11:00:00'],
+    5:  ['1:00 PM', '13:00:00'],
+    6:  ['2:00 PM', '14:00:00'],
+    7:  ['3:00 PM', '15:00:00'],
+    8:  ['4:00 PM', '16:00:00'],
+    9:  ['6:00 PM', '18:00:00'],
+    10: ['7:00 PM', '19:00:00'],
+    11: ['8:00 PM', '20:00:00']
   }
 
   constructor(private appointmentService: AppointmentService, private userService: UserService, private closingService: ClosingService, private router: Router) { }
@@ -183,48 +184,8 @@ export class PatientMakeAppointmentComponent implements OnInit {
           // Timeslot already passed = disable timeslots since you can't go back in time
           // Saturday                = disable timeslots past 12pm
           
-          // Yes I hard coded the timeslot to the timing, don't @ me
-          let timeslotHour = "";
-          switch (timeslot) {
-            case '1':
-              timeslotHour = "08:00:00";
-              break;
-            case '2':
-              timeslotHour = "09:00:00";
-              break;
-            case '3':
-              timeslotHour = "10:00:00";
-              break;
-            case '4':
-              timeslotHour = "11:00:00";
-              break;
-            case '5':
-              timeslotHour = "13:00:00";
-              break;
-            case '6':
-              timeslotHour = "14:00:00";
-              break;
-            case '7':
-              timeslotHour = "15:00:00";
-              break;
-            case '8':
-              timeslotHour = "16:00:00";
-              break;
-            case '9':
-              timeslotHour = "18:00:00";
-              break;
-            case '10':
-              timeslotHour = "19:00:00";
-              break;
-            case '11':
-              timeslotHour = "20:00:00";
-              break;
-          }
+          const timeslotTime = new Date(this.selectedDate + 'T' + this.timeslots[timeslot][1]); // In ISO format
           
-          const timeslotTime = new Date(this.selectedDate + 'T' + timeslotHour); // In ISO format
-          
-          console.log(timeslotTime);
-
           if (isSun || closedToday) {
             disable = "disabled";
           }
@@ -260,7 +221,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
             "yes" if user has appointment else "no"
           ]
           */
-          this.appts[parseInt(timeslot)-1] = [this.timeslots[timeslot], formattedSelectDate, disable, timeslot];
+          this.appts[parseInt(timeslot)-1] = [this.timeslots[timeslot][0], formattedSelectDate, disable, timeslot];
           disable = ""; // Reset disable for next row loop
         }
       }
@@ -314,7 +275,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
     // This is sent to display on the success page
     let query = {
       "Consultation with": "Dr. " + doctorName,
-      "Date": this.timeslots[timeslotNumber] + ", " + new Date(this.selectedDate).toLocaleDateString("en-SG",{weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}),
+      "Date": this.timeslots[timeslotNumber][0] + ", " + new Date(this.selectedDate).toLocaleDateString("en-SG",{weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}),
     }
 
     this.appointmentService.createAppt(appt).subscribe(
