@@ -28,10 +28,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let appt of appts">
-                        <td><input class="form-check-input" name="time-slots" type="radio" value="{{appt}}" [(ngModel)]="selectedAppt" [disabled]="appt[2] == 'disabled'" (change) = "this.selectedDr = ''; updateDrAvailibility()"></td>
-                        <td [ngClass]="appt[2] == 'disabled' ? 'text-black-50' : ''">{{ appt[0] }}</td>
-                        <td [ngClass]="appt[2] == 'disabled' ? 'text-black-50' : ''">{{ appt[1] }}</td>
+                    <tr 
+                    *ngFor="let appt of appts" 
+                    [ngClass]="
+                        appt[2] == 'disabled-by-conflict' ? 'table-info' : 
+                        appt[2] == 'disabled' ? 'table-secondary' : ''
+                    ">
+                        <td><input class="form-check-input" name="time-slots" type="radio" value="{{appt}}" [(ngModel)]="selectedAppt" [disabled]="appt[2] == 'disabled' || appt[2] == 'disabled-by-conflict'" (change) = "this.selectedDr = ''; updateDrAvailibility()"></td>
+                        <td [ngClass]="appt[2] == '' ? '' : 'text-black-50'">{{ appt[0] }}</td>
+                        <td [ngClass]="appt[2] == '' ? '' : 'text-black-50'">
+                            {{ appt[1] }}
+                            <span class="float-end" *ngIf="appt[2] == 'disabled-by-conflict'">You already have an appointment!</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>

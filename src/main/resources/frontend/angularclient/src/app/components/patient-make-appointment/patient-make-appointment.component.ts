@@ -11,27 +11,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./patient-make-appointment.component.css']
 })
 export class PatientMakeAppointmentComponent implements OnInit {
+  
+  // Set max / min for the date selection
+  max = new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]; // Set max valid date = 1 year from today
+  min = new Date().toISOString().split('T')[0];                                                     // Set min valid date = today
 
-  description = "";
-  selectedDate = "";
-  max = new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0];
-  min = new Date().toISOString().split('T')[0];
+  // Data from the backend, populated during ngOnInit()
+  // allAppts: Appointment[] = []; // Every single appt in our DB
+  allDoctors: User[] = [];      // Every single doctor in our DB
 
-  // These two stores data being retrieved from backend
-  allAppts: Appointment[] = [];
-  allDoctors: User[] = [];
-
-  // These two stores data to be used for display 
+  // Processed versions of appts and doctors to be used for populating the timeslot and doctor selection tables
   appts:string[][] = [];
   doctors:string[][] = [];
 
-  // This stores appointments only for the date selected by the user
-  allApptsOnSelectedDate: Appointment[] = [];
+  allApptsOnSelectedDate: Appointment[] = []; // All appointments that fall on the date selected by the user
 
-  // These are binded to the front to get the user's selections
-  selectedAppt = "";
-  selectedDr = "";
+  // These are binded to the input fields to get the user's selections
+  description = "";   // The description provided by the user in the textarea
+  selectedDate = "";  // The date that the user has picked
 
+  selectedAppt = "";  // The timeslot radio button that user has selected
+  selectedDr = "";    // The doctor radio button that user has selected
+
+  // Hardcode 11 timeslots that the clinic will use
   timeslots: {[key: number]: string} = {
     1:  '8:00 AM',
     2:  '9:00 AM',
@@ -49,12 +51,14 @@ export class PatientMakeAppointmentComponent implements OnInit {
   constructor(private appointmentService: AppointmentService, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.appointmentService.getApptsList().subscribe(
-      data => {
-        this.allAppts = data;
-      }
-    );
+    // // Get all appointments from DB
+    // this.appointmentService.getApptsList().subscribe(
+    //   data => {
+    //     this.allAppts = data;
+    //   }
+    // );
 
+    // Get all doctors from DB
     this.userService.getUserList().subscribe(
       data => {
         this.allDoctors = data;
@@ -69,8 +73,10 @@ export class PatientMakeAppointmentComponent implements OnInit {
     )
   }
 
+  // Called on datepicker (change)
+  // Prevents user from manually entering a date, or selecting an invalid date from the datepicker
   enforceBoundsAndCheckForError() {
-    // Ensures that the date selection stays between today and 1 year from now
+    // Overwrite date selection to stay between today and 1 year from now
     if (this.selectedDate != "") {
       if (this.selectedDate > this.max) {
         this.selectedDate = this.max;
@@ -81,15 +87,20 @@ export class PatientMakeAppointmentComponent implements OnInit {
     }
   }
 
+  // Called on datepicker (change)
+  // Creates the rows for timeslots for appointments
   updateApptTimeslots() {
-    // Reset dr selection if prior one exists
-    this.selectedDr = "";
+    this.selectedDr = "";   // Clear out doctor selection if prior one already exists
+    this.selectedAppt = ""; // Clear out selected timeslot if prior one already exists
 
+    // Format user's selected date to nice format for displaying in rows
+    // Format the selected timeslot's date so that we can check if user has changed the date selection, otherwise the timeslot selection will
     let formattedSelectDate = new Date(this.selectedDate).toLocaleDateString("en-SG",{weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-    let formattedApptDate = new Date(this.selectedAppt).toLocaleDateString("en-SG",{weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+    // let formattedApptDate = new Date(this.selectedAppt).toLocaleDateString("en-SG",{weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
     
-    let disable = "";
-    // Disabled weekend timeslots
+    let disable = ""; // "disabled" if slots full, "disabled-by-conflict" if user already has appointment on that day
+
+    // Stores variable to check which timeslots to disable
     let dayChecker = new Date(this.selectedDate).getDay() // Get day of week in number form, 0 = Sunday, ..., 6 = Saturday
     let isSun = false;
     let isSat = false;
@@ -111,95 +122,113 @@ export class PatientMakeAppointmentComponent implements OnInit {
         break;
     }
 
-    // Get list of appointments for selected date
-    let apptCountPerTimeslot:{[key: number]: number} = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0,
-      7: 0,
-      8: 0,
-      9: 0,
-      10: 0,
-      11: 0
+    /* 
+    Get list of appointments for selected date
+    format is:
+    timeslot: [total count of appts for this slot, does user have appt on this slot (0 / 1)]
+    */
+    let apptCountPerTimeslot:{[key: number]: number[]} = {
+      1: [0, 0],
+      2: [0, 0],
+      3: [0, 0],
+      4: [0, 0],
+      5: [0, 0],
+      6: [0, 0],
+      7: [0, 0],
+      8: [0, 0],
+      9: [0, 0],
+      10: [0, 0],
+      11: [0, 0]
     }
-
-    for (var appt in this.allAppts) {
-      // Format the current appt with GMT +8
-      let apptDateWithGMT8 = new Date(
-        new Date(this.allAppts[appt]['date_visited']).setHours(
-          new Date(this.allAppts[appt]['date_visited']).getHours() + 8
-        )
-      ).toISOString().split('T')[0]
     
-      if (apptDateWithGMT8 == this.selectedDate) {
-        this.allApptsOnSelectedDate.push(this.allAppts[appt])
-        apptCountPerTimeslot[this.allAppts[appt]['timeslot']]++;
-      }
-    }
+    this.appointmentService.getApptsByDate(this.selectedDate).subscribe(
+      data => {
+        this.allApptsOnSelectedDate = data;
+      },
+      error => {
+        this.allApptsOnSelectedDate = [];
+      }).add(
+      () => {
+        // Populate apptCountPerTimeslot
+        // timeslot: [total count of appts for this slot, does user have appt on this slot (0 / 1)]
+        for (let appt of this.allApptsOnSelectedDate) {
+          apptCountPerTimeslot[appt.timeslot][0]++;
 
-    // Populate timeslot selection table row by row
-    for (let timeslot in this.timeslots) {
+          if (appt.patient_id == JSON.parse(sessionStorage.getItem("loggedInUser")!).user_id) {
+            apptCountPerTimeslot[appt.timeslot][1] = 1;
+          } 
+        }
 
-      // Disabled rows that match weekend
-      // If Sunday, disable all
-      if (isSun) {
-        disable = "disabled";
-      }
-      // If Saturday, disable timeslots past 12pm
-      else if (isSat) {
-        if (parseInt(timeslot) > 4) {
-          disable = "disabled";
+        // Populate timeslot selection table row by row [Timeslots numbers go from 1 to 11]
+        for (let timeslot in this.timeslots) {
+  
+          // Disable this timeslot row if it's a weekend
+          // Sunday   = disable all
+          // Saturday = disable timeslots past 12pm
+          if (isSun) {
+            disable = "disabled";
+          }
+          else if (isSat) {
+            if (parseInt(timeslot) > 4) {
+              disable = "disabled";
+            }
+          }
+  
+          // Check for other existing appointments to block occupied timeslots
+          // If this timeslot's appointments count = doctor count, disable it
+          if (apptCountPerTimeslot[timeslot][0] == this.allDoctors.length) {
+            disable = "disabled";
+          }
+  
+          // Check if user already has an appointment on the timeslot
+          // Pull the 0 / 1 from the appointment counter array stored previously
+          if (apptCountPerTimeslot[timeslot][1] == 1) {
+            disable = "disabled-by-conflict";
+          }
+  
+  
+          /*
+          Store this timeslot into the appts array for front end to display
+          Format:
+          appt = [
+            timeslot timing (8:00 AM),
+            date (Friday, 11 November 2022),
+            "disabled" if disabled else "", 
+            "yes" if user has appointment else "no"
+          ]
+          */
+          this.appts[parseInt(timeslot)-1] = [this.timeslots[timeslot], formattedSelectDate, disable, timeslot];
+          disable = ""; // Reset disable for next row loop
         }
       }
-      // End weekend check
-
-      // Check for existing appointments to block occupied timeslots
-      // If this timeslot's appointments count = doctor count, disable
-      if (apptCountPerTimeslot[timeslot] == this.allDoctors.length) {
-        disable = "disabled";
-      }
-
-      // End existing appointment check
-
-      this.appts[parseInt(timeslot)-1] = [this.timeslots[timeslot], formattedSelectDate, disable, timeslot];
-      disable = "";
-
-      // Clear out selectedAppt if date is changed so that submit button disappears
-      if (formattedApptDate != formattedSelectDate) {
-        this.selectedAppt = "";
-      }
-    }
+    );
   }
 
   updateDrAvailibility() {
-    this.doctors = [];
-    let doctorId = "";
-    let doctorFullName = "";
-    let doctorDisabled = "";
+    this.doctors = []; // Store doctors to show in doctor table
 
     // For every doctor that exists, check their state so we can provide the options to the user
+    // This disables doctors that are not free for consultation on a specific timeslot
     for (var doctor in this.allDoctors) {
-      doctorId = this.allDoctors[doctor].user_id.toString();
-
+      let doctorId = this.allDoctors[doctor].user_id.toString(); // Get doctor ID
+      let doctorDisabled = "";
+      
       // Run through all appointments for selected date
       for (var appt in this.allApptsOnSelectedDate) {
-        let currentAppt = this.allApptsOnSelectedDate[appt];
-        let selectedApptTimeslot = parseInt(this.selectedAppt.split(',')[4])
+        let currentAppt = this.allApptsOnSelectedDate[appt];                 // Get appointment in current loop
+        let selectedApptTimeslot = parseInt(this.selectedAppt.split(',')[4]) // Get the timeslot number
         
-        // If existing appointment matches current timeslot, store the doctors' state as disabled
+        // If existing appointment timeslot number matches current timeslot number and
+        // the doctor for this appointment is the doctor in our current loop then
+        // Store the doctors' state as disabled
         if (currentAppt.timeslot == selectedApptTimeslot) {
             doctorDisabled = currentAppt.doctor_id == this.allDoctors[doctor].user_id ? "disabled" : "";
-        } // otherwise leave disabled as blank
+        }
       }     
       
       // Afterwards, add this doctor to row of doctors
-      doctorFullName = this.allDoctors[doctor].first_name + " " + this.allDoctors[doctor].last_name
+      let doctorFullName = this.allDoctors[doctor].first_name + " " + this.allDoctors[doctor].last_name
       this.doctors.push([doctorId, doctorFullName, doctorDisabled])
-
-      // for loop wil repeat for all doctors :)
     }
   }
 
