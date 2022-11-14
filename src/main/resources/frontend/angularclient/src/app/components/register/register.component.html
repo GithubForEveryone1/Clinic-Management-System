@@ -17,7 +17,8 @@
                 #firstName="ngModel"
                 [(ngModel)]="user.first_name"
                 [ngClass]="
-                    (firstName.errors && firstName.touched) || badRegisterAttempted ?
+                    (firstName.errors && firstName.touched) || 
+                    (firstName.errors && badRegisterAttempted) ?
                     'form-control is-invalid' : 'form-control'
                 "
             >
@@ -37,7 +38,8 @@
                 #lastName="ngModel"
                 [(ngModel)]="user.last_name"
                 [ngClass]="
-                    (lastName.errors && lastName.touched) || badRegisterAttempted ?
+                    (lastName.errors && lastName.touched) || 
+                    (lastName.errors && badRegisterAttempted) ?
                     'form-control is-invalid' : 'form-control'
                 "
             >
@@ -59,7 +61,8 @@
                 #email="ngModel"
                 [(ngModel)]="user.email"
                 [ngClass]="
-                    (email.errors && email.touched) || badRegisterAttempted ?
+                    (email.errors && email.touched) || 
+                    (email.errors && badRegisterAttempted) ?
                     'form-control is-invalid' : 'form-control'
                 "
             >
@@ -79,7 +82,8 @@
                 #address="ngModel"
                 [(ngModel)]="user.address"
                 [ngClass]="
-                    (address.errors && address.touched) || badRegisterAttempted ?
+                    (address.errors && address.touched) || 
+                    (address.errors && badRegisterAttempted) ?
                     'form-control is-invalid' : 'form-control'
                 "
             >
@@ -104,7 +108,8 @@
                     #contactNumber="ngModel"
                     [(ngModel)]="user.contact_number"
                     [ngClass]="
-                        (contactNumber.errors && contactNumber.touched) || badRegisterAttempted ?
+                        (contactNumber.errors && contactNumber.touched) || 
+                        (contactNumber.errors && badRegisterAttempted) ?
                         'form-control is-invalid' : 'form-control'
                     "
                 >
@@ -126,7 +131,8 @@
                 #password="ngModel"
                 [(ngModel)]="user.password"  
                 [ngClass]="
-                    (password.errors && password.touched) || badRegisterAttempted ?
+                    (password.errors && password.touched) || 
+                    (badRegisterAttempted && password.errors) ?
                     'form-control is-invalid' : 'form-control'
                 "
             >
@@ -145,7 +151,8 @@
                 #dob="ngModel"
                 [(ngModel)]="user.dob"
                 [ngClass]="
-                    ((dob.errors || userUnder18) && dob.touched) || badRegisterAttempted ?
+                    ((dob.errors || userUnder18) && dob.touched) || 
+                    (badRegisterAttempted && dob.errors) ?
                     'form-control is-invalid' : 'form-control'
                 ">
 
@@ -202,6 +209,8 @@
             address.invalid ||
             contactNumber.invalid ||
             password.invalid ||
+            maleGender.invalid ||
+            femaleGender.invalid ||
             dob.invalid;
             else realRegister
             ">
