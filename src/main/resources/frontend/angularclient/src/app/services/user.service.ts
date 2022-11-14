@@ -17,6 +17,10 @@ export class UserService {
 		return this.httpClient.get<User[]>(`${this.baseUrl}/user`);
 	}
 
+	getDoctors(): Observable<User[]> {
+		return this.httpClient.get<User[]>(`${this.baseUrl}/user/doctors`);
+	}
+
 	createUser(user: any): Observable<User> {
 		return this.httpClient.post<User>(`${this.baseUrl}/user/create`, user);
 	}
