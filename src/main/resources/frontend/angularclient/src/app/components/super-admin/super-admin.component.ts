@@ -4,6 +4,7 @@ import { Component, OnInit, Query } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 import { UserService } from 'src/app/services/user.service';
+import {FormGroup, FormControl, Validators} from '@angular/forms'
 
 
 @Component({
@@ -21,6 +22,11 @@ export class SuperAdminComponent implements OnInit {
 		"nurse"
 	];
 	
+	/* createForm = new FormGroup({
+		user: new FormControl('',[Validators.required]),
+		password: new FormControl(''),
+	})  */
+	
 	user: User = {
 		'user_id': NaN,
 		'first_name': "",
@@ -34,6 +40,10 @@ export class SuperAdminComponent implements OnInit {
 		'account_type': "",
 		'date_created': ""
 	}
+	
+	/* get newUser() {
+		return this.createForm.get('user');
+	} */
 
 	badRegisterAttempted = false;
 	errorMsg = "";

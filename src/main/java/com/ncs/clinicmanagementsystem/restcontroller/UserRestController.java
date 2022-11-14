@@ -154,7 +154,7 @@ public class UserRestController {
 	@DeleteMapping("user/delete")
 	public void delete(@RequestBody User theUser) {
 		User tempUser;
-		
+
 		try {
 			tempUser = userService.findByEmail(theUser.getEmail());
 			System.out.println(tempUser);
@@ -188,7 +188,7 @@ public class UserRestController {
 
 		try {
 			tempUser = userService.findByEmail(theUser.getEmail());
-			
+
 			if (tempUser == null) {
 				System.out.println("User not found");
 
@@ -211,7 +211,6 @@ public class UserRestController {
 		System.out.println(tempUser);
 
 		// If email does not exist in DB
-
 
 	}
 

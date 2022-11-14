@@ -23,11 +23,12 @@
 			<div class="accordion-body">
 				<div class="container">
 					<form (ngSubmit)="submitRegister()" class="row g-3">
-						<div class="col-md-6">
-							<label for="inputEmail4" class="form-label">First Name</label> <input
-								type="text" class="form-control" id="inputEmail4"
-								placeholder="First Name" [(ngModel)]="user.first_name"
-								name="first_name">
+						<div class="col-md-6 form-group">
+							<label for="first-name" class="form-label">First Name</label> <input
+								type="text" class="form-control" id="first-name"
+								name="first-name" required pattern="^[a-zA-Z]*"
+								placeholder="First Name" #firstName="ngModel"
+								[(ngModel)]="user.first_name" name="first_name">
 						</div>
 						<div class="col-md-6">
 							<label for="inputPassword4" class="form-label">Last Name</label>
@@ -86,6 +87,11 @@
 						<div id="emailHelp" class="form-text">Enter the email
 							address for the user you want to delete</div>
 					</div>
+					<div class="mb-3 form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1"
+							required> <label class="form-check-label"
+							for="exampleCheck1">Confirm deletion</label>
+					</div>
 					<button type="submit" class="btn btn-primary">Delete</button>
 				</form>
 			</div>
@@ -103,9 +109,10 @@
       </div>
     </div>
   </div> -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
-  $('div.form-check-input.required :checkbox:checked').length > 0
-
-  </script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous">
+		$('div.form-check-input.required :checkbox:checked').length > 0
+	</script>
 </div>
 
