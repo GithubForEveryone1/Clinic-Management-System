@@ -101,7 +101,7 @@ export class DoctorComponent implements OnInit {
       }
     })
   }
-  // 
+  
   // to indicate on the calendar which slots are taken
   isBooked(slot: number): string{
     let res = "false";

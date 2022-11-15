@@ -32,8 +32,6 @@ export class DoctorAppointmentsComponent implements OnInit {
 
   //Appointments
   appts: Appointment[] = [];
-  pastAppts: Appointment[] = [];
-  upcomingAppts: Appointment[] = [];
 
   //Error message from backend server
   errorMsg = "";
@@ -50,7 +48,7 @@ export class DoctorAppointmentsComponent implements OnInit {
       error => this.handleErrorResponse(error),
     );
   }
-
+  
   handleErrorResponse(error:HttpErrorResponse) {
     this.errorMsg = error.error.message;
   }
