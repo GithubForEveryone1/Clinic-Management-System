@@ -4,6 +4,7 @@ import { Appointment } from 'src/app/common/appointment';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { UserService } from 'src/app/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-doctor',
@@ -22,11 +23,11 @@ export class DoctorComponent implements OnInit {
   accountType = this.loggedInUser.account_type;
 
   //today's date
-  today = new Date();
-  todayDate = this.today.valueOf();
+  todayDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
   //Appointments
   appts: Appointment[] = [];
+  tdyAppts: Appointment[] = [];
   pastAppts: Appointment[] = [];
   upcomingAppts: Appointment[] = [];
 
@@ -53,6 +54,9 @@ export class DoctorComponent implements OnInit {
       data => {
         this.appts = data;
         console.log(this.appts);
+        console.log(this.todayDate);
+        this.displayTdyAppts();
+        console.log(this.tdyAppts);
       },
       error => this.handleErrorResponse(error),
     );
@@ -100,4 +104,14 @@ export class DoctorComponent implements OnInit {
     return res;
   }
   
+  //get the appointments based on today's date
+  displayTdyAppts() {
+    this.appts.forEach((value) => {
+      if(formatDate(value.date_visited, 'yyyy-MM-dd', 'en') === this.todayDate){
+        this.tdyAppts.push(value);
+        // console.log(formatDate(value.date_visited, 'yyyy-MM-dd', 'en') === this.todayDate);
+      }
+      ;
+    })
+  }
 }
