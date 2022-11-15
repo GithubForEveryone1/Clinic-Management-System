@@ -147,7 +147,7 @@
         
         <div class="form-group mt-3">
             <label for="dob">Date of Birth</label>
-            <input name="dob" id="dob" type="date" [max]="max" [min]="min" (focusout)="enforceBoundsAndCheckForError()" required
+            <input name="dob" id="dob" type="date" [max]="max" [min]="min" (change)="enforceBoundsAndCheckForError()" required
                 #dob="ngModel"
                 [(ngModel)]="user.dob"
                 [ngClass]="
