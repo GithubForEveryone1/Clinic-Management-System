@@ -34,7 +34,7 @@
         <div class="form-group mt-3">
             <label for="last-name">Last Name</label>
             <input name="last-name" id="last-name" type="text"  placeholder="Last Name" required
-            pattern="^[a-zA-Z].*"
+            pattern="^[a-zA-Z]*"
                 #lastName="ngModel"
                 [(ngModel)]="user.last_name"
                 [ngClass]="
@@ -57,7 +57,7 @@
             <label for="email">Email address</label>
             <input
                 name="email" id="email" type="email" placeholder="Email Address" required
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$"
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$"
                 #email="ngModel"
                 [(ngModel)]="user.email"
                 [ngClass]="
