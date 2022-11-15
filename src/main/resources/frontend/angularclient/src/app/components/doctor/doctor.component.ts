@@ -29,7 +29,6 @@ export class DoctorComponent implements OnInit {
   appts: Appointment[] = [];
   pastAppts: Appointment[] = [];
   upcomingAppts: Appointment[] = [];
-  bookedAppt: Appointment[] = [];
 
   //Patient Info
   patientFirstName = "";
