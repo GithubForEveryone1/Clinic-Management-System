@@ -65,7 +65,7 @@
                 <tbody>
                     <tr *ngFor="let doctor of doctors">
                         <td><input class="form-check-input" name="doctors" type="radio" value="{{ doctor[0] + ':' + doctor[1] }}" [(ngModel)]="selectedDr" [disabled]="doctor[2] == 'disabled'"></td>
-                        <td [ngClass]="doctor[2] == 'disabled' ? 'text-black-50' : ''">Dr. {{ doctor[1] }}</td>
+                        <td [ngClass]="doctor[2] == 'disabled' ? 'text-black-50' : ''"><span class="text-capitalize">Dr. {{ doctor[1] }}</span></td>
                     </tr>
                 </tbody>
             </table>

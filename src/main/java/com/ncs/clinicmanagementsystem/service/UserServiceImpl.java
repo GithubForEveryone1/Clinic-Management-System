@@ -1,3 +1,4 @@
+
 package com.ncs.clinicmanagementsystem.service;
 
 import java.util.Iterator;
@@ -59,3 +60,4 @@ public class UserServiceImpl implements UserService {
 		return userDAO.findDoctors();
 	}
 }
+
