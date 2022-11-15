@@ -61,16 +61,9 @@ export class PatientMakeAppointmentComponent implements OnInit {
     // );
 
     // Get all doctors from DB
-    this.userService.getUserList().subscribe(
+    this.userService.getDoctors().subscribe(
       data => {
         this.allDoctors = data;
-
-        // Get all users, then remove non-doctors >:)
-        for (var user in this.allDoctors) {
-          if (this.allDoctors[user].account_type != 'doctor') {
-            this.allDoctors.splice(parseInt(user), 1)
-          }
-        }
       }
     )
   }
@@ -234,6 +227,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
     // For every doctor that exists, check their state so we can provide the options to the user
     // This disables doctors that are not free for consultation on a specific timeslot
     for (var doctor in this.allDoctors) {
+      console.log(doctor);
       let doctorId = this.allDoctors[doctor].user_id.toString(); // Get doctor ID
       let doctorDisabled = "";
       
