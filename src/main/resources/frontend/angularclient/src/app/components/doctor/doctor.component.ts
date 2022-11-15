@@ -54,7 +54,6 @@ export class DoctorComponent implements OnInit {
       data => {
         this.appts = data;
         console.log(this.appts);
-        console.log(this.todayDate);
         this.displayTdyAppts();
         console.log(this.tdyAppts);
       },
@@ -66,10 +65,22 @@ export class DoctorComponent implements OnInit {
     this.errorMsg = error.error.message;
   }
 
-  displayPatientInfo(slot: number) {
+  //get the appointments based on today's date
+  displayTdyAppts() {
     this.appts.forEach((value) => {
+      if(formatDate(value.date_visited, 'yyyy-MM-dd', 'en') === this.todayDate){
+        this.tdyAppts.push(value);
+        // console.log(formatDate(value.date_visited, 'yyyy-MM-dd', 'en') === this.todayDate);
+      }
+      ;
+    })
+  }
+
+  // display info based on tdy's date
+  displayPatientInfo(slot: number) {
+    this.tdyAppts.forEach((value) => {
+      console.log(value);
       if (value.timeslot === slot) {
-        // console.log(value.timeslot === slot);
         const patient = value.patient;
         this.patientFirstName = patient.first_name;
         this.patientLastName = patient.last_name;
@@ -95,7 +106,7 @@ export class DoctorComponent implements OnInit {
   isBooked(slot: number): string{
     let res = "false";
     
-    this.appts.forEach((value) => {
+    this.tdyAppts.forEach((value) => {
       if(value.timeslot === slot){
         // console.log(value.timeslot === slot);
         res = "true";
@@ -104,14 +115,4 @@ export class DoctorComponent implements OnInit {
     return res;
   }
   
-  //get the appointments based on today's date
-  displayTdyAppts() {
-    this.appts.forEach((value) => {
-      if(formatDate(value.date_visited, 'yyyy-MM-dd', 'en') === this.todayDate){
-        this.tdyAppts.push(value);
-        // console.log(formatDate(value.date_visited, 'yyyy-MM-dd', 'en') === this.todayDate);
-      }
-      ;
-    })
-  }
 }
