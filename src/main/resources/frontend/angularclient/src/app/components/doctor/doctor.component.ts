@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Appointment } from 'src/app/common/appointment';
 import { AppointmentService } from 'src/app/services/appointment.service';
@@ -37,7 +37,8 @@ export class DoctorComponent implements OnInit {
   patientAddress = "";
   contact = "";
   email = "";
-  
+  diagnosis = "";
+
   //Error message from backend server
   errorMsg = "";
 
@@ -52,8 +53,6 @@ export class DoctorComponent implements OnInit {
       data => {
         this.appts = data;
         console.log(this.appts);
-        this.displayPatientInfo();
-        // console.log(this.patientFirstName);
       },
       error => this.handleErrorResponse(error),
     );
@@ -63,16 +62,42 @@ export class DoctorComponent implements OnInit {
     this.errorMsg = error.error.message;
   }
 
-  displayPatientInfo() {
+  displayPatientInfo(slot: number) {
     this.appts.forEach((value) => {
-      const patient = value.patient;
-      this.patientFirstName = patient.first_name;
-      this.patientLastName = patient.last_name;
-      this.dob = patient.dob;
-      this.patientAddress = patient.address;
-      this.contact = patient.contact_number;
-      this.email = patient.email;
+      if (value.timeslot === slot) {
+        // console.log(value.timeslot === slot);
+        const patient = value.patient;
+        this.patientFirstName = patient.first_name;
+        this.patientLastName = patient.last_name;
+        this.dob = patient.dob;
+        this.patientAddress = patient.address;
+        this.contact = patient.contact_number;
+        this.email = patient.email;
+        this.diagnosis = value.diagnosis;
+      } 
+      else {
+        this.patientFirstName = "";
+        this.patientLastName = "";
+        this.dob = "";
+        this.patientAddress = "";
+        this.contact = "";
+        this.email = "";
+        this.diagnosis = "";
+      }
     })
   }
-
+  // 
+  // to indicate on the calendar which slots are taken
+  isBooked(slot: number): string{
+    let res = "false";
+    
+    this.appts.forEach((value) => {
+      if(value.timeslot === slot){
+        // console.log(value.timeslot === slot);
+        res = "true";
+      }
+    })
+    return res;
+  }
+  
 }
