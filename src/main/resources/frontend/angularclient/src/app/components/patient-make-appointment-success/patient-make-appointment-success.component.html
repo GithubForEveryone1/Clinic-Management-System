@@ -1,0 +1,17 @@
+<div class="container text-center mt-5">
+    <img class="img-fluid" src="https://cdn-icons-png.flaticon.com/512/190/190411.png" width="200px">
+    <h1 class="m-5 text-center">Appointment booked!</h1>
+</div>
+<div class="container text-center">
+    <table class="table table-striped mb-3">
+        <tbody>
+            <tr *ngFor="let detail of apptDetails | keyvalue">
+                <td class="text-left">
+                    {{ detail.key }}
+                    <h4>{{ detail.value }}</h4>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" routerLink="/patient/appointments">Done</button>
+</div>
