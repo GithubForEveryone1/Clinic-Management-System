@@ -77,16 +77,16 @@ public class AppointmentRestController {
 	// add mapping for GET /appt/getbydate/{strDate} //yyyy-mm-dd //for example "/appt/getbydate/2022-11-08"
 	@GetMapping("/appt/getbydate/{strDate}")
 	public List<Appointment> getApptsByDate(@PathVariable String strDate) {
-		//System.out.println(strDate);
+//		System.out.println("this is the input from the mapping" + strDate);
 		
 		Date theDate;
 		List<Appointment> theAppts;
 		
 		try {
 			theDate = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
-			//System.out.println(theDate);
+//			System.out.println("date to be passed to the service" + theDate);
 			theAppts = apptService.getApptsByDate(theDate);
-			//System.out.println(theAppts);
+//			System.out.println(theAppts);
 		}
 		catch(Exception e) {
 			throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
