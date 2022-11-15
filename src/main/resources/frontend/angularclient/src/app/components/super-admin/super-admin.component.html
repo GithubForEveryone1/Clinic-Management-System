@@ -1,3 +1,4 @@
+
 <div class="accordion w-50 mx-auto mt-5" id="accordionExample">
 	<div class="alert alert-success alert-dismissible fade show"
 		role="alert" *ngIf="message">
@@ -62,12 +63,59 @@
 						<div class="col-12">
 							<button type="submit" class="btn btn-primary mt-3 col-3">Submit</button>
 						</div>
+
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="accordion-item">
+		<h2 class="accordion-header" id="headingTwo">
+			<button class="accordion-button collapsed" type="button"
+				data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+				aria-expanded="false" aria-controls="collapseTwo">Delete
+				Account</button>
+		</h2>
+		<div id="collapseTwo" class="accordion-collapse collapse"
+			aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+				<form (ngSubmit)="submitDelete()">
+					<div class="mb-3">
+						<label for="exampleInputEmail1" class="form-label">Email
+							address</label> <input type="email" class="form-control"
+							id="exampleInputEmail1" aria-describedby="emailHelp"
+							[(ngModel)]="user.email" name=email>
+						<div id="emailHelp" class="form-text">Enter the email
+							address for the user you want to delete</div>
+					</div>
+<!-- 					<div class="mb-3 form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1"
+							required> <label class="form-check-label"
+							for="exampleCheck1">Confirm deletion</label>
+					</div>  -->
+					<button type="submit" class="btn btn-primary">Delete</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- <h1>hello</h1> -->
+	<!--   <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Disable Account
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous">
+		$('div.form-check-input.required :checkbox:checked').length > 0
+	</script>
 </div>
-
 
 
