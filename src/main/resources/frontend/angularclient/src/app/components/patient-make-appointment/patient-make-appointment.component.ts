@@ -190,7 +190,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
             disable = "disabled";
           }
           else if (new Date() > timeslotTime) {
-            disable = "disabled;"
+            disable = "disabled"
           }
           else if (isSat) {
             if (parseInt(timeslot) > 4) {
