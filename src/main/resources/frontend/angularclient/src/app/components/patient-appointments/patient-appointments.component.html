@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--display patient's full name and id-->
 <div class="container">
     <div class="row mt-5 mb-5 justify-content-center">
@@ -126,4 +127,137 @@
         </div>
     </div>
 
+=======
+<!--display patient's full name and id-->
+<div class="container">
+    <div class="row mt-5 mb-5 justify-content-center">
+        <table class="table-borderless w-auto">
+            <tbody>
+                <tr>
+                    <th scope="row">Patient Name :</th>
+                    <td class="text-capitalize">{{firstName}} {{lastName}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Patient ID :</th>
+                    <td>{{patientId}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--display patient's upcoming and past appointments-->
+<div class="container">
+    <ul class="nav nav-tabs mb-5 justify-content-center" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link {{upcomingTabStatus}}" data-toggle="tab" role="tab" (click)="switchToUpcomingTab()">Upcoming</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link {{pastTabStatus}}" data-toggle="tab" role="tab" (click)="switchToPastTab()">Past</button>
+        </li>
+    </ul>
+
+    <p *ngIf="errorMsg" class="alert alert-danger mb-0" role="alert">{{ errorMsg }}</p>
+
+    <div class="tab-content">
+        <div class="tab-pane container fade {{upcomingTabContentStatus}}" role="tabpanel">
+
+            <!--
+            <div class="container">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Appointment ID</th>
+                            <th>Doctor ID</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                
+                    <p *ngIf="upcomingAppts.length == 0">You do not have upcoming appointments.</p>
+
+                    <tbody>
+                        <tr *ngFor="let appt of upcomingAppts">
+                            <td class="align-middle">{{ appt.appt_id }}</td>
+                            <td class="align-middle">{{ appt.doctor_id }}</td>
+                            <td class="align-middle">{{ appt.date_visited.split('T')[0] }}</td>
+                            <td class="align-middle">{{ appt.timeslot }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            -->
+
+            <div class="container">
+                <p *ngIf="upcomingAppts.length == 0" class="text-center">You do not have any upcoming appointments.</p>
+                <div class="row" *ngFor="let appt of upcomingAppts">
+                    <div class="col-3 bg-primary text-center p-4 my-2">
+                        <p class="text-white display-6">{{ displayDay(initialiseDate(appt.date_visited).getDay()) }}</p>
+                        <h6 class="text-white">{{ appt.date_visited.split('T')[0] }}</h6>
+                    </div>
+                    <div class="col-9 bg-light p-4 my-2">
+                        <h6 class="my-0">Appointment ID: {{ appt.appt_id }}</h6>
+                        <h6 class="my-0">Time: {{ displayTimeslot(appt.timeslot) }}</h6>
+                        <h6 class="my-0">Doctor: Dr. <span class="text-capitalize">{{ appt.doctor.first_name }} {{ appt.doctor.last_name }}</span></h6>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tab-pane container fade {{pastTabContentStatus}}" role="tabpanel">
+
+            <!--
+            <div class="container">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Appointment ID</th>
+                            <th>Doctor ID</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Diagnosis</th>
+                            <th>Prescription</th>
+                        </tr>
+                    </thead>
+                
+                    <p *ngIf="pastAppts.length == 0">You do not have any past appointments.</p>
+
+                    <tbody>
+                        <tr *ngFor="let appt of pastAppts">
+                            <td class="align-middle">{{ appt.appt_id }}</td>
+                            <td class="align-middle">{{ appt.doctor_id }}</td>
+                            <td class="align-middle">{{ appt.date_visited.split('T')[0] }}</td>
+                            <td class="align-middle">{{ appt.timeslot }}</td>
+                            <td class="align-middle">{{ appt.diagnosis }}</td>
+                            <td class="align-middle">{{ appt.prescription }}</td>
+                        </tr>
+                        
+                    </tbody>
+                
+                </table>
+            </div>
+            -->
+
+            <div class="container">
+                <p *ngIf="pastAppts.length == 0" class="text-center">You do not have any past appointments.</p>
+                <div class="row" *ngFor="let appt of pastAppts">
+                    <div class="col-3 bg-primary text-center p-4 my-2">
+                        <p class="text-white display-6">{{ displayDay(initialiseDate(appt.date_visited).getDay()) }}</p>
+                        <h6 class="text-white">{{ appt.date_visited.split('T')[0] }}</h6>
+                    </div>
+                    <div class="col-9 bg-light p-4 my-2">
+                        <h6 class="my-0">Appointment ID: {{ appt.appt_id }}</h6>
+                        <h6 class="my-0">Time: {{ displayTimeslot(appt.timeslot) }}</h6>
+                        <h6 class="my-0">Doctor: Dr. <span class="text-capitalize">{{ appt.doctor.first_name }} {{ appt.doctor.last_name }}</span></h6>
+                        <p>Diagnosis: {{ appt.diagnosis }}</p>
+                        <p>Prescription: {{ appt.prescription }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+>>>>>>> main
 </div>
