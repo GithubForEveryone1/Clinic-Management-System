@@ -1,34 +1,42 @@
 <div class="container details">
     <h1 class="text-center m-5">Make an Appointment</h1>
 
-    <div class="mb-3">
-        <textarea class="form-control" id="description" rows="5" placeholder="What would you like to see the doctor for?" required
-            #textarea="ngModel"
-            [(ngModel)]="description"
-            [ngClass]="
-                (textarea.errors && textarea.touched) || 
-                (textarea.errors && datepicker.dirty) ? 'form-control is-invalid' : 'form-control'">
-        </textarea>
-        <div *ngIf="textarea.errors?.['required']" class="invalid-feedback">
-                Please provide the details for your visit.
+    <div class="row p-3">
+        <div class="col-4 d-flex align-items-center justify-content-end">
+            <input name="date" id="date" type="date" class="p-3" [(ngModel)]="selectedDate" [max]="max" [min]="min" onkeydown="return false" (change)="enforceBoundsAndCheckForError(); updateApptTimeslots()" #datepicker="ngModel">
+        </div>
+        <div class="col-6 mb-3">
+            <select class="form-select mt-3" aria-label="Default select example" #selector="ngModel" [(ngModel)]="dropdown">
+                <option selected hidden>What would you like to see the doctor for?</option>
+                <option value="Stomach Aches">Stomach Aches</option>
+                <option value="Cold / Flu">Cold / Flu</option>
+                <option value="Just to get MC">Just to get MC</option>
+                <option value="Others">Others</option>
+            </select>
+            <textarea class="form-control mt-3" id="description" rows="5" placeholder="Please provide a description for your visit." 
+                [required]="selector.value == 'Others'"
+                [hidden]="selector.value != 'Others'"
+                #textarea="ngModel"
+                [(ngModel)]="description"
+                [ngClass]="
+                    (textarea.errors && textarea.touched) || 
+                    (textarea.errors && datepicker.dirty) ? 'form-control is-invalid' : 'form-control'">
+            </textarea>
+            <div *ngIf="textarea.errors?.['required']" class="invalid-feedback">
+                    Please provide the details for your visit.
+            </div>
         </div>
     </div>
 
     <!-- <div class="row mt-3 p-3"> -->
         <!-- <div class="col text-center"> -->
-            <h4 class="text-center p-2 mt-5" for="date">Select a date and time</h4>
+            <!-- <h4 class="text-center p-2 mt-5" for="date">Select a date and time</h4> -->
         <!-- </div> -->
     <!-- </div> -->
 
-    <div class="row p-3 text-center">
-        <div class="col">
-            <input name="date" id="date" type="date" class="p-3" [(ngModel)]="selectedDate" [max]="max" [min]="min" onkeydown="return false" (change)="enforceBoundsAndCheckForError(); updateApptTimeslots()" #datepicker="ngModel">
-        </div>
-    </div> 
-
     <div class="fadeInDown" *ngIf="selectedDate >= min && selectedDate <= max">
         <div class="row">
-            <table class="table table-striped mb-3">
+            <table class="table mb-3">
                 <thead>
                     <tr>
                         <th scope="col" style="width: 5%"></th>
@@ -40,14 +48,22 @@
                     <tr 
                     *ngFor="let appt of appts" 
                     [ngClass]="
-                        appt[2] == 'disabled-by-conflict' ? 'table-info' : 
+                        appt[2] == 'disabled-by-conflict' ? 'table-warning' : 
                         appt[2] == 'disabled' ? 'table-secondary' : ''
                     ">
                         <td><input class="form-check-input" name="time-slots" type="radio" value="{{appt}}" [(ngModel)]="selectedAppt" [disabled]="appt[2] == 'disabled' || appt[2] == 'disabled-by-conflict'" (change) = "this.selectedDr = ''; updateDrAvailibility()"></td>
                         <td [ngClass]="appt[2] == '' ? '' : 'text-black-50'">{{ appt[0] }}</td>
                         <td [ngClass]="appt[2] == '' ? '' : 'text-black-50'">
                             {{ appt[1] }}
-                            <span class="float-end" *ngIf="appt[2] == 'disabled-by-conflict'">You already have an appointment!</span>
+                            <span class="float-end" *ngIf="appt[2] == 'disabled-by-conflict'">
+                                You have an appointment
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
+                                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+                                </svg>
+                            </span>
+                            <span class="float-end" *ngIf="appt[2] == 'disabled'">
+                                Unavailable
+                            </span>
                         </td>
                     </tr>
                 </tbody>
