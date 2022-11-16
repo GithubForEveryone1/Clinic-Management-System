@@ -53,13 +53,6 @@ export class PatientMakeAppointmentComponent implements OnInit {
   constructor(private appointmentService: AppointmentService, private userService: UserService, private closingService: ClosingService, private router: Router) { }
 
   ngOnInit(): void {
-    // // Get all appointments from DB
-    // this.appointmentService.getApptsList().subscribe(
-    //   data => {
-    //     this.allAppts = data;
-    //   }
-    // );
-
     // Get all doctors from DB
     this.userService.getDoctors().subscribe(
       data => {
