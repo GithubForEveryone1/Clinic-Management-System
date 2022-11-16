@@ -14,11 +14,11 @@ declare const $:any;
   styleUrls: ['./doctor-appointments.component.css']
 })
 export class DoctorAppointmentsComponent implements OnInit,AfterViewInit {
-  @ViewChild('dTable') dataTable: any;
-  @ViewChild(DataTableDirective)
-  dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
+  // @ViewChild('dTable') dataTable: any;
+  // @ViewChild(DataTableDirective)
+  // dtElement: DataTableDirective;
+  // dtOptions: DataTables.Settings = {};
+  // dtTrigger: Subject<any> = new Subject();
 
   loggedInUserStr: string | null = sessionStorage.getItem("loggedInUser");
 
@@ -40,14 +40,17 @@ export class DoctorAppointmentsComponent implements OnInit,AfterViewInit {
       this.appointmentService.getApptsByDoctorId(this.doctorId).subscribe(
         data => {
           this.appts = data;
-          this.dtTrigger.next();
+          $(function(){
+              $("#example").DataTable();
+           });
+          // this.dtTrigger.next();
           console.log(this.appts);
         
         },
         error => this.handleErrorResponse(error),
         
       );
-       console.log($("#example").DataTable());
+      //  console.log($("#example").DataTable());
      
     }
 
@@ -55,14 +58,14 @@ export class DoctorAppointmentsComponent implements OnInit,AfterViewInit {
       
     }
 
-    rerender(): void {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        // Destroy the table first
-        dtInstance.destroy();
-        // Call the dtTrigger to rerender again
-        this.dtTrigger.next();
-      });
-     }
+    // rerender(): void {
+    //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    //     // Destroy the table first
+    //     dtInstance.destroy();
+    //     // Call the dtTrigger to rerender again
+    //     this.dtTrigger.next();
+    //   });
+    //  }
 
   handleErrorResponse(error:HttpErrorResponse) {
     this.errorMsg = error.error.message;
