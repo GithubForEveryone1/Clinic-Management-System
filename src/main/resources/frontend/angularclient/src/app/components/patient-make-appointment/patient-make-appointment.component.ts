@@ -28,6 +28,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
   allApptsOnSelectedDate: Appointment[] = []; // All appointments that fall on the date selected by the user
 
   // These are binded to the input fields to get the user's selections
+  dropdown = "What would you like to see the doctor for?";       // The dropdown for common ailments selection
   description = "";    // The description provided by the user in the textarea
   selectedDate = "";   // The date that the user has picked
  
@@ -255,7 +256,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
       "doctor_id": doctorId,
       "date_visited": this.selectedDate,
       "timeslot": timeslotNumber,
-      "diagnosis": this.description,
+      "diagnosis": this.description ? this.description : this.dropdown,
       "prescription": null
     };
     
