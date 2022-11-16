@@ -70,7 +70,12 @@ public class AppointmentDAOHibernateImpl implements AppointmentDAO {
 
 	@Override
 	public void editApptByApptId(Appointment theAppt) { //alfred 07.11.2022: perhaps we dont need this we can just use above method. kiv.
-		// TODO Auto-generated method stub
+		// Remus 16/11/2022: Copy and pasted createApptByUserId body here to re-use but keep a unique function name for clarity
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		// Save user.
+		currentSession.saveOrUpdate(theAppt);
 
 	}
 
