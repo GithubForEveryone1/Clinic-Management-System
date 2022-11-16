@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { HttpErrorResponse, HttpClient, HttpResponse } from '@angular/common/http';
 
-class DataTablesResponse {
-  data: any[];
-  draw: number;
-  recordsFiltered: number;
-  recordsTotal: number;
-}
+// class DataTablesResponse {
+//   data: any[];
+//   draw: number;
+//   recordsFiltered: number;
+//   recordsTotal: number;
+// }
 
 @Component({
   selector: 'app-doctor-appointments',
@@ -18,7 +18,7 @@ class DataTablesResponse {
 })
 export class DoctorAppointmentsComponent implements OnInit {
 
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
 
   loggedInUserStr: string | null = sessionStorage.getItem("loggedInUser");
 
@@ -35,16 +35,42 @@ export class DoctorAppointmentsComponent implements OnInit {
 
   constructor(private router: Router, private appointmentService: AppointmentService, private route: ActivatedRoute, private http:HttpClient) { }
 
-  ngOnInit(): void {
-    this.appointmentService.getApptsByDoctorId(this.doctorId).subscribe(
-      data => {
-        this.appts = data;
-        console.log(this.appts);
+   ngOnInit(): void {
+     this.appointmentService.getApptsByDoctorId(this.doctorId).subscribe(
+       data => {
+         this.appts = data;
+         console.log(this.appts);
        
-      },
-      error => this.handleErrorResponse(error),
-    );
-  }
+       },
+       error => this.handleErrorResponse(error),
+     );
+   }
+  // ngOnInit(): void {
+  //   const that = this;
+
+  //   this.dtOptions = {
+  //     pagingType: 'full_numbers',
+  //     pageLength: 2,
+  //     serverSide: true,
+  //     processing: true,
+  //     ajax: (dataTablesParameters: any, callback) => {
+  //       that.http
+  //         .post<DataTablesResponse>(
+  //           'https://xtlncifojk.eu07.qoddiapp.com/',
+  //           dataTablesParameters, {}
+  //         ).subscribe(resp => {
+  //           that.persons = resp.data;
+
+  //           callback({
+  //             recordsTotal: resp.recordsTotal,
+  //             recordsFiltered: resp.recordsFiltered,
+  //             data: []
+  //           });
+  //         });
+  //     },
+  //     columns: [{ data: 'id' }, { data: 'firstName' }, { data: 'lastName' }]
+  //   };
+  // }
   
   handleErrorResponse(error:HttpErrorResponse) {
     this.errorMsg = error.error.message;
