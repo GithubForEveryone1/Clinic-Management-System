@@ -50,8 +50,8 @@ export class PatientAppointmentsComponent implements OnInit {
           currentAppt.date_visited = localizedDate;
           this.appts.push(currentAppt);
         }
-        this.filterApptsBeforeToday();
-        this.filterApptsAfterToday();
+        this.filterAndSortForPastAppts();
+        this.filterAndSortForUpcomingAppts();
         console.log(this.todayDate);
         console.log(Date.parse("2022-11-08T00:00:00.000+00:00"));
         console.log(new Date("2022-11-08T00:00:00.000+00:00").getDay());
@@ -82,22 +82,116 @@ export class PatientAppointmentsComponent implements OnInit {
     this.errorMsg = error.error.message;
   }
 
-  filterApptsBeforeToday() {
+  //create a method to read time for timeslot
+  readTimeslot(slot: number):number {
+    switch(slot) {
+      case 1: {
+        return 8;
+      }
+      case 2: {
+        return 9;
+      }
+      case 3: {
+        return 10;
+      }
+      case 4: {
+        return 11;
+      }
+      case 5: {
+        return 13;
+      }
+      case 6: {
+        return 14;
+      }
+      case 7: {
+        return 15;
+      }
+      case 8: {
+        return 16;
+      }
+      case 9: {
+        return 18;
+      }
+      case 10: {
+        return 19;
+      }
+      case 11: {
+        return 20;
+      }
+      default: {
+        return NaN
+      }
+    }
+  }
+
+  /* // re-declared inside the callback func instead.
+  timeslots: {[key: number]: number} = {
+    1:  8,
+    2:  9,
+    3:  10,
+    4:  11,
+    5:  13,
+    6:  14,
+    7:  15,
+    8:  16,
+    9:  18,
+    10: 19,
+    11: 20
+  }
+  */
+
+  //sortByDateCompareFn(a: Appointment, b: Appointment) {// cant sort down to hours.... work in progress....
+  sortByDateCompareFn(a: Appointment, b: Appointment) {// cant sort down to hours.... work in progress....
+    //if ( Date.parse(a.date_visited) < Date.parse(b.date_visited) ){
+    //if ((new Date(a.date_visited).setHours(this.readTimeslot(a.timeslot))) < (new Date(b.date_visited).setHours(this.readTimeslot(b.timeslot)))) {
+    const timeslots: {[key: number]: number} = {
+      1:  8,
+      2:  9,
+      3:  10,
+      4:  11,
+      5:  13,
+      6:  14,
+      7:  15,
+      8:  16,
+      9:  18,
+      10: 19,
+      11: 20
+    }
+
+    if ((new Date(a.date_visited).setHours(timeslots[a.timeslot])) < (new Date(b.date_visited).setHours(timeslots[b.timeslot]))) {
+      return -1;
+    }
+    //if ( Date.parse(a.date_visited) > Date.parse(b.date_visited) ){
+    //if ((new Date(a.date_visited).setHours(this.readTimeslot(a.timeslot))) > (new Date(b.date_visited).setHours(this.readTimeslot(b.timeslot)))) {
+    if ((new Date(a.date_visited).setHours(timeslots[a.timeslot])) > (new Date(b.date_visited).setHours(timeslots[b.timeslot]))) {
+      return 1;
+    }
+    return 0;
+  }
+
+  filterAndSortForPastAppts() {
+    //console.log(this.readTimeslot(1));
     this.appts.forEach((value) => {
-      const apptDate = Date.parse(value.date_visited);
+      //const apptDate = Date.parse(value.date_visited);
+      const apptDate = new Date(value.date_visited).setHours(this.readTimeslot(value.timeslot));
+      console.log(apptDate);
       if (apptDate < this.todayDate) {
         this.pastAppts.push(value);
       }
     });
+    this.pastAppts.sort(this.sortByDateCompareFn);
   }
 
-  filterApptsAfterToday() {
+  filterAndSortForUpcomingAppts() {
     this.appts.forEach((value) => {
-      const apptDate = Date.parse(value.date_visited);
+      //const apptDate = Date.parse(value.date_visited);
+      const apptDate = new Date(value.date_visited).setHours(this.readTimeslot(value.timeslot));
+      console.log(apptDate);
       if (apptDate >= this.todayDate) {
         this.upcomingAppts.push(value);
       }
     });
+    this.upcomingAppts.sort(this.sortByDateCompareFn);
   }
 
   initialiseDate(strDate: string): Date {
