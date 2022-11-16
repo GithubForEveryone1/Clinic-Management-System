@@ -26,14 +26,215 @@
                 </button>
                 <div class="dropdown-menu">
                     <div *ngFor="let doctor of doctors">
-                        <button class="dropdown-item" type="button" (click)="changeSelectedDoctor(doctor.user_id)"> Dr. <span class="text-capitalize">{{ doctor.first_name }} {{ doctor.last_name }}</span></button>
+                        <button class="dropdown-item" type="button" (click)="changeSelectedDoctor(doctor.user_id); resetPatientInfo()"> Dr. <span class="text-capitalize">{{ doctor.first_name }} {{ doctor.last_name }}</span></button>
                     </div> 
                 </div>
             </div>
-            <div class="input-group date">
-                <input type="date" class="form-control" [(ngModel)]="selectedDate">
+            <div class="input-group date ms-3">
+                <input type="date" class="form-control" [(ngModel)]="selectedDate" (change)="changeSelectedDate(); resetPatientInfo()">
             </div>
         </div>
     </div> 
 </div>
 
+<!-- Display of selected doctor's appointment schedule the selected date -->
+<div class="row mx-auto p-3">
+    <h4 class="mt-5 mb-5 text-center">Dr. <span class="text-capitalize">{{ selectedDoctor.first_name }} {{ selectedDoctor.last_name }}</span>'s Appointments</h4>
+    <div class="col-6">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a (click)="displayPatientInfo(1)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(1) == 'true' ? '' : 'disabled' " id="slot-1" data-bs-toggle="list" href="#slot-1-patient" role="tab" aria-controls="slot-1-patient">8:00 AM - 9:00 AM</a>
+            <a (click)="displayPatientInfo(2)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(2) == 'true' ? '' : 'disabled' " id="slot-2" data-bs-toggle="list" href="#slot-2-patient" role="tab" aria-controls="slot-2-patient">9:00 AM - 10:00 AM</a>
+            <a (click)="displayPatientInfo(3)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(3) == 'true' ? '' : 'disabled' " id="slot-3" data-bs-toggle="list" href="#slot-3-patient" role="tab" aria-controls="slot-3-patient">10:00 AM - 11:00 AM</a>
+            <a (click)="displayPatientInfo(4)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(4) == 'true' ? '' : 'disabled' " id="slot-4" data-bs-toggle="list" href="#slot-4-patient" role="tab" aria-controls="slot-4-patient">11:00 AM - 12:00 PM</a>
+            <a class="list-group-item disabled text-center" aria-disabled="true">LUNCH</a>
+            <a (click)="displayPatientInfo(5)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(5) == 'true' ? '' : 'disabled' " id="slot-5" data-bs-toggle="list" href="#slot-5-patient" role="tab" aria-controls="slot-5-patient">1:00 PM - 2:00 PM</a>
+            <a (click)="displayPatientInfo(6)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(6) == 'true' ? '' : 'disabled' " id="slot-6" data-bs-toggle="list" href="#slot-6-patient" role="tab" aria-controls="slot-6-patient">2:00 PM - 3:00 PM</a>
+            <a (click)="displayPatientInfo(7)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(7) == 'true' ? '' : 'disabled' " id="slot-7" data-bs-toggle="list" href="#slot-7-patient" role="tab" aria-controls="slot-7-patient">3:00 PM - 4:00 PM</a>
+            <a (click)="displayPatientInfo(8)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(8) == 'true' ? '' : 'disabled' " id="slot-8" data-bs-toggle="list" href="#slot-8-patient" role="tab" aria-controls="slot-8-patient">4:00 PM - 5:00 PM</a>
+            <a class="list-group-item disabled text-center" aria-disabled="true">DINNER</a>
+            <a (click)="displayPatientInfo(9)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(9) == 'true' ? '' : 'disabled' " id="slot-9" data-bs-toggle="list" href="#slot-9-patient" role="tab" aria-controls="slot-9-patient">6:00 PM - 7:00 PM</a>
+            <a (click)="displayPatientInfo(10)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(10) == 'true' ? '' : 'disabled' " id="slot-10" data-bs-toggle="list" href="#slot-10-patient" role="tab" aria-controls="slot-10-patient">7:00 PM - 8:00 PM</a>
+            <a (click)="displayPatientInfo(11)" class="list-group-item list-group-item-action text-center" [ngClass]="isBooked(11) == 'true' ? '' : 'disabled' " id="slot-11" data-bs-toggle="list" href="#slot-11-patient" role="tab" aria-controls="slot-11-patient">8:00 PM - 9:00 PM</a>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade" id="slot-1-patient" role="tabpanel" aria-labelledby="slot-1">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">8:00 AM - 9:00 AM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-2-patient" role="tabpanel" aria-labelledby="slot-2">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">9:00 AM - 10:00 AM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-3-patient" role="tabpanel" aria-labelledby="slot-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">10:00 AM - 11:00 AM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-4-patient" role="tabpanel" aria-labelledby="slot-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">11:00 AM - 12:00 PM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-5-patient" role="tabpanel" aria-labelledby="slot-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">1:00 PM - 2:00 PM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-6-patient" role="tabpanel" aria-labelledby="slot-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">2:00 PM - 3:00 PM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-7-patient" role="tabpanel" aria-labelledby="slot-7">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">3:00 PM - 4:00 PM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-8-patient" role="tabpanel" aria-labelledby="slot-8">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">4:00 PM - 5:00 PM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-9-patient" role="tabpanel" aria-labelledby="slot-9">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">6:00 PM - 7:00 PM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-10-patient" role="tabpanel" aria-labelledby="slot-10">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">7:00 PM - 8:00 PM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="slot-11-patient" role="tabpanel" aria-labelledby="slot-11">
+                <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">8:00 PM - 9:00 PM</h5>
+                      <p class="card-text">Diagnosis: {{diagnosis}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">First Name: {{patientFirstName}}</li>
+                      <li class="list-group-item">Last Name: {{patientLastName}}</li>
+                      <li class="list-group-item">DOB: {{dob.split('T')[0]}}</li>
+                      <li class="list-group-item">Address: {{patientAddress}}</li>
+                      <li class="list-group-item">Contact: {{contact}}</li>
+                      <li class="list-group-item">Email: {{email}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
