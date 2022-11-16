@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Appointment } from 'src/app/common/appointment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DataTableDirective } from 'angular-datatables';
 
 //so that jquery can work
 declare const $:any;
@@ -12,9 +13,12 @@ declare const $:any;
   templateUrl: './doctor-appointments.component.html',
   styleUrls: ['./doctor-appointments.component.css']
 })
-export class DoctorAppointmentsComponent implements OnInit {
-
-  // dtOptions: DataTables.Settings = {};
+export class DoctorAppointmentsComponent implements OnInit,AfterViewInit {
+  @ViewChild('dTable') dataTable: any;
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
 
   loggedInUserStr: string | null = sessionStorage.getItem("loggedInUser");
 
@@ -32,16 +36,33 @@ export class DoctorAppointmentsComponent implements OnInit {
   constructor(private router: Router, private appointmentService: AppointmentService, private route: ActivatedRoute) { }
 
    ngOnInit(): void {
-    $('#example').DataTable();
-     this.appointmentService.getApptsByDoctorId(this.doctorId).subscribe(
-       data => {
-         this.appts = data;
-         console.log(this.appts);
-       
-       },
-       error => this.handleErrorResponse(error),
-     );
-   }
+
+      this.appointmentService.getApptsByDoctorId(this.doctorId).subscribe(
+        data => {
+          this.appts = data;
+          this.dtTrigger.next();
+          console.log(this.appts);
+        
+        },
+        error => this.handleErrorResponse(error),
+        
+      );
+       console.log($("#example").DataTable());
+     
+    }
+
+    ngAfterViewInit(): void {
+      
+    }
+
+    rerender(): void {
+      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        // Destroy the table first
+        dtInstance.destroy();
+        // Call the dtTrigger to rerender again
+        this.dtTrigger.next();
+      });
+     }
 
   handleErrorResponse(error:HttpErrorResponse) {
     this.errorMsg = error.error.message;

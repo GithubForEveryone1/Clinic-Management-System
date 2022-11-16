@@ -1,7 +1,7 @@
 <div class="container" style="height:100vh">
     <div class="row m-3">
         <h1 class="text-center">These are all your appointments</h1>
-        <table id="example" class="table table-striped mt-3" style="width:100%">
+        <table id="example" #dTable class="table table-striped mt-3" style="width:100%">
             <thead>
                 <tr>
                     <th>Appointment ID</th>
@@ -22,6 +22,16 @@
                     <td>{{appt.prescription}}</td>
                 </tr>
             </tbody>
+            <!-- <tfoot>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Appointment Date</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Diagnosis</th>
+                    <th>Prescription</th>
+                </tr>
+            </tfoot> -->
         </table>
     </div>
 </div>
