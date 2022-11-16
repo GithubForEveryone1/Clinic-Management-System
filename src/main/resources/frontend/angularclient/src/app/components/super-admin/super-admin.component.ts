@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { ClosingService } from 'src/app/services/closing.service';
+import { Closing } from 'src/app/common/closing';
+
 
 
 @Component({
@@ -39,6 +42,11 @@ export class SuperAdminComponent implements OnInit {
 		'account_type': "",
 		'date_created': ""
 	}
+	
+	closingDate: Closing = {
+		'closing_date': new Date((new Date()).getTime() + 24*60*60*1000),
+		'description': 'super_admin block date'
+	};
 
 	/* get newUser() {
 		return this.createForm.get('user');
@@ -55,7 +63,7 @@ export class SuperAdminComponent implements OnInit {
 	// It's just for easily deleting accounts on the frontend for now
 	emailForDelete = "";
 
-	constructor(private router: Router, private userService: UserService) { }
+	constructor(private router: Router, private userService: UserService, private closingService: ClosingService) { }
 
 	ngOnInit(): void {
 	}
@@ -95,6 +103,17 @@ export class SuperAdminComponent implements OnInit {
 				this.message = "User has been deleted successfully!"
 			},
 			error => this.errorMessage = "Email does not exist"
+		)
+	}
+	
+	submitClosingDate() {
+		console.log(this.closingDate);
+		this.closingService.getClosingDate(this.closingDate).subscribe(
+			data => {
+				this.message = "Block date success!"
+				/* this.router.navigate(['login'], { queryParams: { registered: 'true' } }); */
+			},
+			error => this.errorMessage = "cmi"
 		)
 	}
 
