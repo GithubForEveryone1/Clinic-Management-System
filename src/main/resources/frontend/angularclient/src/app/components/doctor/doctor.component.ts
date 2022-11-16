@@ -90,15 +90,6 @@ export class DoctorComponent implements OnInit {
         this.email = patient.email;
         this.diagnosis = value.diagnosis;
       } 
-      else {
-        this.patientFirstName = "";
-        this.patientLastName = "";
-        this.dob = "";
-        this.patientAddress = "";
-        this.contact = "";
-        this.email = "";
-        this.diagnosis = "";
-      }
     })
   }
   

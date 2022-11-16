@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Appointment } from 'src/app/common/appointment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DataTableDirective } from 'angular-datatables';
+
+//so that jquery can work
+declare const $:any;
 
 @Component({
   selector: 'app-doctor-appointments',
   templateUrl: './doctor-appointments.component.html',
   styleUrls: ['./doctor-appointments.component.css']
 })
-export class DoctorAppointmentsComponent implements OnInit {
+export class DoctorAppointmentsComponent implements OnInit,AfterViewInit {
 
   loggedInUserStr: string | null = sessionStorage.getItem("loggedInUser");
 
@@ -17,19 +21,7 @@ export class DoctorAppointmentsComponent implements OnInit {
   loggedInUser = this.loggedInUserStr ? JSON.parse(this.loggedInUserStr) : null;
 
   doctorId = this.loggedInUser.user_id;
-  firstName = this.loggedInUser.first_name;
-  lastName = this.loggedInUser.last_name;
-  dob = this.loggedInUser.dob;
-  address = this.loggedInUser.address;
-  contactNo = this.loggedInUser.contact_number;
-  email = this.loggedInUser.email;
-  gender = this.loggedInUser.gender;
-  accountType = this.loggedInUser.account_type;
-
-  //today's date
-  today = new Date();
-  todayDate = this.today.valueOf();
-
+ 
   //Appointments
   appts: Appointment[] = [];
 
@@ -38,17 +30,28 @@ export class DoctorAppointmentsComponent implements OnInit {
 
   constructor(private router: Router, private appointmentService: AppointmentService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.appointmentService.getApptsByDoctorId(this.doctorId).subscribe(
-      data => {
-        this.appts = data;
-        console.log(this.appts);
-       
-      },
-      error => this.handleErrorResponse(error),
-    );
-  }
-  
+   ngOnInit(): void {
+
+      this.appointmentService.getApptsByDoctorId(this.doctorId).subscribe(
+        data => {
+          this.appts = data;
+          $(function(){
+              $("#example").DataTable();
+           });
+          // this.dtTrigger.next();
+          console.log(this.appts);
+        
+        },
+        error => this.handleErrorResponse(error),
+        
+      );
+      
+    }
+
+    ngAfterViewInit(): void {
+      
+    }
+
   handleErrorResponse(error:HttpErrorResponse) {
     this.errorMsg = error.error.message;
   }

@@ -24,10 +24,12 @@
             ],
             "styles": [
             "node_modules/bootstrap/dist/css/bootstrap.min.css",
-            "src/styles.css"
+            "src/styles.css",
+            "node_modules/datatables.net-dt/css/jquery.dataTables.css"
             ],
             "scripts": [
-              "src/assets/dataTables.js"
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js"
             ]
           },
           "configurations": {
@@ -96,7 +98,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/dataTables.js"
             ]
           }
         }
