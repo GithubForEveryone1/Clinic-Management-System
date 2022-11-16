@@ -28,6 +28,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
   allApptsOnSelectedDate: Appointment[] = []; // All appointments that fall on the date selected by the user
 
   // These are binded to the input fields to get the user's selections
+  dropdown = "What would you like to see the doctor for?";       // The dropdown for common ailments selection
   description = "";    // The description provided by the user in the textarea
   selectedDate = "";   // The date that the user has picked
  
@@ -53,24 +54,10 @@ export class PatientMakeAppointmentComponent implements OnInit {
   constructor(private appointmentService: AppointmentService, private userService: UserService, private closingService: ClosingService, private router: Router) { }
 
   ngOnInit(): void {
-    // // Get all appointments from DB
-    // this.appointmentService.getApptsList().subscribe(
-    //   data => {
-    //     this.allAppts = data;
-    //   }
-    // );
-
     // Get all doctors from DB
-    this.userService.getUserList().subscribe(
+    this.userService.getDoctors().subscribe(
       data => {
         this.allDoctors = data;
-
-        // Get all users, then remove non-doctors >:)
-        for (var user in this.allDoctors) {
-          if (this.allDoctors[user].account_type != 'doctor') {
-            this.allDoctors.splice(parseInt(user), 1)
-          }
-        }
       }
     )
   }
@@ -234,6 +221,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
     // For every doctor that exists, check their state so we can provide the options to the user
     // This disables doctors that are not free for consultation on a specific timeslot
     for (var doctor in this.allDoctors) {
+      console.log(doctor);
       let doctorId = this.allDoctors[doctor].user_id.toString(); // Get doctor ID
       let doctorDisabled = "";
       
@@ -268,7 +256,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
       "doctor_id": doctorId,
       "date_visited": this.selectedDate,
       "timeslot": timeslotNumber,
-      "diagnosis": this.description,
+      "diagnosis": this.description ? this.description : this.dropdown,
       "prescription": null
     };
     
