@@ -14,11 +14,6 @@ declare const $:any;
   styleUrls: ['./doctor-appointments.component.css']
 })
 export class DoctorAppointmentsComponent implements OnInit,AfterViewInit {
-  // @ViewChild('dTable') dataTable: any;
-  // @ViewChild(DataTableDirective)
-  // dtElement: DataTableDirective;
-  // dtOptions: DataTables.Settings = {};
-  // dtTrigger: Subject<any> = new Subject();
 
   loggedInUserStr: string | null = sessionStorage.getItem("loggedInUser");
 
@@ -50,22 +45,12 @@ export class DoctorAppointmentsComponent implements OnInit,AfterViewInit {
         error => this.handleErrorResponse(error),
         
       );
-      //  console.log($("#example").DataTable());
-     
+      
     }
 
     ngAfterViewInit(): void {
       
     }
-
-    // rerender(): void {
-    //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-    //     // Destroy the table first
-    //     dtInstance.destroy();
-    //     // Call the dtTrigger to rerender again
-    //     this.dtTrigger.next();
-    //   });
-    //  }
 
   handleErrorResponse(error:HttpErrorResponse) {
     this.errorMsg = error.error.message;
