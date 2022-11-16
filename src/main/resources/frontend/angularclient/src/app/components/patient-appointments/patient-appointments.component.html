@@ -56,7 +56,7 @@
             -->
 
             <div class="container">
-                <p *ngIf="upcomingAppts.length == 0" class="text-center">You do not have any past appointments.</p>
+                <p *ngIf="upcomingAppts.length == 0" class="text-center">You do not have any upcoming appointments.</p>
                 <div class="row" *ngFor="let appt of upcomingAppts">
                     <div class="col-3 bg-primary text-center p-4 my-2">
                         <p class="text-white display-6">{{ displayDay(initialiseDate(appt.date_visited).getDay()) }}</p>
