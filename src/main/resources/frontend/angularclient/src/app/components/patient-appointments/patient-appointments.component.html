@@ -26,6 +26,9 @@
             <button class="nav-link {{pastTabStatus}}" data-toggle="tab" role="tab" (click)="switchToPastTab()">Past</button>
         </li>
     </ul>
+
+    <p *ngIf="errorMsg" class="alert alert-danger mb-0" role="alert">{{ errorMsg }}</p>
+
     <div class="tab-content">
         <div class="tab-pane container fade {{upcomingTabContentStatus}}" role="tabpanel">
 
@@ -56,7 +59,7 @@
             -->
 
             <div class="container">
-                <p *ngIf="upcomingAppts.length == 0" class="text-center">You do not have any past appointments.</p>
+                <p *ngIf="upcomingAppts.length == 0" class="text-center">You do not have any upcoming appointments.</p>
                 <div class="row" *ngFor="let appt of upcomingAppts">
                     <div class="col-3 bg-primary text-center p-4 my-2">
                         <p class="text-white display-6">{{ displayDay(initialiseDate(appt.date_visited).getDay()) }}</p>
