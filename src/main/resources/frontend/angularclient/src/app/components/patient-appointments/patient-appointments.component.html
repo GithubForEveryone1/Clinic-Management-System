@@ -26,6 +26,9 @@
             <button class="nav-link {{pastTabStatus}}" data-toggle="tab" role="tab" (click)="switchToPastTab()">Past</button>
         </li>
     </ul>
+
+    <p *ngIf="errorMsg" class="alert alert-danger mb-0" role="alert">{{ errorMsg }}</p>
+
     <div class="tab-content">
         <div class="tab-pane container fade {{upcomingTabContentStatus}}" role="tabpanel">
 

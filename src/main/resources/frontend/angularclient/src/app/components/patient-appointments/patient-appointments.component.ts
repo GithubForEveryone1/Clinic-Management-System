@@ -124,13 +124,46 @@ export class PatientAppointmentsComponent implements OnInit {
     }
   }
 
+  /* // re-declared inside the callback func instead.
+  timeslots: {[key: number]: number} = {
+    1:  8,
+    2:  9,
+    3:  10,
+    4:  11,
+    5:  13,
+    6:  14,
+    7:  15,
+    8:  16,
+    9:  18,
+    10: 19,
+    11: 20
+  }
+  */
+
+  //sortByDateCompareFn(a: Appointment, b: Appointment) {// cant sort down to hours.... work in progress....
   sortByDateCompareFn(a: Appointment, b: Appointment) {// cant sort down to hours.... work in progress....
     //if ( Date.parse(a.date_visited) < Date.parse(b.date_visited) ){
-    if ((new Date(a.date_visited).setHours(this.readTimeslot(a.timeslot))) < (new Date(b.date_visited).setHours(this.readTimeslot(b.timeslot)))) {
+    //if ((new Date(a.date_visited).setHours(this.readTimeslot(a.timeslot))) < (new Date(b.date_visited).setHours(this.readTimeslot(b.timeslot)))) {
+    const timeslots: {[key: number]: number} = {
+      1:  8,
+      2:  9,
+      3:  10,
+      4:  11,
+      5:  13,
+      6:  14,
+      7:  15,
+      8:  16,
+      9:  18,
+      10: 19,
+      11: 20
+    }
+
+    if ((new Date(a.date_visited).setHours(timeslots[a.timeslot])) < (new Date(b.date_visited).setHours(timeslots[b.timeslot]))) {
       return -1;
     }
     //if ( Date.parse(a.date_visited) > Date.parse(b.date_visited) ){
-    if ((new Date(a.date_visited).setHours(this.readTimeslot(a.timeslot))) > (new Date(b.date_visited).setHours(this.readTimeslot(b.timeslot)))) {
+    //if ((new Date(a.date_visited).setHours(this.readTimeslot(a.timeslot))) > (new Date(b.date_visited).setHours(this.readTimeslot(b.timeslot)))) {
+    if ((new Date(a.date_visited).setHours(timeslots[a.timeslot])) > (new Date(b.date_visited).setHours(timeslots[b.timeslot]))) {
       return 1;
     }
     return 0;
