@@ -5,14 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ncs.clinicmanagementsystem.entity.Appointment;
 import com.ncs.clinicmanagementsystem.entity.User;
@@ -147,7 +140,7 @@ public class AppointmentRestController {
 		
 		// save new appt to db.
 		try {
-			apptService.createApptByUserId(theAppt);
+			apptService.editApptByApptId(theAppt);
 		}
 		catch(Exception e) {
 			//throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
@@ -158,13 +151,23 @@ public class AppointmentRestController {
 	}
 	
 	// add mapping for POST /appt/edit
-	@PostMapping("/appt/edit")
+	@PutMapping("/appt/edit")
 	public Appointment editAppt(@RequestBody Appointment theAppt) {
-		
+
 		// what are the fields that will be edited? perhaps it is better to split into individual methods. kiv..
 		// - patient reschedules to change doctor, date, timeslot
 		// - doctor updates diagnosis
 		// - doctor updates prescriptions
+
+		//  Remus: For now, this will edit everything that is given, so front-end needs to ensure that existing fields should also be sent through to avoid overwriting stuff into blank
+		//  Remus: Method is re-using the create since create also updates existing records (open the editApptByApptId method to see more)
+		try {
+			apptService.editApptByApptId(theAppt);
+		}
+		catch(Exception e) {
+			//throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
+			throw new RuntimeException("error on saving new appt to db."); //test...
+		}
 
 		return theAppt;
 		
