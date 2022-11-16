@@ -1,14 +1,12 @@
 <div class="container" style="height:100vh">
     <div class="row m-3">
         <h1 class="text-center">These are all your appointments</h1>
-        <table id="example" class="table table-striped mt-3" style="width:100%">
+        <table id="example" #dTable class="table table-striped mt-3" style="width:100%">
             <thead>
                 <tr>
                     <th>Appointment ID</th>
                     <th>Appointment Date</th>
-                    <th>Patient ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Patient's Name</th>
                     <th>Diagnosis</th>
                     <th>Prescription</th>
                 </tr>
@@ -17,19 +15,23 @@
                 <tr *ngFor="let appt of appts">
                     <td>{{appt.appt_id}}</td>
                     <td>{{ appt.date_visited.split('T')[0] }}</td>
-                    <td>{{appt.patient_id}}</td>
-                    <td>{{appt.patient.first_name}}</td>
-                    <td>{{appt.patient.last_name}}</td>
+                    <td>{{appt.patient.first_name + ' ' +appt.patient.last_name}}</td>
                     <td>{{appt.diagnosis}}</td>
                     <td>{{appt.prescription}}</td>
                 </tr>
             </tbody>
+            <!-- <tfoot>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Appointment Date</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Diagnosis</th>
+                    <th>Prescription</th>
+                </tr>
+            </tfoot> -->
         </table>
     </div>
 </div>
 
-<!-- <script>
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
-</script> -->
+
