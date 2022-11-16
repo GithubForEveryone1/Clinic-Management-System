@@ -140,7 +140,7 @@ public class AppointmentRestController {
 		
 		// save new appt to db.
 		try {
-			apptService.editApptByApptId(theAppt);
+			apptService.createApptByUserId(theAppt);
 		}
 		catch(Exception e) {
 			//throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
