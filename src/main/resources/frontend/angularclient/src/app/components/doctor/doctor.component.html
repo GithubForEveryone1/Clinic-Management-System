@@ -7,7 +7,9 @@
     <!-- Display of appointment schedule for the day -->
     <div class="row mx-auto p-3">
         <h4 class="mb-3">Appointments for today</h4>
-        <div class="col-4">
+
+        <!-- Displays the list of timeslots for today -->
+        <div class="col">
             <div class="list-group" id="list-tab" role="tablist">
                 <a (click)="displayPatientInfo(1)" class="list-group-item list-group-item-action" [ngClass]="isBooked(1) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-1" data-bs-toggle="list" href="#slot-1-patient" role="tab" aria-controls="slot-1-patient">8 AM - 9 AM</a>
                 <a (click)="displayPatientInfo(2)" class="list-group-item list-group-item-action" [ngClass]="isBooked(2) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-2" data-bs-toggle="list" href="#slot-2-patient" role="tab" aria-controls="slot-2-patient">9 AM - 10 AM</a>
@@ -23,10 +25,12 @@
                 <a (click)="displayPatientInfo(11)" class="list-group-item list-group-item-action" [ngClass]="isBooked(11) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-11" data-bs-toggle="list" href="#slot-11-patient" role="tab" aria-controls="slot-11-patient">7 PM - 8 PM</a>
             </div>
         </div>
-        <div class="col-8">
+
+        <!-- Displays the patient's info -->
+        <div class="col">
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show" id="slot-1-patient" role="tabpanel" aria-labelledby="slot-1">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">8 AM - 9 AM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -40,13 +44,12 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-2-patient" role="tabpanel" aria-labelledby="slot-2">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">9 AM - 10 AM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -60,13 +63,12 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-3-patient" role="tabpanel" aria-labelledby="slot-3">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">10 AM - 11 AM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -80,13 +82,12 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-4-patient" role="tabpanel" aria-labelledby="slot-4">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">11 AM - 12 PM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -100,13 +101,12 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-5-patient" role="tabpanel" aria-labelledby="slot-5">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">1 PM - 2 PM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -120,13 +120,18 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <!-- <a (click)="displayPatientInfo(1)" class="list-group-item list-group-item-action" id="slot-1" data-bs-toggle="list" href="#slot-1-patient" role="tab" aria-controls="slot-1-patient">Add Diagnosis</a> -->
+                          <div class="row">
+                            <div id="addDiagnosis" role="tablist">
+                              <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                            </div>
+                          </div>
+                          <!-- <a href="#" class="card-link">Add Diagnosis</a> -->
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-6-patient" role="tabpanel" aria-labelledby="slot-6">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">2 PM - 3 PM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -140,13 +145,12 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-7-patient" role="tabpanel" aria-labelledby="slot-7">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">3 PM - 4 PM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -160,13 +164,12 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-8-patient" role="tabpanel" aria-labelledby="slot-8">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">4 PM - 5 PM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -180,13 +183,12 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-9-patient" role="tabpanel" aria-labelledby="slot-9">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">5 PM - 6 PM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -200,13 +202,12 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-10-patient" role="tabpanel" aria-labelledby="slot-10">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">6 PM - 7 PM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -220,13 +221,12 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="slot-11-patient" role="tabpanel" aria-labelledby="slot-11">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">7 PM - 8 PM</h5>
                           <p class="card-text">Diagnosis: {{diagnosis}}</p>
@@ -240,12 +240,46 @@
                           <li class="list-group-item">Email: {{email}}</li>
                         </ul>
                         <div class="card-body">
-                          <a href="#" class="card-link">Edit Diagnosis</a>
-                          <a href="#" class="card-link">Add Prescription</a>
+                          <a href="#" class="card-link">Add Diagnosis</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Displays the diagnosis form -->
+        <div class="col">
+          <div class="tab-content">
+            <div class="tab-pane fade" id="add-diagnosis" role="tabpanel" aria-labelledby="add-diagnosis-tab">
+              <form>
+                <div class="form-group">
+                  <label for="docDiagnosis">Doctor's Diagnosis</label>
+                  <textarea class="form-control" id="docDiagnosis" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Example select</label>
+                  <select class="form-control" id="exampleFormControlSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Example select</label>
+                  <select class="form-control" id="exampleFormControlSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
         </div>
     </div>
 </div>
