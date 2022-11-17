@@ -39,10 +39,9 @@
 					*ngIf="authenticationService.isUserLoggedIn() && authenticationService.isUserNurse()">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" routerLink="/doctor">Home</a></li>
+							aria-current="page" routerLink="/nurse">Appointments</a></li>
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" routerLink="/doctor/appointments">Your
-								appointments</a></li>
+							aria-current="page" routerLink="/all-patients">View All Patients</a></li>
 					</ul>
 				</div>
 				<div *ngIf="authenticationService.isUserSuperAdmin()">
