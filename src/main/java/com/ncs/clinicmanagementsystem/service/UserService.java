@@ -18,4 +18,6 @@ public interface UserService {
 	
 	public List<User> findDoctors();
 	
+	public List<User> findPatients();
+	
 }

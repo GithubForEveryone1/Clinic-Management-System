@@ -16,6 +16,7 @@ import { DoctorAppointmentsComponent } from './components/doctor-appointments/do
 import { PatientMakeAppointmentComponent } from './components/patient-make-appointment/patient-make-appointment.component';
 import { PatientMakeAppointmentSuccessComponent } from './components/patient-make-appointment-success/patient-make-appointment-success.component';
 import { PatientMakeAppointmentFailureComponent } from './components/patient-make-appointment-failure/patient-make-appointment-failure.component';
+import { AllPatientsComponent } from './components/all-patients/all-patients.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,9 @@ const routes: Routes = [
   {path: 'doctor', component: DoctorComponent, canActivate: [RouteGuardService]},
   {path: 'doctor/appointments', component: DoctorAppointmentsComponent, canActivate: [RouteGuardService]},
   {path: 'nurse', component: NurseComponent, canActivate: [RouteGuardService]},
-  {path: '**', component: ErrorComponent} 
+  {path: 'all-patients', component: AllPatientsComponent, canActivate: [RouteGuardService]},
+  {path: '**', component: ErrorComponent},
+  {path: 'error', component: ErrorComponent} 
 ];
 
 @NgModule({
