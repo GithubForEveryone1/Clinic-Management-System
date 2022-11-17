@@ -12,8 +12,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<ul
-					*ngIf="authenticationService.isUserLoggedIn() && authenticationService.isUserPatient()"
+				<ul *ngIf="authenticationService.isUserLoggedIn()&& authenticationService.isUserPatient()"
 					class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" routerLink="/patient/appointments/new">Book
@@ -46,18 +45,16 @@
 					class="nav-item"><a class="nav-link active"
 					aria-current="page" routerLink="/admin">Administrator</a></li>
 			</ul>
-			<div *ngIf="authenticationService.isUserLoggedIn(); else noUser">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item dropdown user-li"><a
-						class="nav-link dropdown-toggle"
-						style="color: rgba(0, 0, 0, 0.9) !important" href="#"
-						id="navbarDropdownMenuLink" data-bs-toggle="dropdown"
-						aria-expanded="false"> {{authenticationService.loggedInUser}}
-					</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							<li><a class="dropdown-item" routerLink="/logout">Logout</a></li>
-						</ul></li>
+			<div class="btn-group"
+				*ngIf="authenticationService.isUserLoggedIn(); else noUser">
+				<button type="button" class="btn btn-primary dropdown-toggle"
+					data-bs-toggle="dropdown" aria-expanded="false">
+					{{authenticationService.loggedInUser}}</button>
+				<ul class="dropdown-menu dropdown-menu-end"
+					aria-labelledby="navbarDropdownMenuLink">
+					<li><a class="dropdown-item text-center" routerLink="/logout">Logout</a></li>
 				</ul>
+
 
 			</div>
 			<ng-template #noUser> <a routerLink="/login"><button
