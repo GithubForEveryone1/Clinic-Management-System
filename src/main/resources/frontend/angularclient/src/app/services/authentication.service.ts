@@ -67,7 +67,11 @@ export class AuthenticationService {
       return false;
     }
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 8130689b (create view all patients page)
   logout() {
     //sessionStorage.removeItem("firstName");
     //sessionStorage.removeItem("email");
