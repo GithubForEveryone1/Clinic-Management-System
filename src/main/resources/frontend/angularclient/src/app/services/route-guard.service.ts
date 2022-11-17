@@ -25,3 +25,20 @@ export class RouteGuardService implements CanActivate{
     return false;
   }
 }
+
+/* //alfred 17.11.2022: kiv..
+export class RouteGuardServiceForNurse implements CanActivate {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    if (this.authenticationService.isUserNurse()) {
+      return true;
+    }
+
+    this.router.navigate(['error'])
+    return false;
+  }
+}
+*/

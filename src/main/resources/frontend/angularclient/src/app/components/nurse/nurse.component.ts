@@ -53,9 +53,11 @@ export class NurseComponent implements OnInit {
 
   ngOnInit(): void {
     
+    /* //alfred 17.11.2022: is this needed?
     if (this.accountType != 'nurse') {
       this.router.navigate(['error']);
     };
+    */
 
     this.userService.getDoctors().subscribe(
       data => {

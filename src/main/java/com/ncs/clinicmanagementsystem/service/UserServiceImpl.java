@@ -59,5 +59,12 @@ public class UserServiceImpl implements UserService {
 	public List<User> findDoctors() {
 		return userDAO.findDoctors();
 	}
+	
+	@Override
+	@Transactional
+	public List<User> findPatients() {
+		return userDAO.findPatients();
+	}
+	
 }
 
