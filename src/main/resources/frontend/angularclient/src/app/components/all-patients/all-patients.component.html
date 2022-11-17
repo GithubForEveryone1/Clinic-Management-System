@@ -1,6 +1,9 @@
 <div class="container" style="height:100vh">
     <div class="row m-3">
         <h1 class="text-center">All Patients</h1>
+        
+        <p *ngIf="patientsErrorMsg" class="alert alert-danger mb-0" role="alert">{{ patientsErrorMsg }}</p>
+
         <table id="example" #dTable class="table table-striped mt-3" style="width:100%">
             <thead>
                 <tr>

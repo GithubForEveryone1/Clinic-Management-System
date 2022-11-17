@@ -67,16 +67,6 @@ export class AuthenticationService {
       return false;
     }
   }
-  
-  isUserNurse(): boolean {
-    const account_type = sessionStorage.getItem("type");
-
-    if(account_type == "nurse") {
-      return sessionStorage.getItem("type") !== null;	
-    } else {
-      return false;
-    }
-  }
 
   logout() {
     //sessionStorage.removeItem("firstName");
