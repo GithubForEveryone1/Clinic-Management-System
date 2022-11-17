@@ -11,43 +11,40 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul
-				*ngIf="authenticationService.isUserLoggedIn()&& authenticationService.isUserPatient()"
-				class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" routerLink="/patient/appointments/new">Book
-						an appt</a></li>
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="#">Other services</a></li>
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" routerLink="/patient/appointments">Your
-						appointments</a></li>
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<ul *ngIf="authenticationService.isUserLoggedIn()&& authenticationService.isUserPatient()"
+					class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" routerLink="/patient/appointments/new">Book
+							an appt</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="#">Other services</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" routerLink="/patient/appointments">Your
+							appointments</a></li>
+				</ul>
+				<ul
+					*ngIf="authenticationService.isUserLoggedIn() && authenticationService.isUserDoctor()"
+					class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" routerLink="/doctor">Home</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" routerLink="/doctor/appointments">Your
+							appointments</a></li>
+				</ul>
+				<ul
+					*ngIf="authenticationService.isUserLoggedIn() && authenticationService.isUserNurse()"
+					class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" routerLink="/doctor">Home</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" routerLink="/doctor/appointments">Your
+							appointments</a></li>
+				</ul>
+				<li *ngIf="authenticationService.isUserSuperAdmin()"
+					class="nav-item"><a class="nav-link active"
+					aria-current="page" routerLink="/admin">Administrator</a></li>
 			</ul>
-
-			<ul
-				*ngIf="authenticationService.isUserLoggedIn() && authenticationService.isUserDoctor()"
-				class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" routerLink="/doctor">Home</a></li>
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" routerLink="/doctor/appointments">Your
-						appointments</a></li>
-			</ul>
-
-			<ul
-				*ngIf="authenticationService.isUserLoggedIn() && authenticationService.isUserNurse()"
-				class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" routerLink="/nurse">Appointments</a></li>
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" routerLink="/all-patients">View All
-						Patients</a></li>
-			</ul>
-
-			<li *ngIf="authenticationService.isUserSuperAdmin()" class="nav-item"><a
-				class="nav-link active" aria-current="page" routerLink="/admin">Administrator</a></li>
-		
-
 			<div class="btn-group"
 				*ngIf="authenticationService.isUserLoggedIn(); else noUser">
 				<button type="button" class="btn btn-primary dropdown-toggle"
