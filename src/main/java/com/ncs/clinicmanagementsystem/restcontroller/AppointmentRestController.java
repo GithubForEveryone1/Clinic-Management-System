@@ -161,6 +161,7 @@ public class AppointmentRestController {
 
 		//  Remus: For now, this will edit everything that is given, so front-end needs to ensure that existing fields should also be sent through to avoid overwriting stuff into blank
 		//  Remus: Method is re-using the create since create also updates existing records (open the editApptByApptId method to see more)
+		
 		try {
 			apptService.editApptByApptId(theAppt);
 		}
