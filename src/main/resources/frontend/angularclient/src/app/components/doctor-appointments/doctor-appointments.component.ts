@@ -36,7 +36,7 @@ export class DoctorAppointmentsComponent implements OnInit,AfterViewInit {
         data => {
           this.appts = data;
           $(function(){
-              $("#example").DataTable();
+              $("#docAppt").DataTable();
            });
           // this.dtTrigger.next();
           console.log(this.appts);
