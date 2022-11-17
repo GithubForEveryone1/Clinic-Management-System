@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Query } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
@@ -63,7 +63,7 @@ export class SuperAdminComponent implements OnInit {
 	// It's just for easily deleting accounts on the frontend for now
 	emailForDelete = "";
 
-	constructor(private router: Router, private userService: UserService, private closingService: ClosingService) { }
+	constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private closingService: ClosingService) { }
 
 	ngOnInit(): void {
 	}
