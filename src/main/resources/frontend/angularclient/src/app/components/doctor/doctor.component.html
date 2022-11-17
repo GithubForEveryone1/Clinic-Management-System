@@ -254,14 +254,14 @@
               <form>
                 <div class="form-group">
                   <label for="docDiagnosis">Doctor's Diagnosis</label>
-                  <textarea class="form-control" id="docDiagnosis" rows="4"></textarea>
+                  <textarea class="form-control" id="docDiagnosis" rows="4" name="diagnosis" [(ngModel)]="diagnosis"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="docDiagnosis">Prescription</label>
-                  <textarea class="form-control" id="docDiagnosis" rows="4"></textarea>
+                  <textarea class="form-control" id="docDiagnosis" rows="4" name="prescription" [(ngModel)]="prescription"></textarea>
                 </div>
                 <div class="mt-2">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary" (click)="addDiagnosis()">Submit</button>
                 </div>
               </form>
             </div>

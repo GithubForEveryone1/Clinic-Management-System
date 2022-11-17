@@ -28,8 +28,6 @@ export class DoctorComponent implements OnInit {
   //Appointments
   appts: Appointment[] = [];
   tdyAppts: Appointment[] = [];
-  pastAppts: Appointment[] = [];
-  upcomingAppts: Appointment[] = [];
 
   //Patient Info
   patientFirstName = "";
@@ -39,6 +37,13 @@ export class DoctorComponent implements OnInit {
   contact = "";
   email = "";
   diagnosis = "";
+
+  // doctor adding diagnosis
+  apptId = NaN;
+  patientId = NaN;
+  dateVisited = "";
+  prescription = "";
+  timeslot = NaN;
 
   //Error message from backend server
   errorMsg = "";
@@ -89,6 +94,10 @@ export class DoctorComponent implements OnInit {
         this.contact = patient.contact_number;
         this.email = patient.email;
         this.diagnosis = value.diagnosis;
+        this.patientId = value.patient_id
+        this.apptId = value.appt_id;
+        this.dateVisited = value.date_visited;
+        this.timeslot = value.timeslot;
       } 
     })
   }
@@ -106,4 +115,28 @@ export class DoctorComponent implements OnInit {
     return res;
   }
   
+  // method to add in diagnosis and prescription 
+  addDiagnosis(){
+     // This is POSTed to the backend
+     let appt = {
+       "appt_id": this.apptId,
+       "patient_id": this.patientId,
+       "doctor_id": this.doctorId,
+       "date_visited": this.dateVisited,
+       "timeslot": this.timeslot,
+       "diagnosis": this.diagnosis,
+       "prescription": this.prescription
+     };
+    
+    //  console.log(this.appointmentService.editAppt(appt));
+     this.appointmentService.editAppt(appt).subscribe(
+       data => {
+        console.log(data)
+        //  this.router.navigate(['patient/appointments/success'], {queryParams: query});
+       },
+       error => {
+        //  this.router.navigate(['patient/appointments/failure']);
+       }
+     )
+ }
 }
