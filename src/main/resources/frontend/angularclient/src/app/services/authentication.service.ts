@@ -12,6 +12,13 @@ export class AuthenticationService {
   private baseUrl = 'http://localhost:8080/api';
 
   constructor(private httpClient: HttpClient) { }
+  
+  
+  get loggedInUser(): any {
+	const jsonFirstName = JSON.parse(sessionStorage.getItem("loggedInUser") || '{}');
+	const first_name = jsonFirstName.first_name
+	return first_name
+}
 
   authenticateUser(user: any): Observable<User> {
     return this.httpClient.post<User>(`${this.baseUrl}/user/login`, user);
@@ -40,6 +47,16 @@ export class AuthenticationService {
       return false;
     }
   }
+  
+    isUserNurse(): boolean {
+    const account_type = sessionStorage.getItem("type");
+
+    if(account_type == "nurse") {
+      return sessionStorage.getItem("type") !== null;	
+    } else {
+      return false;
+    }
+  }
 
   isUserPatient(): boolean {
     const account_type = sessionStorage.getItem("type");
@@ -56,5 +73,6 @@ export class AuthenticationService {
     //sessionStorage.removeItem("email");
     //sessionStorage.removeItem("gender");
     sessionStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("type");
   }
 }
