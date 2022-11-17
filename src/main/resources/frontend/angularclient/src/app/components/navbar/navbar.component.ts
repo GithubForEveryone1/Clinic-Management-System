@@ -11,15 +11,15 @@ export class NavbarComponent implements OnInit {
 
 	constructor(public authenticationService: AuthenticationService) { }
 	
-	jsonFirstName = JSON.parse(sessionStorage.getItem("loggedInUser") || '{}');
+	/* jsonFirstName = JSON.parse(sessionStorage.getItem("loggedInUser") || '{}'); */
 	
 	ngOnInit() {	
 		console.log(sessionStorage.getItem("type"));
-		console.log(this.jsonFirstName.first_name);
+		/* console.log(this.jsonFirstName.first_name); */
 	}
 	
-	getFirstName() {
+	/* getFirstName() {
 		return this.jsonFirstName.first_name
-	}
+	} */
 
 }
