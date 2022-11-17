@@ -18,4 +18,6 @@ public interface UserDAO {
 
 	public List<User> findDoctors();
 	
+	public List<User> findPatients();
+	
 }

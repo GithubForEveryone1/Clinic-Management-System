@@ -81,6 +81,17 @@ public class UserDAOHibernateImpl implements UserDAO {
 		return theDoctors;
 	}
 	
+	@Override
+	public List<User> findPatients() {
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		// get the patients
+		Criteria criteria = currentSession.createCriteria(User.class);
+		List<User> thePatients = criteria.add(Restrictions.eq("account_type", "patient")).list();
+		
+		return thePatients;
+	}
 	
 	@Override
 	public void save(User theUser) {
