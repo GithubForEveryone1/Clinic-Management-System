@@ -67,7 +67,25 @@ public class UserRestController {
 		}
 		
 		return theDoctors;
+	}
+	
+	// add mapping for GET /user/patients
+	@GetMapping("/user/patients")
+	public List<User> findPatients() {
+		List<User> thePatients;
 		
+		try {
+			thePatients = userService.findPatients();
+		}
+		catch(Exception e) {
+			throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
+		}
+		
+		if (thePatients.isEmpty()) { //throws error msg if patients list is empty.
+			throw new RuntimeException("Opps something happened. Please try again.");
+		}
+		
+		return thePatients;
 	}
 	
 	// add mapping for GET /user/{userEmail}
