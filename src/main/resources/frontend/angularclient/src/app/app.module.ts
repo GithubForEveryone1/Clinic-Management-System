@@ -26,6 +26,8 @@ import { DoctorAppointmentsComponent } from './components/doctor-appointments/do
 import { PatientMakeAppointmentSuccessComponent } from './components/patient-make-appointment-success/patient-make-appointment-success.component';
 import { PatientMakeAppointmentFailureComponent } from './components/patient-make-appointment-failure/patient-make-appointment-failure.component';
 import { AllPatientsComponent } from './components/all-patients/all-patients.component';
+import { DocAddDiagnosisSuccessComponent } from './components/doc-add-diagnosis-success/doc-add-diagnosis-success.component';
+import { DocAddDiagnosisFailureComponent } from './components/doc-add-diagnosis-failure/doc-add-diagnosis-failure.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { AllPatientsComponent } from './components/all-patients/all-patients.com
     PatientMakeAppointmentComponent,
     PatientMakeAppointmentSuccessComponent,
     PatientMakeAppointmentFailureComponent,
-    AllPatientsComponent
+    AllPatientsComponent,
+    DocAddDiagnosisSuccessComponent,
+    DocAddDiagnosisFailureComponent
   ],
   imports: [
     BrowserModule,
