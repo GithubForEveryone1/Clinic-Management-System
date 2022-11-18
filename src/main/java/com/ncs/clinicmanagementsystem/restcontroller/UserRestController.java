@@ -49,45 +49,45 @@ public class UserRestController {
 
 		return theUsers;
 	}
-	
+
 	// add mapping for GET /user/doctors
 	@GetMapping("/user/doctors")
 	public List<User> findDoctors() {
 		List<User> theDoctors;
-		
+
 		try {
 			theDoctors = userService.findDoctors();
+		} catch (Exception e) {
+			throw new RuntimeException("Opps something happened. Please try again."); // throws error msg if error from
+																						// db.
 		}
-		catch(Exception e) {
-			throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
-		}
-		
-		if (theDoctors.isEmpty()) { //throws error msg if doctors list is empty.
+
+		if (theDoctors.isEmpty()) { // throws error msg if doctors list is empty.
 			throw new RuntimeException("Opps something happened. Please try again.");
 		}
-		
+
 		return theDoctors;
 	}
-	
+
 	// add mapping for GET /user/patients
 	@GetMapping("/user/patients")
 	public List<User> findPatients() {
 		List<User> thePatients;
-		
+
 		try {
 			thePatients = userService.findPatients();
+		} catch (Exception e) {
+			throw new RuntimeException("Opps something happened. Please try again."); // throws error msg if error from
+																						// db.
 		}
-		catch(Exception e) {
-			throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
-		}
-		
-		if (thePatients.isEmpty()) { //throws error msg if patients list is empty.
+
+		if (thePatients.isEmpty()) { // throws error msg if patients list is empty.
 			throw new RuntimeException("Opps something happened. Please try again.");
 		}
-		
+
 		return thePatients;
 	}
-	
+
 	// add mapping for GET /user/{userEmail}
 	@GetMapping("/user/{userEmail}")
 	public User getUser(@PathVariable String userEmail) {
@@ -137,6 +137,19 @@ public class UserRestController {
 		}
 
 		return theUser;
+	}
+
+	@PostMapping("user/checkEmailExist")
+	public User checkEmail(@RequestBody User theUser) {
+		User tempUser;
+		String userEmail = theUser.getEmail();
+		
+		try {
+			tempUser = userService.findByEmail(userEmail);
+		} catch(Exception e) {
+			throw new RuntimeException("Opps something happened. Please try again.");
+		}
+		return tempUser;
 	}
 
 	// add mapping for POST /user/login - user login

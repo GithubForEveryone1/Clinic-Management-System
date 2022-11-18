@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { ClosingService } from 'src/app/services/closing.service';
 import { Closing } from 'src/app/common/closing';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 
@@ -42,9 +43,9 @@ export class SuperAdminComponent implements OnInit {
 		'account_type': "",
 		'date_created': ""
 	}
-	
+
 	closingDate: Closing = {
-		'closing_date': new Date((new Date()).getTime() + 24*60*60*1000),
+		'closing_date': new Date((new Date()).getTime() + 24 * 60 * 60 * 1000),
 		'description': 'super_admin block date'
 	};
 
@@ -63,9 +64,23 @@ export class SuperAdminComponent implements OnInit {
 	// It's just for easily deleting accounts on the frontend for now
 	emailForDelete = "";
 
-	constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private closingService: ClosingService) { }
+	constructor(private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService, private userService: UserService, private closingService: ClosingService) { }
 
 	ngOnInit(): void {
+	}
+
+	submitUpdate() {
+		const formData = {
+			'email': this.user.email
+		}
+		console.log(formData);
+		this.authenticationService.authenticateEmail(formData).subscribe(
+			data => {
+				
+				console.log(this.user)
+			},
+			error => this.handleRegisterErrorResponse(error)
+		)
 	}
 
 	fakeRegister() {
@@ -105,7 +120,7 @@ export class SuperAdminComponent implements OnInit {
 			error => this.errorMessage = "Email does not exist"
 		)
 	}
-	
+
 	submitClosingDate() {
 		console.log(this.closingDate);
 		this.closingService.getClosingDate(this.closingDate).subscribe(

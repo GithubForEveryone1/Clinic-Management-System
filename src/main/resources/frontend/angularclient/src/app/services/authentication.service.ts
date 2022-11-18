@@ -23,6 +23,10 @@ export class AuthenticationService {
   authenticateUser(user: any): Observable<User> {
     return this.httpClient.post<User>(`${this.baseUrl}/user/login`, user);
   }
+  
+  authenticateEmail(email: any) {
+    return this.httpClient.post(`${this.baseUrl}/user/checkEmailExist`, { body: email });
+  }
 
   isUserLoggedIn(): boolean {
     //return sessionStorage.getItem("email") !== null;
