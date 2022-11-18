@@ -1,0 +1,55 @@
+<div class="container">
+    <h2 class="text-center mt-5">Personal Info</h2>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card w-75 mt-5">
+            <div class="card-body">
+                <h4 class="card-title">Basic Info</h4>
+                <table class="table table-hover">
+                    <tbody>
+                      <tr>
+                        <td class="col-3 lead align-middle">Name</td>
+                        <td class="col-9 align-middle"><span class="text-capitalize">{{ firstName }} {{ lastName }}</span></td>
+                      </tr>
+                      <tr>
+                        <td class="lead">D.O.B.</td>
+                        <td class="align-middle">{{ dob.split('T')[0] }}</td>
+                      </tr>
+                      <tr>
+                        <td class="lead">Gender</td>
+                        <td class="align-middle text-capitalize">{{ gender }}</td>
+                      </tr>
+                      <tr>
+                        <td class="lead">Account</td>
+                        <td class="align-middle text-capitalize">{{ accountType }}</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card w-75 mt-5">
+            <div class="card-body">
+                <h4 class="card-title">Contact Info</h4>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td class="col-3 lead align-middle">Email</td>
+                            <td class="col-9">{{ email }}</td>
+                        </tr>
+                        <tr>
+                            <td class="lead align-middle">Address</td>
+                            <td class="align-middle text-capitalize">{{ address }}</td>
+                        </tr>
+                        <tr>
+                            <td class="lead align-middle">Phone</td>
+                            <td class="align-middle">+65-{{ contactNo }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
