@@ -14,7 +14,9 @@ public interface AppointmentService {
 	public void createApptByUserId(Appointment theAppt);
 	
 	public void editApptByApptId(Appointment theAppt);
-	
+
+	public void editApptDiagnosisAndPrescription(Appointment theAppt);
+
 	public void deleteApptByApptId(int theApptId);
 	
 	public List<Appointment> getApptsByDoctorId(int theDoctorId);
