@@ -34,7 +34,7 @@ export class AppointmentService {
   }
 
   editAppt(appointment: any): Observable<Appointment> {
-		return this.httpClient.post<Appointment>(`${this.baseUrl}/appt/edit`, appointment);
+		return this.httpClient.put<Appointment>(`${this.baseUrl}/appt/edit`, appointment);
 	}
 
 }
