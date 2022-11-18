@@ -131,8 +131,16 @@ export class DoctorComponent implements OnInit {
     //  console.log(this.appointmentService.editAppt(appt));
      this.appointmentService.editAppt(appt).subscribe(
        data => {
-        console.log(data)
-        this.router.navigate(['doctor/add-diagnosis-success']);
+        // console.log(data)
+        let query = {
+          // pass patient name
+          "Patient": this.patientFirstName + this.patientLastName,
+          // pass diagnosis 
+          "Diagnosis": data.diagnosis,
+          // pass prepscription 
+          "Prescription": data.prescription,
+        };
+        this.router.navigate(['doctor/add-diagnosis-success'], {queryParams: query});
        },
        error => {
         this.router.navigate(['doctor/add-diagnosis-failure']);

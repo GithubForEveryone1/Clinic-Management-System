@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-doc-add-diagnosis-success',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocAddDiagnosisSuccessComponent implements OnInit {
 
-  constructor() { }
+  diagnosisDetails = {};
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.diagnosisDetails = params;
+      console.log(params);
+    })
   }
 
 }
