@@ -153,27 +153,33 @@ public class AppointmentRestController {
 	// add mapping for POST /appt/edit
 	@PutMapping("/appt/edit")
 	public Appointment editAppt(@RequestBody Appointment theAppt) {
+		// what are the fields that will be edited? perhaps it is better to split into individual methods. kiv..
+		// - patient reschedules to change doctor, date, timeslot
+		// - doctor updates diagnosis
+		// - doctor updates prescriptions
+
+		// Remus: I removed everything here for now since we're not using this yet
+		return new Appointment();
+	}
+	@PutMapping("/appt/edit-diagnosis-and-prescription")
+	public String editApptDiagnosisAndPrescription(@RequestBody Appointment theAppt) {
 
 		// what are the fields that will be edited? perhaps it is better to split into individual methods. kiv..
 		// - patient reschedules to change doctor, date, timeslot
 		// - doctor updates diagnosis
 		// - doctor updates prescriptions
 
-		//  Remus: For now, this will edit everything that is given, so front-end needs to ensure that existing fields should also be sent through to avoid overwriting stuff into blank
-		//  Remus: Method is re-using the create since create also updates existing records (open the editApptByApptId method to see more)
-		
 		try {
-			apptService.editApptByApptId(theAppt);
+			apptService.editApptDiagnosisAndPrescription(theAppt);
 		}
 		catch(Exception e) {
-			//throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
-			throw new RuntimeException("error on saving new appt to db."); //test...
+			throw new RuntimeException("Could not update appointment due to unknown error :(");
 		}
 
-		return theAppt;
-		
+		return "I don't know how to return a proper HTTP response, but you successfully updated the appointment :)";
+
 	}
-	
+
 	// add mapping for DELETE /appt/delete
 	@DeleteMapping("/appt/delete")
 	public void deleteAppt(@RequestBody Appointment theAppt) {

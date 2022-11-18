@@ -45,6 +45,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 		apptDAO.editApptByApptId(theAppt);
 
 	}
+	@Override
+	@Transactional
+	public void editApptDiagnosisAndPrescription(Appointment theAppt) {
+		apptDAO.editApptDiagnosisAndPrescription(theAppt);
+
+	}
 
 	@Override
 	@Transactional

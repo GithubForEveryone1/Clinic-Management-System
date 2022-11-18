@@ -64,19 +64,28 @@ public class AppointmentDAOHibernateImpl implements AppointmentDAO {
 		Session currentSession = entityManager.unwrap(Session.class);
 				
 		// Save user.
-		currentSession.saveOrUpdate(theAppt);
+		currentSession.save(theAppt);
 
 	}
 
 	@Override
-	public void editApptByApptId(Appointment theAppt) { //alfred 07.11.2022: perhaps we dont need this we can just use above method. kiv.
-		// Remus 16/11/2022: Copy and pasted createApptByUserId body here to re-use but keep a unique function name for clarity
+	public void editApptByApptId(Appointment theAppt) {
+		//alfred 07.11.2022: perhaps we dont need this we can just use above method. kiv.
+		// Remus - I removed this part for now, added another method specifically for Dr to change diagnosis and prescription
+	}
+	@Override
+	public void editApptDiagnosisAndPrescription(Appointment theAppt) {
 		// get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// Save user.
-		currentSession.saveOrUpdate(theAppt);
+		Appointment existingAppt = currentSession.find(Appointment.class, theAppt.getAppt_id());
 
+		// Only get ID, diagnosis and prescription from input, other fields will not update and will retrieve from existing appt
+		existingAppt.setDiagnosis(theAppt.getDiagnosis());
+		existingAppt.setPrescription(theAppt.getPrescription());
+
+		// Update appointment
+		currentSession.update(existingAppt);
 	}
 
 	@Override
