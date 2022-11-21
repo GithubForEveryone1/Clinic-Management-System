@@ -67,7 +67,6 @@ export class AuthenticationService {
       return false;
     }
   }
-
   logout() {
     //sessionStorage.removeItem("firstName");
     //sessionStorage.removeItem("email");

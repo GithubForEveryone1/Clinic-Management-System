@@ -27,6 +27,8 @@ import { PatientMakeAppointmentSuccessComponent } from './components/patient-mak
 import { PatientMakeAppointmentFailureComponent } from './components/patient-make-appointment-failure/patient-make-appointment-failure.component';
 import { AllPatientsComponent } from './components/all-patients/all-patients.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { DocAddDiagnosisSuccessComponent } from './components/doc-add-diagnosis-success/doc-add-diagnosis-success.component';
+import { DocAddDiagnosisFailureComponent } from './components/doc-add-diagnosis-failure/doc-add-diagnosis-failure.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     PatientMakeAppointmentSuccessComponent,
     PatientMakeAppointmentFailureComponent,
     AllPatientsComponent,
+    DocAddDiagnosisSuccessComponent,
+    DocAddDiagnosisFailureComponent,
     ProfileComponent
   ],
   imports: [
