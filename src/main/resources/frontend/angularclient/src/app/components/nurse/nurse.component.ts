@@ -3,8 +3,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Appointment } from 'src/app/common/appointment';
+import { Closing } from 'src/app/common/closing';
 import { User } from 'src/app/common/user';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { ClosingService } from 'src/app/services/closing.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -41,6 +43,7 @@ export class NurseComponent implements OnInit {
   
   //Date
   selectedDate = (new Date().toISOString().split('T')[0]);
+  isClosed = false;
 
   //Doctor's appointments
   doctorAppts: Appointment[] = [];
@@ -49,7 +52,11 @@ export class NurseComponent implements OnInit {
   //Timeslot
   selectedTimeslot = NaN;
 
-  constructor(private router: Router, private userService: UserService, private appointmentService: AppointmentService) { }
+  //Closing Dates
+  closingDates: Closing[] = [];
+  closingDatesErrorMsg = "";
+
+  constructor(private router: Router, private userService: UserService, private appointmentService: AppointmentService, private closingService: ClosingService) { }
 
   ngOnInit(): void {
     
@@ -66,6 +73,9 @@ export class NurseComponent implements OnInit {
         this.initSelectedDoctor();
         //console.log(this.doctors[0]);
         //console.log(this.selectedDoctor);
+
+        this.getClosingDates();
+        this.checkIfClinicIsClosed();
 
         this.getApptsByDoctorIdAndFilterByDate(this.selectedDoctor.user_id, this.selectedDate);
 
@@ -206,7 +216,47 @@ export class NurseComponent implements OnInit {
     return res;
   }
 
+  //method to call closingService.getClosingDatesList().
+  getClosingDates() {
+    this.closingService.getClosingDatesList().subscribe(
+      data => {
+        this.closingDates = data;
+      },
+      error => this.handleGetClosingDatesErrorResponse(error),
+    );
+  }
 
+  //method to handle error response from appointmentService.getApptsByDoctorId()
+  handleGetClosingDatesErrorResponse(error:HttpErrorResponse) {
+    this.closingDatesErrorMsg = error.error.message;
+  }
+
+  // method for datepicker to check if selected date is a Sunday or a clinic closing date.
+  checkIfClinicIsClosed() {
+    //check for Sunday
+    let dayChecker = new Date(this.selectedDate).getDay() // Get day of week in number form, 0 = Sunday, ..., 6 = Saturday
+    if (dayChecker === 0) {
+      this.isClosed = true;
+      return;
+    }
+    else {
+      this.isClosed = false;
+    }
+
+    //check for closing dates
+    for (let value of this.closingDates) {
+      console.log(formatDate(value.closing_date, 'yyyy-MM-dd', 'en'));
+      if (this.selectedDate === formatDate(value.closing_date, 'yyyy-MM-dd', 'en')) {
+        this.isClosed = true;
+        break;
+      }
+      this.isClosed = false;
+    }
+  }
+
+  printIsClosed() {
+    console.log(this.isClosed);
+  }
 
 }
 

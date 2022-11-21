@@ -12,8 +12,8 @@ export class ClosingService {
 
 	constructor(private httpClient: HttpClient) { }
 
-	getClosingDatesList(): Observable<object[]> {
-		return this.httpClient.get<object[]>(`${this.baseUrl}`);
+	getClosingDatesList(): Observable<Closing[]> {
+		return this.httpClient.get<Closing[]>(`${this.baseUrl}`);
 	}
 
 	getClosingDate(closingDate: Closing): Observable<Closing> {
