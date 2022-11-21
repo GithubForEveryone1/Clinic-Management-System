@@ -28,9 +28,23 @@
                     <td class="align-middle">+65 {{ patient.contact_number }}</td>
                     <td class="align-middle">{{ patient.dob.split('T')[0] }}</td>
                     <td class="align-middle text-capitalize">{{ patient.gender }}</td>
-                    <td class="align-middle"><button type="button" class="btn btn-primary" (click)="viewPatientHistory(patient.user_id)">View History</button></td>
+                    <td class="align-middle"><button type="button" class="btn btn-primary" (click)="showOverlay(patient)">View History</button></td>
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <!-- Hidden overlay for viewing patient history -->
+    <div id="patient-history-overlay" class="p-5 overlay" [hidden]="hideHistory">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-primary closebtn float-end" (click)="hideOverlay()">Close</button>
+                </div>
+            </div>
+            <div class="row">
+                <app-patient-history [selectedPatient]="selectedPatient"></app-patient-history>
+            </div>
+        </div>
     </div>
 </div>

@@ -17,10 +17,7 @@ export class AllPatientsComponent implements OnInit,AfterViewInit {
 
   constructor(private router: Router, private userService: UserService) { }
   
-  
-
   ngOnInit(): void {
-
     this.userService.getPatients().subscribe(
       data => {
         this.patients = data;
@@ -30,13 +27,9 @@ export class AllPatientsComponent implements OnInit,AfterViewInit {
       },
       error => this.handleGetPatientsErrorResponse(error),
     );
-
-
   }
 
-  ngAfterViewInit(): void {
-
-  }
+  ngAfterViewInit(): void {}
 
   //method to handle error response from userService.getDoctors()
   handleGetPatientsErrorResponse(error:HttpErrorResponse) {
@@ -44,8 +37,28 @@ export class AllPatientsComponent implements OnInit,AfterViewInit {
   }
 
   //method to pass patient ID to view patient history component.
+  // Remus: I didn't use this method for the history display but we might need it in future
   viewPatientHistory(thePatientId: number) {
     this.router.navigate(['patient-history'], {queryParams: {patientId: thePatientId} })
   }
 
+  // Show overlay for patient history
+  hideHistory = true;
+  selectedPatient = {} as User;
+  showOverlay(thePatient: User) {
+    this.hideHistory = false;
+    this.selectedPatient = thePatient;
+
+    setTimeout(() => {
+      document.getElementById("patient-history-overlay")!.style.opacity = "1";
+    }, 50) // Need to sleep so that the opacity only changes AFTER DOM element is unhidden for CSS transition to work
+  }
+  
+  hideOverlay() {
+    document.getElementById("patient-history-overlay")!.style.opacity = "0";
+    setTimeout(() => {
+      this.hideHistory = true;
+    }, 300) // Need to sleep so that the hidden parameter only changes AFTER CSS transition is finished, this 300ms is also in the css transition set to 0.3s
+  }
+  // End overlay
 }

@@ -5,6 +5,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
 import { UserService } from 'src/app/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
+import { User } from 'src/app/common/user';
 
 @Component({
   selector: 'app-doctor',
@@ -143,4 +144,36 @@ export class DoctorComponent implements OnInit {
        }
      )
  }
+
+   // Show overlay for patient history
+   hideHistory = true;
+   selectedPatient = {} as User;
+   showOverlay() {
+     this.hideHistory = false;
+     this.selectedPatient = {
+      'user_id': this.patientId,
+      'first_name': this.patientFirstName,
+      'last_name': this.patientLastName,
+      'contact_number': '', // These are just blank because we don't need them
+      'dob': '',            //
+      'email': '',          //
+      'date_created': '',   //
+      'gender': '',         //
+      'address': '',        //
+      'password': '',       //
+      'account_type': ''    // These are just blank because we don't need them
+     };
+ 
+     setTimeout(() => {
+       document.getElementById("patient-history-overlay")!.style.opacity = "1";
+     }, 50) // Need to sleep so that the opacity only changes AFTER DOM element is unhidden for CSS transition to work
+   }
+   
+   hideOverlay() {
+     document.getElementById("patient-history-overlay")!.style.opacity = "0";
+     setTimeout(() => {
+       this.hideHistory = true;
+     }, 300) // Need to sleep so that the hidden parameter only changes AFTER CSS transition is finished, this 300ms is also in the css transition set to 0.3s
+   }
+   // End overlay
 }
