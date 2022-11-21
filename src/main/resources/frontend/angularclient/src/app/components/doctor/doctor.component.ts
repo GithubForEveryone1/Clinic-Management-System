@@ -120,10 +120,6 @@ export class DoctorComponent implements OnInit {
      // This is POSTed to the backend
      let appt = {
        "appt_id": this.apptId,
-      //  "patient_id": this.patientId,
-      //  "doctor_id": this.doctorId,
-      //  "date_visited": this.dateVisited,
-      //  "timeslot": this.timeslot,
       "diagnosis": this.diagnosis,
       "prescription": this.prescription
      };
