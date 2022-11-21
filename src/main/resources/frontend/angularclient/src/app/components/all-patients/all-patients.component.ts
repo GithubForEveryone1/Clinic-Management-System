@@ -37,11 +37,12 @@ export class AllPatientsComponent implements OnInit,AfterViewInit {
   }
 
   //method to pass patient ID to view patient history component.
+  // Remus: I didn't use this method for the history display but we might need it in future
   viewPatientHistory(thePatientId: number) {
     this.router.navigate(['patient-history'], {queryParams: {patientId: thePatientId} })
   }
 
-
+  // Show overlay for patient history
   hideHistory = true;
   selectedPatient = {} as User;
   showOverlay(thePatient: User) {
@@ -59,5 +60,5 @@ export class AllPatientsComponent implements OnInit,AfterViewInit {
       this.hideHistory = true;
     }, 300) // Need to sleep so that the hidden parameter only changes AFTER CSS transition is finished, this 300ms is also in the css transition set to 0.3s
   }
-
+  // End overlay
 }

@@ -47,6 +47,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -70,6 +71,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -93,6 +95,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -116,6 +119,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -139,6 +143,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -162,6 +167,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -185,6 +191,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -208,6 +215,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -231,6 +239,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -254,6 +263,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -277,6 +287,7 @@
                           <div class="row">
                             <div id="addDiagnosis" role="tablist">
                               <button id="add-diagnosis-tab" data-bs-toggle="tab" data-bs-target="#add-diagnosis" type="button" role="tab" aria-controls="add-diagnosis" aria-selected="false">Add Diagnosis</button>
+                              <button type="button" class="float-end" (click)="showOverlay()">View Patient's History</button>
                             </div>
                           </div>
                         </div>
@@ -306,5 +317,19 @@
           </div>
         </div>
     </div>
+    
+    <!-- Hidden overlay for viewing patient history -->
+    <div id="patient-history-overlay" class="p-5 overlay" [hidden]="hideHistory">
+      <div class="container">
+          <div class="row">
+              <div class="col">
+                  <button type="button" class="btn btn-primary closebtn float-end" (click)="hideOverlay()">Close</button>
+              </div>
+          </div>
+          <div class="row">
+              <app-patient-history [selectedPatient]="selectedPatient"></app-patient-history>
+          </div>
+      </div>
+  </div>
 </div>
 

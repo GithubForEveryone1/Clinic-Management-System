@@ -9,18 +9,8 @@
     background-color: rgba(0, 0, 0, 0.854);
     overflow-x: hidden;
     transition: .3s;
-  }
+}
 
 .overlay .closebtn {
     font-size: 24px;
 }
-  
-  @media screen and (max-height: 450px) {
-    .overlay a {font-size: 20px}
-    .overlay .closebtn {
-    font-size: 40px;
-    top: 15px;
-    right: 35px;
-    }
-  }
-  
