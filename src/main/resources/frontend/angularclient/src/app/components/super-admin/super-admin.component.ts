@@ -70,14 +70,10 @@ export class SuperAdminComponent implements OnInit {
 	}
 
 	submitUpdate() {
-		const formData = {
-			'email': this.user.email
-		}
-		console.log(formData);
-		this.authenticationService.authenticateEmail(formData).subscribe(
+		console.log(this.user.email);
+		this.authenticationService.authenticateEmail(this.user).subscribe(
 			data => {
 				
-				console.log(this.user)
 			},
 			error => this.handleRegisterErrorResponse(error)
 		)

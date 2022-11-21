@@ -28,6 +28,7 @@ import { PatientMakeAppointmentFailureComponent } from './components/patient-mak
 import { AllPatientsComponent } from './components/all-patients/all-patients.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     PatientMakeAppointmentSuccessComponent,
     PatientMakeAppointmentFailureComponent,
     AllPatientsComponent,
-    ProfileComponent
+    ProfileComponent,
+
   ],
   imports: [
     BrowserModule,

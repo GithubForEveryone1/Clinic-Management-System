@@ -24,8 +24,8 @@ export class AuthenticationService {
     return this.httpClient.post<User>(`${this.baseUrl}/user/login`, user);
   }
   
-  authenticateEmail(email: any) {
-    return this.httpClient.post(`${this.baseUrl}/user/checkEmailExist`, { body: email });
+  authenticateEmail(user: any): Observable<User> {
+    return this.httpClient.post<User>(`${this.baseUrl}/user/checkEmailExist`, { user });
   }
 
   isUserLoggedIn(): boolean {
