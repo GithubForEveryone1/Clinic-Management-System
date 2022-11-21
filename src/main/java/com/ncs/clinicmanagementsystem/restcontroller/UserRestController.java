@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -105,6 +106,20 @@ public class UserRestController {
 			throw new RuntimeException("User email not found - " + userEmail);
 		}
 
+		return theUser;
+	}
+
+	@PutMapping("/user/update")
+	public User updateUser(@RequestBody User theUser) {
+		System.out.println(theUser.getUser_id());
+		System.out.println(theUser.getFirst_name());
+		User tempUser;
+		try {
+			userService.update(theUser);
+		} catch (Exception e) {
+			throw new RuntimeException("Opps something happened. Please try again."); // throws error msg if error from
+			// db.
+		}
 		return theUser;
 	}
 

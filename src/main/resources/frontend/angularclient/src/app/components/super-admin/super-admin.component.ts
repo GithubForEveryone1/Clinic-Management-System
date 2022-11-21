@@ -74,14 +74,35 @@ export class SuperAdminComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	submitUpdate() {
-
+	fetchUserDetail() {
 		this.userService.authenticateEmail(this.findEmail).subscribe(
 			data => {
 				console.log(data);
 				this.beforeUpdate = false;
 				this.afterUpdate = true;
 				/* this.openMyModal(data); */
+				this.user.user_id = data.user_id;
+				this.user.first_name = data.first_name;
+				this.user.last_name = data.last_name;
+				this.user.email = data.email;
+				this.user.password = data.password;
+			},
+			error => this.handleRegisterErrorResponse(error)
+		)
+	}
+
+	submitUpdate() {
+		console.log(this.user);
+		this.userService.updateUser(this.user).subscribe(
+			data => {
+				console.log(data);
+				this.beforeUpdate = false;
+				this.afterUpdate = true;
+				/* this.openMyModal(data); */
+				this.user.first_name = data.first_name;
+				this.user.last_name = data.last_name;
+				this.user.email = data.email;
+				this.user.password = data.password;
 			},
 			error => this.handleRegisterErrorResponse(error)
 		)

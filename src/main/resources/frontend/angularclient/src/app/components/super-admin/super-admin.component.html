@@ -109,7 +109,7 @@
 		<div id="collapseFour" class="accordion-collapse collapse"
 			aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 			<div *ngIf="beforeUpdate" class="accordion-body">
-				<form (ngSubmit)="submitUpdate()">
+				<form (ngSubmit)="fetchUserDetail()">
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Email
 							address</label> <input type="email" class="form-control"
@@ -128,7 +128,7 @@
 			</div>
 			<div *ngIf="afterUpdate" class="accordion-body">
 				<div class="container">
-					<form (ngSubmit)="submitRegister()" class="row g-3">
+					<form (ngSubmit)="submitUpdate()" class="row g-3">
 						<div class="col-md-6 form-group">
 							<label for="first-name" class="form-label">First Name</label> <input
 								type="text" class="form-control" id="first-name"
@@ -150,21 +150,13 @@
 								name="email">
 							<div id="emailHelp" class="form-text"></div>
 						</div>
-						<div class="col-12">
+<!-- 						<div class="col-12">
 							<label for="exampleInputPassword1" class="form-label">Password</label>
 							<input type="password" class="form-control"
 								id="exampleInputPassword1" placeholder="Password"
 								[(ngModel)]="user.password" name="password">
-						</div>
-						<div class="col-12">
-							<label class="form-label">Choose an option</label> <select
-								class="col-10" [(ngModel)]="user.account_type"
-								name="account_type" class="form-select mt-4"
-								aria-label="Default select example"
-								style="margin: 0 !important;">
-								<option *ngFor="let c of role" [ngValue]="c">{{c}}</option>
-							</select>
-						</div>
+						</div> -->
+
 						<div class="col-12">
 							<button type="submit" class="btn btn-primary mt-3">Submit</button>
 						</div>
