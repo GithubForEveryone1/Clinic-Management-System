@@ -162,7 +162,7 @@ public class AppointmentRestController {
 		return new Appointment();
 	}
 	@PutMapping("/appt/edit-diagnosis-and-prescription")
-	public String editApptDiagnosisAndPrescription(@RequestBody Appointment theAppt) {
+	public Appointment editApptDiagnosisAndPrescription(@RequestBody Appointment theAppt) {
 
 		// what are the fields that will be edited? perhaps it is better to split into individual methods. kiv..
 		// - patient reschedules to change doctor, date, timeslot
@@ -176,7 +176,8 @@ public class AppointmentRestController {
 			throw new RuntimeException("Could not update appointment due to unknown error :(");
 		}
 
-		return "I don't know how to return a proper HTTP response, but you successfully updated the appointment :)";
+//		return "I don't know how to return a proper HTTP response, but you successfully updated the appointment :)";
+		return theAppt;
 
 	}
 

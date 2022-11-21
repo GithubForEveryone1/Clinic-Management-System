@@ -120,18 +120,18 @@ export class DoctorComponent implements OnInit {
      // This is POSTed to the backend
      let appt = {
        "appt_id": this.apptId,
-       "patient_id": this.patientId,
-       "doctor_id": this.doctorId,
-       "date_visited": this.dateVisited,
-       "timeslot": this.timeslot,
-       "diagnosis": this.diagnosis,
-       "prescription": this.prescription
+      //  "patient_id": this.patientId,
+      //  "doctor_id": this.doctorId,
+      //  "date_visited": this.dateVisited,
+      //  "timeslot": this.timeslot,
+      "diagnosis": this.diagnosis,
+      "prescription": this.prescription
      };
     
     //  console.log(this.appointmentService.editAppt(appt));
-     this.appointmentService.editAppt(appt).subscribe(
+     this.appointmentService.editApptDiagnosisAndPrescription(appt).subscribe(
        data => {
-        // console.log(data)
+        console.log(data)
         let query = {
           // pass patient name
           "Patient": this.patientFirstName + this.patientLastName,
