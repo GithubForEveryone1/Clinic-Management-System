@@ -1,0 +1,26 @@
+.overlay {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.854);
+    overflow-x: hidden;
+    transition: .3s;
+  }
+
+.overlay .closebtn {
+    font-size: 24px;
+}
+  
+  @media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+  }
+  

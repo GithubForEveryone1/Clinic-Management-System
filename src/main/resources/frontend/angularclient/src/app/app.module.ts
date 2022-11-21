@@ -25,10 +25,11 @@ import { PatientMakeAppointmentComponent } from './components/patient-make-appoi
 import { DoctorAppointmentsComponent } from './components/doctor-appointments/doctor-appointments.component';
 import { PatientMakeAppointmentSuccessComponent } from './components/patient-make-appointment-success/patient-make-appointment-success.component';
 import { PatientMakeAppointmentFailureComponent } from './components/patient-make-appointment-failure/patient-make-appointment-failure.component';
-import { AllPatientsComponent } from './components/all-patients/all-patients.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { DocAddDiagnosisSuccessComponent } from './components/doc-add-diagnosis-success/doc-add-diagnosis-success.component';
 import { DocAddDiagnosisFailureComponent } from './components/doc-add-diagnosis-failure/doc-add-diagnosis-failure.component';
+import { AllPatientsComponent } from './components/all-patients/all-patients.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PatientHistoryComponent } from './components/patient-history/patient-history.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { DocAddDiagnosisFailureComponent } from './components/doc-add-diagnosis-
     AllPatientsComponent,
     DocAddDiagnosisSuccessComponent,
     DocAddDiagnosisFailureComponent,
-    ProfileComponent
+    ProfileComponent,
+    PatientHistoryComponent
   ],
   imports: [
     BrowserModule,
