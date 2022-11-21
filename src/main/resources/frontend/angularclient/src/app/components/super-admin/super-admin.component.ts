@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, Query } from '@angular/core';
+import { Component, OnInit, Query, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/common/user';
 import { UserService } from 'src/app/services/user.service';
@@ -7,7 +7,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { ClosingService } from 'src/app/services/closing.service';
 import { Closing } from 'src/app/common/closing';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 
 @Component({
@@ -15,10 +16,14 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 	templateUrl: './super-admin.component.html',
 	styleUrls: ['./super-admin.component.css']
 })
+
 export class SuperAdminComponent implements OnInit {
 
 	message!: string;
 	errorMessage!: string;
+	beforeUpdate = true;
+	afterUpdate = false;
+	findEmail = '';
 
 	role = [
 		"doctor",
@@ -64,19 +69,27 @@ export class SuperAdminComponent implements OnInit {
 	// It's just for easily deleting accounts on the frontend for now
 	emailForDelete = "";
 
-	constructor(private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService, private userService: UserService, private closingService: ClosingService) { }
+	constructor(private modalService: NgbModal, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService, private userService: UserService, private closingService: ClosingService) { }
 
 	ngOnInit(): void {
 	}
 
 	submitUpdate() {
-		console.log(this.user.email);
-		this.authenticationService.authenticateEmail(this.user).subscribe(
+
+		this.userService.authenticateEmail(this.findEmail).subscribe(
 			data => {
-				
+				console.log(data);
+				this.beforeUpdate = false;
+				this.afterUpdate = true;
+				/* this.openMyModal(data); */
 			},
 			error => this.handleRegisterErrorResponse(error)
 		)
+	}
+
+	openMyModal(response: any) {
+		const modalRef = this.modalService.open(ModalComponent);
+		modalRef.componentInstance.response = response;
 	}
 
 	fakeRegister() {

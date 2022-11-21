@@ -27,6 +27,8 @@ import { PatientMakeAppointmentSuccessComponent } from './components/patient-mak
 import { PatientMakeAppointmentFailureComponent } from './components/patient-make-appointment-failure/patient-make-appointment-failure.component';
 import { AllPatientsComponent } from './components/all-patients/all-patients.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -51,6 +53,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     PatientMakeAppointmentFailureComponent,
     AllPatientsComponent,
     ProfileComponent,
+    ModalComponent,
 
   ],
   imports: [
@@ -58,7 +61,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    DataTablesModule
+    DataTablesModule,
+    NgbModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

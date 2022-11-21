@@ -139,18 +139,20 @@ public class UserRestController {
 		return theUser;
 	}
 
-	@PostMapping("user/checkEmailExist")
-	public User checkEmail(@RequestBody User theUser) {
-		User tempUser;
-		String userEmail = theUser.getEmail();
-		
-		try {
-			tempUser = userService.findByEmail(userEmail);
-		} catch(Exception e) {
-			throw new RuntimeException("Opps something happened. Please try again.");
-		}
-		return tempUser;
-	}
+//	@GetMapping("/user/checkEmailExist/{user}")
+//	public User checkEmail(@PathVariable String theUser) {
+//		User tempUser;
+//		System.out.println(theUser);
+//		String userEmail = theUser;
+//		
+//		try {
+//			tempUser = userService.findByEmail(userEmail);
+//			System.out.println(tempUser);
+//		} catch(Exception e) {
+//			throw new RuntimeException("Opps something happened. Please try again.");
+//		}
+//		return tempUser;
+//	}
 
 	// add mapping for POST /user/login - user login
 	@PostMapping("/user/login")
