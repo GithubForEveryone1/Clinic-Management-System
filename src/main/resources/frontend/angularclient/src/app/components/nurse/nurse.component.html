@@ -16,6 +16,10 @@
     </div>
 </div>
 
+<!--display error messages-->
+<p *ngIf="doctorsErrorMsg" class="alert alert-danger mb-0" role="alert">{{ doctorsErrorMsg }}</p>
+<p *ngIf="closingDatesErrorMsg" class="alert alert-danger mb-0" role="alert">{{ closingDatesErrorMsg }}</p>
+
 <!--dropdown menus for doctors and date picker for date-->
 <div class="container mt-3 ">
     <div class="d-flex justify-content-center">
@@ -31,11 +35,17 @@
                 </div>
             </div>
             <div class="input-group date ms-3">
-                <input type="date" class="form-control" [(ngModel)]="selectedDate" (change)="changeSelectedDate(); resetPatientInfo()">
+                <input type="date" [ngClass]="isClosed ? 'is-invalid' : ''" class="form-control" [(ngModel)]="selectedDate" (change)="changeSelectedDate(); resetPatientInfo(); checkIfClinicIsClosed(); printIsClosed();">
+                <div *ngIf="isClosed === true" class="invalid-feedback">
+                  The clinic is closed on this selected date.
+                </div>
             </div>
         </div>
     </div> 
 </div>
+
+<!--display error messages-->
+<p *ngIf="doctorApptsErrorMsg" class="alert alert-danger mb-0" role="alert">{{ doctorApptsErrorMsg }}</p>
 
 <!-- Display of selected doctor's appointment schedule the selected date -->
 <div class="container">
