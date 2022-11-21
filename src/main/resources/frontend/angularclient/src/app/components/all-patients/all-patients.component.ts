@@ -43,4 +43,9 @@ export class AllPatientsComponent implements OnInit,AfterViewInit {
     this.patientsErrorMsg = error.error.message;
   }
 
+  //method to pass patient ID to view patient history component.
+  viewPatientHistory(thePatientId: number) {
+    this.router.navigate(['patient-history'], {queryParams: {patientId: thePatientId} })
+  }
+
 }
