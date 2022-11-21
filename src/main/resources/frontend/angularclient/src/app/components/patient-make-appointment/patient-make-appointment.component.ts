@@ -5,6 +5,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { ClosingService } from 'src/app/services/closing.service';
+import { IllnessService } from 'src/app/services/illness.service';
 
 @Component({
   selector: 'app-patient-make-appointment',
@@ -13,13 +14,23 @@ import { ClosingService } from 'src/app/services/closing.service';
 })
 export class PatientMakeAppointmentComponent implements OnInit {
   
+  constructor(
+    private appointmentService: AppointmentService,
+    private userService: UserService,
+    private closingService: ClosingService,
+    private illnessService: IllnessService,
+    private router: Router) { }
+
   // Set max / min for the date selection
   max = new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]; // Set max valid date = 1 year from today
   min = new Date().toISOString().split('T')[0];                                                     // Set min valid date = today
 
+  // Illness array to populate dropdown
+  illnesses:Object[] = [];
+
   // Data from the backend, populated during ngOnInit()
   // allAppts: Appointment[] = []; // Every single appt in our DB
-  allDoctors: User[] = [];      // Every single doctor in our DB
+  allDoctors:User[] = [];      // Every single doctor in our DB
 
   // Processed versions of appts and doctors to be used for populating the timeslot and doctor selection tables
   appts:string[][] = [];
@@ -51,14 +62,21 @@ export class PatientMakeAppointmentComponent implements OnInit {
     11: ['8:00 PM', '20:00:00']
   }
 
-  constructor(private appointmentService: AppointmentService, private userService: UserService, private closingService: ClosingService, private router: Router) { }
-
   ngOnInit(): void {
     // Get all doctors from DB
     this.userService.getDoctors().subscribe(
       data => {
         this.allDoctors = data;
       }
+    )
+
+    // Get all illnesses
+    this.illnessService.getIllnessList().subscribe(
+      data => {
+        for (let illness in data) {
+          this.illnesses.push(data[illness]['name' as keyof Object]);
+        }
+      }   
     )
   }
 
