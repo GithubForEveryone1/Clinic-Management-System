@@ -124,6 +124,9 @@ export class NurseComponent implements OnInit {
   //method to change selectedDoctor and change doctorAppts
   changeSelectedDoctor(theDoctorId: number) {
     const tempDoctor = this.doctors.find(doctor => doctor.user_id === theDoctorId);
+    
+    this.doctorApptsErrorMsg = "";
+    
     //this.selectedDoctor = tempDoctor ? tempDoctor : null;
     this.selectedDoctor = tempDoctor!;
 

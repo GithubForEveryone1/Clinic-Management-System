@@ -86,7 +86,7 @@ public class AppointmentRestController {
 		}
 		
 		if (theAppts.isEmpty()) { // throws error msg if user has no appointments.
-			throw new RuntimeException("You have no appointments."); 
+			throw new RuntimeException("There are no appointments on this selected date."); 
 		}
 		
 		return theAppts;
@@ -208,7 +208,7 @@ public class AppointmentRestController {
 		}
 			
 		if (docAppts.isEmpty()) { // throws error msg if user has no appointments.
-			throw new RuntimeException("You have no appointments."); 
+			throw new RuntimeException("This doctor has no appointments."); 
 		}
 			
 		return docAppts;
