@@ -1,0 +1,5 @@
+.list-group-item.active {
+    color: var(--bs-list-group-active-color);
+    background-color: var(--bs-list-group-disabled-color);
+    border-color: var(--bs-list-group-active-color);
+}
