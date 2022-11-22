@@ -14,6 +14,8 @@ public interface UserService {
 	
 	public void save(User theUser);
 	
+	public void update(User theUser);
+	
 	public void deleteByEmail(String theEmail);
 	
 	public List<User> findDoctors();

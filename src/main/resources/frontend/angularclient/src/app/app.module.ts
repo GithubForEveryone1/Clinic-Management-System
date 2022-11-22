@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserListComponent } from './components/user-list/user-list.component';
@@ -25,46 +24,51 @@ import { PatientMakeAppointmentComponent } from './components/patient-make-appoi
 import { DoctorAppointmentsComponent } from './components/doctor-appointments/doctor-appointments.component';
 import { PatientMakeAppointmentSuccessComponent } from './components/patient-make-appointment-success/patient-make-appointment-success.component';
 import { PatientMakeAppointmentFailureComponent } from './components/patient-make-appointment-failure/patient-make-appointment-failure.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './components/modal/modal.component';
 import { DocAddDiagnosisSuccessComponent } from './components/doc-add-diagnosis-success/doc-add-diagnosis-success.component';
 import { DocAddDiagnosisFailureComponent } from './components/doc-add-diagnosis-failure/doc-add-diagnosis-failure.component';
 import { AllPatientsComponent } from './components/all-patients/all-patients.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PatientHistoryComponent } from './components/patient-history/patient-history.component';
 
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserListComponent,
-    LoginComponent,
-    ErrorComponent,
-    LogoutComponent,
-    PatientProfileComponent,
-    NavbarComponent,
-    RegisterComponent,
-    HomeComponent,
-    FooterComponent,
-    PatientAppointmentsComponent,
-    SuperAdminComponent,
-    DoctorComponent,
-    NurseComponent,
-    DoctorAppointmentsComponent,
-    PatientMakeAppointmentComponent,
-    PatientMakeAppointmentSuccessComponent,
-    PatientMakeAppointmentFailureComponent,
-    AllPatientsComponent,
-    DocAddDiagnosisSuccessComponent,
-    DocAddDiagnosisFailureComponent,
-    ProfileComponent,
-    PatientHistoryComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    DataTablesModule
-  ],
-  providers: [UserService],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		UserListComponent,
+		LoginComponent,
+		ErrorComponent,
+		LogoutComponent,
+		PatientProfileComponent,
+		NavbarComponent,
+		RegisterComponent,
+		HomeComponent,
+		FooterComponent,
+		PatientAppointmentsComponent,
+		SuperAdminComponent,
+		DoctorComponent,
+		NurseComponent,
+		DoctorAppointmentsComponent,
+		PatientMakeAppointmentComponent,
+		PatientMakeAppointmentSuccessComponent,
+		PatientMakeAppointmentFailureComponent,
+		AllPatientsComponent,
+		ModalComponent,
+		DocAddDiagnosisSuccessComponent,
+		DocAddDiagnosisFailureComponent,
+		ProfileComponent,
+		PatientHistoryComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		FormsModule,
+		DataTablesModule,
+		NgbModule
+	],
+	providers: [UserService],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

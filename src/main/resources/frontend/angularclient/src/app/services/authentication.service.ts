@@ -5,73 +5,73 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class AuthenticationService {
-  
-  private baseUrl = 'http://localhost:8080/api';
 
-  constructor(private httpClient: HttpClient) { }
-  
-  
-  get loggedInUser(): any {
-	const jsonFirstName = JSON.parse(sessionStorage.getItem("loggedInUser") || '{}');
-	const first_name = jsonFirstName.first_name
-	return first_name
-}
+	private baseUrl = 'http://localhost:8080/api';
 
-  authenticateUser(user: any): Observable<User> {
-    return this.httpClient.post<User>(`${this.baseUrl}/user/login`, user);
-  }
+	constructor(private httpClient: HttpClient) { }
 
-  isUserLoggedIn(): boolean {
-    //return sessionStorage.getItem("email") !== null;
-    return sessionStorage.getItem("loggedInUser") !== null;
-  }
-    
-  isUserSuperAdmin(): boolean {
-	const account_type = sessionStorage.getItem("type");
-    if(account_type == "admin") {
-      return sessionStorage.getItem("type") !== null;	
-    } else {
-      return false;
-    }
-  }
 
-  isUserDoctor(): boolean {
-    const account_type = sessionStorage.getItem("type");
+	get loggedInUser(): any {
+		const jsonFirstName = JSON.parse(sessionStorage.getItem("loggedInUser") || '{}');
+		const first_name = jsonFirstName.first_name
+		return first_name
+	}
 
-    if(account_type == "doctor") {
-      return sessionStorage.getItem("type") !== null;	
-    } else {
-      return false;
-    }
-  }
-  
-    isUserNurse(): boolean {
-    const account_type = sessionStorage.getItem("type");
+	authenticateUser(user: any): Observable<User> {
+		return this.httpClient.post<User>(`${this.baseUrl}/user/login`, user);
+	}
 
-    if(account_type == "nurse") {
-      return sessionStorage.getItem("type") !== null;	
-    } else {
-      return false;
-    }
-  }
+	isUserLoggedIn(): boolean {
+		//return sessionStorage.getItem("email") !== null;
+		return sessionStorage.getItem("loggedInUser") !== null;
+	}
 
-  isUserPatient(): boolean {
-    const account_type = sessionStorage.getItem("type");
+	isUserSuperAdmin(): boolean {
+		const account_type = sessionStorage.getItem("type");
+		if (account_type == "admin") {
+			return sessionStorage.getItem("type") !== null;
+		} else {
+			return false;
+		}
+	}
+	isUserDoctor(): boolean {
+		const account_type = sessionStorage.getItem("type");
 
-    if(account_type == "patient") {
-      return sessionStorage.getItem("type") !== null;	
-    } else {
-      return false;
-    }
-  }
-  logout() {
-    //sessionStorage.removeItem("firstName");
-    //sessionStorage.removeItem("email");
-    //sessionStorage.removeItem("gender");
-    sessionStorage.removeItem("loggedInUser");
-    sessionStorage.removeItem("type");
-  }
+		if (account_type == "doctor") {
+			return sessionStorage.getItem("type") !== null;
+		} else {
+			return false;
+		}
+	}
+
+	isUserNurse(): boolean {
+		const account_type = sessionStorage.getItem("type");
+
+		if (account_type == "nurse") {
+			return sessionStorage.getItem("type") !== null;
+		} else {
+			return false;
+		}
+	}
+
+	isUserPatient(): boolean {
+		const account_type = sessionStorage.getItem("type");
+
+		if (account_type == "patient") {
+			return sessionStorage.getItem("type") !== null;
+		} else {
+			return false;
+		}
+	}
+
+	logout() {
+		//sessionStorage.removeItem("firstName");
+		//sessionStorage.removeItem("email");
+		//sessionStorage.removeItem("gender");
+		sessionStorage.removeItem("loggedInUser");
+		sessionStorage.removeItem("type");
+	}
 }

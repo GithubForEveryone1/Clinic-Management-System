@@ -15,12 +15,12 @@ import com.ncs.clinicmanagementsystem.entity.User;
 public class UserServiceImpl implements UserService {
 
 	private UserDAO userDAO;
-	
+
 	@Autowired
 	public UserServiceImpl(UserDAO theUserDAO) {
 		this.userDAO = theUserDAO;
 	}
-	
+
 	@Override
 	@Transactional
 	public List<User> findAll() {
@@ -38,18 +38,25 @@ public class UserServiceImpl implements UserService {
 	public User findById(int theUserId) {
 		return userDAO.findById(theUserId);
 	}
-	
+
 	@Override
 	@Transactional
 	public void save(User theUser) {
-		 userDAO.save(theUser);
+		userDAO.save(theUser);
+
+	}
+
+	@Override
+	@Transactional
+	public void update(User theUser) {
+		userDAO.updateUser(theUser);
 
 	}
 
 	@Override
 	@Transactional
 	public void deleteByEmail(String theEmail) {
-		
+
 		userDAO.deleteByEmail(theEmail);
 
 	}
@@ -59,12 +66,11 @@ public class UserServiceImpl implements UserService {
 	public List<User> findDoctors() {
 		return userDAO.findDoctors();
 	}
-	
+
 	@Override
 	@Transactional
 	public List<User> findPatients() {
 		return userDAO.findPatients();
 	}
-	
-}
 
+}

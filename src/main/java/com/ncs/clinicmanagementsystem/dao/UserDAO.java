@@ -15,6 +15,8 @@ public interface UserDAO {
 	public void save(User theUser);
 	
 	public void deleteByEmail(String theEmail);
+	
+	public void updateUser(User theUser);
 
 	public List<User> findDoctors();
 	
