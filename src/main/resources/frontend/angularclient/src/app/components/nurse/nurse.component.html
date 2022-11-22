@@ -14,11 +14,12 @@
             </tbody>
         </table>
     </div>
-</div>
 
-<!--display error messages-->
-<p *ngIf="doctorsErrorMsg" class="alert alert-danger mb-0" role="alert">{{ doctorsErrorMsg }}</p>
-<p *ngIf="closingDatesErrorMsg" class="alert alert-danger mb-0" role="alert">{{ closingDatesErrorMsg }}</p>
+    <!--display error messages-->
+    <p *ngIf="doctorsErrorMsg" class="alert alert-danger mt-2 text-center" role="alert">{{ doctorsErrorMsg }}</p>
+    <p *ngIf="closingDatesErrorMsg" class="alert alert-danger mt-2 text-center" role="alert">{{ closingDatesErrorMsg }}</p>
+
+</div>
 
 <!--dropdown menus for doctors and date picker for date-->
 <div class="container mt-3 ">
@@ -44,11 +45,12 @@
     </div> 
 </div>
 
-<!--display error messages-->
-<p *ngIf="doctorApptsErrorMsg" class="alert alert-danger mb-0" role="alert">{{ doctorApptsErrorMsg }}</p>
-
 <!-- Display of selected doctor's appointment schedule the selected date -->
 <div class="container">
+
+  <!--display error messages-->
+  <p *ngIf="doctorApptsErrorMsg" class="alert alert-danger mt-2 text-center" role="alert">{{ doctorApptsErrorMsg }}</p>
+
     <div class="row mx-auto p-3">
         <h4 class="mt-5 mb-5 text-center">Dr. <span class="text-capitalize">{{ selectedDoctor.first_name }} {{ selectedDoctor.last_name }}</span>'s Appointments</h4>
         <div class="col-6">

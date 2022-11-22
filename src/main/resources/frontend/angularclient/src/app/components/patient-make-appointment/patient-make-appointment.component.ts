@@ -274,7 +274,7 @@ export class PatientMakeAppointmentComponent implements OnInit {
       "doctor_id": doctorId,
       "date_visited": this.selectedDate,
       "timeslot": timeslotNumber,
-      "diagnosis": this.description ? this.dropdown + " " + this.description : this.dropdown,
+      "diagnosis": this.description ? this.dropdown + " - " + this.description : this.dropdown,
       "prescription": null
     };
     
