@@ -20,9 +20,10 @@
                 <a (click)="displayPatientInfo(6)" class="list-group-item list-group-item-action" [ngClass]="isBooked(6) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-6" data-bs-toggle="list" href="#slot-6-patient" role="tab" aria-controls="slot-6-patient">2 PM - 3 PM</a>
                 <a (click)="displayPatientInfo(7)" class="list-group-item list-group-item-action" [ngClass]="isBooked(7) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-7" data-bs-toggle="list" href="#slot-7-patient" role="tab" aria-controls="slot-7-patient">3 PM - 4 PM</a>
                 <a (click)="displayPatientInfo(8)" class="list-group-item list-group-item-action" [ngClass]="isBooked(8) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-8" data-bs-toggle="list" href="#slot-8-patient" role="tab" aria-controls="slot-8-patient">4 PM - 5 PM</a>
-                <a (click)="displayPatientInfo(9)" class="list-group-item list-group-item-action" [ngClass]="isBooked(9) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-9" data-bs-toggle="list" href="#slot-9-patient" role="tab" aria-controls="slot-9-patient">5 PM - 6 PM</a>
-                <a (click)="displayPatientInfo(10)" class="list-group-item list-group-item-action" [ngClass]="isBooked(10) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-10" data-bs-toggle="list" href="#slot-10-patient" role="tab" aria-controls="slot-10-patient">6 PM - 7 PM</a>
-                <a (click)="displayPatientInfo(11)" class="list-group-item list-group-item-action" [ngClass]="isBooked(11) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-11" data-bs-toggle="list" href="#slot-11-patient" role="tab" aria-controls="slot-11-patient">7 PM - 8 PM</a>
+                <a class="list-group-item disabled text-center" aria-disabled="true">DINNER</a>
+                <a (click)="displayPatientInfo(9)" class="list-group-item list-group-item-action" [ngClass]="isBooked(9) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-9" data-bs-toggle="list" href="#slot-9-patient" role="tab" aria-controls="slot-9-patient">6 PM - 7PM</a>
+                <a (click)="displayPatientInfo(10)" class="list-group-item list-group-item-action" [ngClass]="isBooked(10) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-10" data-bs-toggle="list" href="#slot-10-patient" role="tab" aria-controls="slot-10-patient">7 PM - 8 PM</a>
+                <a (click)="displayPatientInfo(11)" class="list-group-item list-group-item-action" [ngClass]="isBooked(11) == 'true' ? 'bg-secondary' : 'disabled' " id="slot-11" data-bs-toggle="list" href="#slot-11-patient" role="tab" aria-controls="slot-11-patient">8 PM - 9 PM</a>
             </div>
         </div>
 
