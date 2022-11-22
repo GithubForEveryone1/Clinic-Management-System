@@ -37,7 +37,6 @@ export class AuthenticationService {
 			return false;
 		}
 	}
-
 	isUserDoctor(): boolean {
 		const account_type = sessionStorage.getItem("type");
 

@@ -97,9 +97,6 @@ public class UserDAOHibernateImpl implements UserDAO {
 	@Override
 	public void updateUser(User theUser) {
 		Session currentSession = entityManager.unwrap(Session.class);
-//		theUser.setFirst_name(theUser.getFirst_name());
-//		theUser.setFirst_name(theUser.getFirst_name());
-//		theUser.setFirst_name(theUser.getFirst_name());
 		System.out.println(theUser.getUser_id());
 		System.out.println(theUser.getFirst_name());
 		User existingUser = currentSession.find(User.class, theUser.getUser_id());
@@ -107,16 +104,9 @@ public class UserDAOHibernateImpl implements UserDAO {
 		// Only get ID, diagnosis and prescription from input, other fields will not update and will retrieve from existing appt
 		System.out.println("before set");
 		existingUser.setFirst_name(theUser.getFirst_name());
-//		existingUser.setLast_name(theUser.getLast_name());
-//		existingUser.setEmail(theUser.getEmail());
+		existingUser.setLast_name(theUser.getLast_name());
+		existingUser.setEmail(theUser.getEmail());
 		
-//		Query theQuery = currentSession.createQuery(
-//				"update user set first_name =:userFirstName, last_name =:userLastName, email=:userEmail where email=:currentEmail");
-//		theQuery.setParameter("userFirstName", theUser.getFirst_name());
-//		theQuery.setParameter("userLastName", theUser.getLast_name());
-//		theQuery.setParameter("userEmail", theUser.getEmail());
-//		theQuery.setParameter("currentEmail", currentEmail);
-//		theQuery.executeUpdate();
 		currentSession.update(existingUser);
 		System.out.println("at the end");
 	}

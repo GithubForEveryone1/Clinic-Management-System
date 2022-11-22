@@ -87,7 +87,7 @@ export class SuperAdminComponent implements OnInit {
 				this.user.email = data.email;
 				this.user.password = data.password;
 			},
-			error => this.handleRegisterErrorResponse(error)
+			error => this.errorMessage = "Email does not exist"
 		)
 	}
 
@@ -96,15 +96,12 @@ export class SuperAdminComponent implements OnInit {
 		this.userService.updateUser(this.user).subscribe(
 			data => {
 				console.log(data);
-				this.beforeUpdate = false;
-				this.afterUpdate = true;
+				this.beforeUpdate = true;
+				this.afterUpdate = false;
 				/* this.openMyModal(data); */
-				this.user.first_name = data.first_name;
-				this.user.last_name = data.last_name;
-				this.user.email = data.email;
-				this.user.password = data.password;
+				this.message = "User has been updated successfully!"
 			},
-			error => this.handleRegisterErrorResponse(error)
+			error => this.errorMessage = "rip bozo"
 		)
 	}
 

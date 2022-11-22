@@ -5,6 +5,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
 import { UserService } from 'src/app/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
+import { User } from 'src/app/common/user';
 
 @Component({
   selector: 'app-doctor',
@@ -28,8 +29,6 @@ export class DoctorComponent implements OnInit {
   //Appointments
   appts: Appointment[] = [];
   tdyAppts: Appointment[] = [];
-  pastAppts: Appointment[] = [];
-  upcomingAppts: Appointment[] = [];
 
   //Patient Info
   patientFirstName = "";
@@ -39,6 +38,13 @@ export class DoctorComponent implements OnInit {
   contact = "";
   email = "";
   diagnosis = "";
+
+  // doctor adding diagnosis
+  apptId = NaN;
+  patientId = NaN;
+  dateVisited = "";
+  prescription = "";
+  timeslot = NaN;
 
   //Error message from backend server
   errorMsg = "";
@@ -89,6 +95,10 @@ export class DoctorComponent implements OnInit {
         this.contact = patient.contact_number;
         this.email = patient.email;
         this.diagnosis = value.diagnosis;
+        this.patientId = value.patient_id
+        this.apptId = value.appt_id;
+        this.dateVisited = value.date_visited;
+        this.timeslot = value.timeslot;
       } 
     })
   }
@@ -106,4 +116,64 @@ export class DoctorComponent implements OnInit {
     return res;
   }
   
+  // method to add in diagnosis and prescription 
+  addDiagnosis(){
+     // This is POSTed to the backend
+     let appt = {
+       "appt_id": this.apptId,
+      "diagnosis": this.diagnosis,
+      "prescription": this.prescription
+     };
+    
+    //  console.log(this.appointmentService.editAppt(appt));
+     this.appointmentService.editApptDiagnosisAndPrescription(appt).subscribe(
+       data => {
+        console.log(data)
+        let query = {
+          // pass patient name
+          "Patient": this.patientFirstName + this.patientLastName,
+          // pass diagnosis 
+          "Diagnosis": data.diagnosis,
+          // pass prepscription 
+          "Prescription": data.prescription,
+        };
+        this.router.navigate(['doctor/add-diagnosis-success'], {queryParams: query});
+       },
+       error => {
+        this.router.navigate(['doctor/add-diagnosis-failure']);
+       }
+     )
+ }
+
+   // Show overlay for patient history
+   hideHistory = true;
+   selectedPatient = {} as User;
+   showOverlay() {
+     this.hideHistory = false;
+     this.selectedPatient = {
+      'user_id': this.patientId,
+      'first_name': this.patientFirstName,
+      'last_name': this.patientLastName,
+      'contact_number': '', // These are just blank because we don't need them
+      'dob': '',            //
+      'email': '',          //
+      'date_created': '',   //
+      'gender': '',         //
+      'address': '',        //
+      'password': '',       //
+      'account_type': ''    // These are just blank because we don't need them
+     };
+ 
+     setTimeout(() => {
+       document.getElementById("patient-history-overlay")!.style.opacity = "1";
+     }, 50) // Need to sleep so that the opacity only changes AFTER DOM element is unhidden for CSS transition to work
+   }
+   
+   hideOverlay() {
+     document.getElementById("patient-history-overlay")!.style.opacity = "0";
+     setTimeout(() => {
+       this.hideHistory = true;
+     }, 300) // Need to sleep so that the hidden parameter only changes AFTER CSS transition is finished, this 300ms is also in the css transition set to 0.3s
+   }
+   // End overlay
 }

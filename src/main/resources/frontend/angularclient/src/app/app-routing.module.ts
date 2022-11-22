@@ -18,6 +18,8 @@ import { PatientMakeAppointmentSuccessComponent } from './components/patient-mak
 import { PatientMakeAppointmentFailureComponent } from './components/patient-make-appointment-failure/patient-make-appointment-failure.component';
 import { AllPatientsComponent } from './components/all-patients/all-patients.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { DocAddDiagnosisSuccessComponent } from './components/doc-add-diagnosis-success/doc-add-diagnosis-success.component';
+import { DocAddDiagnosisFailureComponent } from './components/doc-add-diagnosis-failure/doc-add-diagnosis-failure.component';
 
 
 const routes: Routes = [
@@ -33,6 +35,8 @@ const routes: Routes = [
   {path: 'patient', component: PatientProfileComponent, canActivate: [RouteGuardService]},
   {path: 'admin', component: SuperAdminComponent, canActivate: [RouteGuardService]},
   {path: 'doctor', component: DoctorComponent, canActivate: [RouteGuardService]},
+  {path: 'doctor/add-diagnosis-success', component: DocAddDiagnosisSuccessComponent, canActivate: [RouteGuardService]},
+  {path: 'doctor/add-diagnosis-failure', component: DocAddDiagnosisFailureComponent, canActivate: [RouteGuardService]},
   {path: 'doctor/appointments', component: DoctorAppointmentsComponent, canActivate: [RouteGuardService]},
   {path: 'nurse', component: NurseComponent, canActivate: [RouteGuardService]},
   {path: 'all-patients', component: AllPatientsComponent, canActivate: [RouteGuardService]},
