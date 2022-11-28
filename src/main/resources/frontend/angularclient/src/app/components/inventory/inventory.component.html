@@ -8,6 +8,7 @@
                     <th>Drug Name</th>
                     <th>Description</th>
                     <th>Quantity</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                     <td>{{item.product_name }}</td>
                     <td>{{item.description}}</td>
                     <td [ngClass]="checkStock(item.qty) == 'true' ? 'stock-low' : 'stock'" >{{item.qty}}</td>
+                    <td> <button class="btn btn-primary" [ngClass]="checkStock(item.qty) == 'true' ? ' ' : 'disabled'">Add Stock</button></td>
                 </tr>
             </tbody>
         </table>
