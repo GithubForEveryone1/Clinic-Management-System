@@ -31,6 +31,7 @@ import { DocAddDiagnosisFailureComponent } from './components/doc-add-diagnosis-
 import { AllPatientsComponent } from './components/all-patients/all-patients.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PatientHistoryComponent } from './components/patient-history/patient-history.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { PatientHistoryComponent } from './components/patient-history/patient-hi
 		DocAddDiagnosisSuccessComponent,
 		DocAddDiagnosisFailureComponent,
 		ProfileComponent,
-		PatientHistoryComponent
+		PatientHistoryComponent,
+  InventoryComponent
 	],
 	imports: [
 		BrowserModule,
