@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { Inventory } from 'src/app/common/inventory';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-inventory',
@@ -15,7 +16,9 @@ export class InventoryComponent implements OnInit {
   inventory: Inventory[] = [];
   error = "";
 
-  constructor(private router: Router, private inventoryService: InventoryService, private route: ActivatedRoute) { }
+  stock = NaN;
+
+  constructor(private router: Router, private inventoryService: InventoryService, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.inventoryService.getInventoryList().subscribe(
@@ -28,6 +31,15 @@ export class InventoryComponent implements OnInit {
       },
       // error => this.handleErrorResponse(error),
     );
+  }
+
+  checkStock(stock: number): string{
+    if(stock <= 30){
+      return 'true'; 
+    }
+    else {
+      return 'false';
+    }
   }
 
 }
