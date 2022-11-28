@@ -57,5 +57,7 @@ public class Inventory {
 		this.qty = qty;
 	}
 	
-	
+	public Inventory() {
+		
+	}
 }
