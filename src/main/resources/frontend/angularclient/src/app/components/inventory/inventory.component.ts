@@ -4,6 +4,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { Inventory } from 'src/app/common/inventory';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-inventory',
@@ -40,6 +41,14 @@ export class InventoryComponent implements OnInit {
     else {
       return 'false';
     }
+  }
+
+  showFormModal(){
+    $('#myModalCenter').modal('show');
+  }
+
+  closeFormModal(){
+    $('#myModalCenter').modal('hide');
   }
 
 }
