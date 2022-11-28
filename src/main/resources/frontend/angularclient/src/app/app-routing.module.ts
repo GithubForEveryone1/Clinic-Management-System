@@ -20,6 +20,7 @@ import { AllPatientsComponent } from './components/all-patients/all-patients.com
 import { ProfileComponent } from './components/profile/profile.component';
 import { DocAddDiagnosisSuccessComponent } from './components/doc-add-diagnosis-success/doc-add-diagnosis-success.component';
 import { DocAddDiagnosisFailureComponent } from './components/doc-add-diagnosis-failure/doc-add-diagnosis-failure.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path: 'nurse', component: NurseComponent, canActivate: [RouteGuardService]},
   {path: 'all-patients', component: AllPatientsComponent, canActivate: [RouteGuardService]},
   {path: 'profile', component: ProfileComponent, canActivate: [RouteGuardService]},
+  {path: 'inventory', component: InventoryComponent, canActivate: [RouteGuardService]},
   {path: '**', component: ErrorComponent},
   {path: 'error', component: ErrorComponent} 
 ];
