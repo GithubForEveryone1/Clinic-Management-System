@@ -18,6 +18,7 @@ export class InventoryComponent implements OnInit {
   error = "";
 
   stock = NaN;
+  product_name = '';
 
   constructor(private router: Router, private inventoryService: InventoryService, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
 
@@ -43,8 +44,9 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  showFormModal(){
+  showFormModal(product_name: string){
     $('#myModalCenter').modal('show');
+    this.product_name = product_name;
   }
 
   closeFormModal(){
