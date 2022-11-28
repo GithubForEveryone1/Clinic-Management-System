@@ -28,7 +28,7 @@ public class InventoryRestController {
 		
 		try {
 			theInventory = inventoryService.findAll();
-			System.out.println(theInventory);
+//			System.out.println(theInventory);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
