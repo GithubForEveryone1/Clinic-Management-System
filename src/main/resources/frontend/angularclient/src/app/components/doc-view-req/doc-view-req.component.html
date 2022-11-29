@@ -10,6 +10,7 @@
                     <th>Drug Name</th>
                     <th>Quantity</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,8 @@
                     <td>{{req.product.product_name}}</td>
                     <td>{{req.req_qty}}</td>
                     <td [ngClass]="checkStatus(req.status)">{{req.status}}</td>
+                    <td><button type="button" class="btn btn-success mx-3">Approve</button> 
+                        <button type="button" class="btn btn-danger">Reject</button></td>
                 </tr>
             </tbody>
         </table>
