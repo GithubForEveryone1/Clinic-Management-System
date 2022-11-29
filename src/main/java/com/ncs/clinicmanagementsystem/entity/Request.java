@@ -26,6 +26,10 @@ public class Request {
 	@Column(name="nurse_id")
 	private int nurse_id;
 	
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="nurse_id", insertable=false, updatable=false)
+	private User nurse;
+	
 	@Column(name="inv_id")
 	private int inv_id;
 	
@@ -98,21 +102,32 @@ public class Request {
 	public void setDate_created(Date date_created) {
 		this.date_created = date_created;
 	}
+	
+	public User getNurse() {
+		return nurse;
+	}
 
-	public Request(int nurse_id, int inv_id, Inventory product, int req_qty, String status, Date date_created) {
+	public void setNurse(User nurse) {
+		this.nurse = nurse;
+	}
+
+	@Override
+	public String toString() {
+		return "Request [request_id=" + request_id + ", nurse_id=" + nurse_id + ", nurse=" + nurse + ", inv_id="
+				+ inv_id + ", product=" + product + ", req_qty=" + req_qty + ", status=" + status + ", date_created="
+				+ date_created + "]";
+	}
+
+	public Request(int nurse_id, User nurse, int inv_id, Inventory product, int req_qty, String status,
+			Date date_created) {
 		super();
 		this.nurse_id = nurse_id;
+		this.nurse = nurse;
 		this.inv_id = inv_id;
 		this.product = product;
 		this.req_qty = req_qty;
 		this.status = status;
 		this.date_created = date_created;
-	}
-
-	@Override
-	public String toString() {
-		return "Request [request_id=" + request_id + ", nurse_id=" + nurse_id + ", inv_id=" + inv_id + ", product="
-				+ product + ", req_qty=" + req_qty + ", status=" + status + ", date_created=" + date_created + "]";
 	}
 
 	public Request() {}
