@@ -30,6 +30,10 @@ export class InventoryComponent implements OnInit {
   invId = NaN;
   qty = NaN;
 
+  // response messages
+  message= "";
+  errorMessage="";
+
   constructor(
     private router: Router, 
     private inventoryService: InventoryService, 
@@ -81,9 +85,11 @@ export class InventoryComponent implements OnInit {
     this.requestService.addRequest(req).subscribe(
       data =>{
         console.log(data);
-      }
-    )
-   
+        this.message = "Your request has been submitted successfully."
+      },
+      error => this.errorMessage = "Please try again"
+    );
+    
+    $('#myModalCenter').modal('hide');
   }
-
 }
