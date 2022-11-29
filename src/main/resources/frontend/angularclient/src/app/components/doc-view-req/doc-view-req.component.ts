@@ -26,4 +26,14 @@ export class DocViewReqComponent implements OnInit {
     )
   }
 
+  checkStatus(status: string): string{
+    if (status === 'approved') {
+      return "approved";
+    } else if (status === 'rejected') {
+      return "rejected";
+    } else {
+      return "pending";
+    }
+  }
+
 }

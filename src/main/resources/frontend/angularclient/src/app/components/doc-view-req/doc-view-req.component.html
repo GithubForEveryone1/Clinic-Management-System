@@ -18,7 +18,7 @@
                     <td>{{req.nurse.first_name + ' ' + req.nurse.last_name}}</td>
                     <td>{{req.product.product_name}}</td>
                     <td>{{req.req_qty}}</td>
-                    <td>{{req.status}}</td>
+                    <td [ngClass]="checkStatus(req.status)">{{req.status}}</td>
                 </tr>
             </tbody>
         </table>

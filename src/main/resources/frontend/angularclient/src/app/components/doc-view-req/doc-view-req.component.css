@@ -1,0 +1,11 @@
+.pending {
+    background-color: rgb(255, 192, 57);
+}
+
+.approved {
+    background-color: green;
+}
+
+.rejected {
+    background-color: red;
+}
