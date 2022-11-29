@@ -32,6 +32,7 @@ import { AllPatientsComponent } from './components/all-patients/all-patients.com
 import { ProfileComponent } from './components/profile/profile.component';
 import { PatientHistoryComponent } from './components/patient-history/patient-history.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
+import { NurseAddReqSuccessComponent } from './components/nurse-add-req-success/nurse-add-req-success.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { InventoryComponent } from './components/inventory/inventory.component';
 		DocAddDiagnosisFailureComponent,
 		ProfileComponent,
 		PatientHistoryComponent,
-  InventoryComponent
+  InventoryComponent,
+  NurseAddReqSuccessComponent
 	],
 	imports: [
 		BrowserModule,
