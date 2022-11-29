@@ -15,4 +15,8 @@ export class RequestService {
   addRequest(request: any): Observable<Request>{
     return this.httpClient.post<Request>(`${this.baseUrl}/request/create`, request);
   }
+
+  viewRequests(): Observable<Request[]>{
+    return this.httpClient.get<Request[]>(`${this.baseUrl}/requests`);
+  }
 }
