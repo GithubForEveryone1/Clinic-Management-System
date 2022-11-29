@@ -31,6 +31,17 @@ public class Request {
 	
 	@Column(name="req_qty")
 	private int req_qty;
+	
+	@Column(name="status")
+	private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public int getRequest_id() {
 		return request_id;
@@ -72,20 +83,21 @@ public class Request {
 		this.req_qty = req_qty;
 	}
 
-	public Request(int nurse_id, int inv_id, Inventory product, int req_qty) {
+	public Request(int nurse_id, int inv_id, Inventory product, int req_qty, String status) {
 		super();
 		this.nurse_id = nurse_id;
 		this.inv_id = inv_id;
 		this.product = product;
 		this.req_qty = req_qty;
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "Request [request_id=" + request_id + ", nurse_id=" + nurse_id + ", inv_id=" + inv_id + ", product="
-				+ product + ", req_qty=" + req_qty + "]";
+				+ product + ", req_qty=" + req_qty + ", status=" + status + "]";
 	}
-	
+
 	public Request() {}
 
 }
