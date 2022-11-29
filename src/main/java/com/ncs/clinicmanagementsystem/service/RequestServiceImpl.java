@@ -22,7 +22,7 @@ public class RequestServiceImpl implements RequestService{
 
 	@Override
 	@Transactional
-	public List<User> findAll() {
+	public List<Request> findAll() {
 		return reqDAO.findAll();
 	}
 	

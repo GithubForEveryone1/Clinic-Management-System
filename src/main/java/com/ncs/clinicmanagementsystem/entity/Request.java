@@ -1,5 +1,7 @@
 package com.ncs.clinicmanagementsystem.entity;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name="request")
@@ -34,6 +38,10 @@ public class Request {
 	
 	@Column(name="status")
 	private String status;
+	
+	@Column(name="date_created")
+	@CreationTimestamp
+	private Date date_created;
 
 	public String getStatus() {
 		return status;
@@ -83,19 +91,28 @@ public class Request {
 		this.req_qty = req_qty;
 	}
 
-	public Request(int nurse_id, int inv_id, Inventory product, int req_qty, String status) {
+	public Date getDate_created() {
+		return date_created;
+	}
+
+	public void setDate_created(Date date_created) {
+		this.date_created = date_created;
+	}
+
+	public Request(int nurse_id, int inv_id, Inventory product, int req_qty, String status, Date date_created) {
 		super();
 		this.nurse_id = nurse_id;
 		this.inv_id = inv_id;
 		this.product = product;
 		this.req_qty = req_qty;
 		this.status = status;
+		this.date_created = date_created;
 	}
 
 	@Override
 	public String toString() {
 		return "Request [request_id=" + request_id + ", nurse_id=" + nurse_id + ", inv_id=" + inv_id + ", product="
-				+ product + ", req_qty=" + req_qty + ", status=" + status + "]";
+				+ product + ", req_qty=" + req_qty + ", status=" + status + ", date_created=" + date_created + "]";
 	}
 
 	public Request() {}

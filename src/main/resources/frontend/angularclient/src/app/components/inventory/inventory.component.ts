@@ -5,6 +5,7 @@ import { Inventory } from 'src/app/common/inventory';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import * as bootstrap from 'bootstrap';
+import { RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-inventory',
@@ -13,14 +14,28 @@ import * as bootstrap from 'bootstrap';
 })
 export class InventoryComponent implements OnInit {
 
+  loggedInUserStr: string | null = sessionStorage.getItem("loggedInUser");
+
+  //parse JSON back to User object
+  loggedInUser = this.loggedInUserStr ? JSON.parse(this.loggedInUserStr) : null;
+
+  nurseId = this.loggedInUser.user_id;
+
   // inventory list
   inventory: Inventory[] = [];
   error = "";
 
   stock = NaN;
-  product_name = '';
+  productName = '';
+  invId = NaN;
+  qty = NaN;
 
-  constructor(private router: Router, private inventoryService: InventoryService, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
+  constructor(
+    private router: Router, 
+    private inventoryService: InventoryService, 
+    private route: ActivatedRoute, 
+    private authenticationService: AuthenticationService,
+    private requestService: RequestService) { }
 
   ngOnInit(): void {
     this.inventoryService.getInventoryList().subscribe(
@@ -44,13 +59,31 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  showFormModal(product_name: string){
+  showFormModal(productName: string, invId: number){
     $('#myModalCenter').modal('show');
-    this.product_name = product_name;
+    this.productName = productName;
+    this.invId = invId;
   }
 
   closeFormModal(){
     $('#myModalCenter').modal('hide');
+  }
+
+  addRequest(){
+    // This is POSTed to the backend
+    let req = {
+      "inv_id": this.invId,
+      "nurse_id": this.nurseId,
+      "req_qty": this.qty,
+      "status": "pending",
+    };
+
+    this.requestService.addRequest(req).subscribe(
+      data =>{
+        console.log(data);
+      }
+    )
+   
   }
 
 }
