@@ -3,6 +3,8 @@ import { RequestService } from 'src/app/services/request.service';
 import { Request } from 'src/app/common/request';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-doc-view-req',
@@ -19,6 +21,7 @@ export class DocViewReqComponent implements OnInit {
   constructor(
     private router: Router,
     private requestService: RequestService,
+    private inventoryService: InventoryService,
     private route: ActivatedRoute, 
     private authenticationService: AuthenticationService,) { }
 
@@ -44,15 +47,16 @@ export class DocViewReqComponent implements OnInit {
     }
   }
 
-  approveRequest(request_id: number) {
-    let req = {
-      "request_id": request_id,
-      "status": ""
-    }
-    this.requestService.approveRequest(req).subscribe(
+  approveRequest(request: any) {
+    this.requestService.approveRequest(request).subscribe(
       data=>{
         console.log(data);
         this.ngOnInit();
+      }
+    )
+    this.inventoryService.renewStockQty(request).subscribe(
+      data => {
+        console.log(data);
       }
     )
   }

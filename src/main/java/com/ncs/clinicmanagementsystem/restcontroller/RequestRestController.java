@@ -82,7 +82,7 @@ public class RequestRestController {
 	// change status to reject
 	@PutMapping("/request/reject")
 	public Request rejectRequest(@RequestBody Request req) {
-		System.out.println(req);
+		
 		try {
 			requestService.rejectRequest(req);
 			

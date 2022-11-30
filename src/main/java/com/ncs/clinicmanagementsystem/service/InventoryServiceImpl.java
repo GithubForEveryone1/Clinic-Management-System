@@ -25,4 +25,11 @@ public class InventoryServiceImpl implements InventoryService{
 		return inventoryDAO.findAll();
 	}
 
+	@Override
+	@Transactional
+	public void renewStockQty(Inventory inv, int qty) {
+		inventoryDAO.renewStockQty(inv,qty);
+		
+	}
+
 }

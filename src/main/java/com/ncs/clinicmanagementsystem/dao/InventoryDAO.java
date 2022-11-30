@@ -8,4 +8,6 @@ public interface InventoryDAO {
 
 	public List<Inventory> findAll();
 
+	public void renewStockQty(Inventory inv, int qty);
+
 }
