@@ -6,6 +6,8 @@ import { UserService } from 'src/app/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { User } from 'src/app/common/user';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { Inventory } from 'src/app/common/inventory';
 
 @Component({
   selector: 'app-doctor',
@@ -49,9 +51,15 @@ export class DoctorComponent implements OnInit {
   //Error message from backend server
   errorMsg = "";
 
+  //inventory
+  meds: Inventory[] = [];
+  quantity = NaN;
+  product_name ="";
+
   constructor(
     private router: Router, 
     private appointmentService: AppointmentService, 
+    private inventoryService: InventoryService,
     private userService: UserService, 
     private route: ActivatedRoute) { }
 
@@ -62,6 +70,7 @@ export class DoctorComponent implements OnInit {
         console.log(this.appts);
         this.displayTdyAppts();
         console.log(this.tdyAppts);
+        this.showMeds();
       },
       error => this.handleErrorResponse(error),
     );
@@ -120,9 +129,9 @@ export class DoctorComponent implements OnInit {
   addDiagnosis(){
      // This is POSTed to the backend
      let appt = {
-       "appt_id": this.apptId,
+      "appt_id": this.apptId,
       "diagnosis": this.diagnosis,
-      "prescription": this.prescription
+      "prescription": this.product_name + "x" + this.quantity
      };
     
     //  console.log(this.appointmentService.editAppt(appt));
@@ -176,4 +185,13 @@ export class DoctorComponent implements OnInit {
      }, 300) // Need to sleep so that the hidden parameter only changes AFTER CSS transition is finished, this 300ms is also in the css transition set to 0.3s
    }
    // End overlay
+
+   // display all medicine in inventory
+   showMeds(){
+    this.inventoryService.getInventoryList().subscribe(
+      data => {
+        this.meds = data;
+      }
+    )
+   }
 }
