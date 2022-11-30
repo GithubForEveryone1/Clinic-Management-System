@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from 'src/app/services/request.service';
 import { Request } from 'src/app/common/request';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-doc-view-req',
@@ -12,7 +14,13 @@ export class DocViewReqComponent implements OnInit {
   // requests array
   reqs: Request[] = [];
 
-  constructor(private requestService: RequestService) { }
+  request_id = NaN;
+
+  constructor(
+    private router: Router,
+    private requestService: RequestService,
+    private route: ActivatedRoute, 
+    private authenticationService: AuthenticationService,) { }
 
   ngOnInit(): void {
     this.requestService.viewRequests().subscribe(
@@ -36,8 +44,16 @@ export class DocViewReqComponent implements OnInit {
     }
   }
 
-  // approveRequest(){
-
-  // }
-
+  approveRequest(request_id: number) {
+    let req = {
+      "request_id": request_id,
+      "status": ""
+    }
+    this.requestService.approveRequest(req).subscribe(
+      data=>{
+        console.log(data);
+        this.ngOnInit();
+      }
+    )
+  }
 }

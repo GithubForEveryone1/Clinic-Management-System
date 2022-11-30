@@ -19,4 +19,8 @@ export class RequestService {
   viewRequests(): Observable<Request[]>{
     return this.httpClient.get<Request[]>(`${this.baseUrl}/requests`);
   }
+
+  approveRequest(request: any): Observable<Request>{
+    return this.httpClient.post<Request>(`${this.baseUrl}/request/approve`, request);
+  }
 }
