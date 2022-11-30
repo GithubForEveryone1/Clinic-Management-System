@@ -32,4 +32,18 @@ public class RequestServiceImpl implements RequestService{
 		reqDAO.save(req);
 
 	}
+
+	@Override
+	@Transactional
+	public void approveRequest(Request req) {
+		reqDAO.approveRequest(req);
+		
+	}
+
+	@Override
+	@Transactional
+	public void rejectRequest(Request req) {
+		reqDAO.rejectRequest(req);
+		
+	}
 }

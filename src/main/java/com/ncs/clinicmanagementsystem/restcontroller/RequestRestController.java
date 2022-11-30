@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,6 +62,36 @@ public class RequestRestController {
 		}
 
 		return requests;
+	}
+	
+	// change status from pending to approve
+	@PutMapping("/request/approve")
+	public Request approveRequest(@RequestBody Request req) {
+		
+		try {
+			requestService.approveRequest(req);
+			
+		}
+		catch(Exception e) {
+			throw new RuntimeException("Could not update request due to unknown error :(");
+		}
+		return req;
+		
+	}
+	
+	// change status to reject
+	@PutMapping("/request/reject")
+	public Request rejectRequest(@RequestBody Request req) {
+		
+		try {
+			requestService.rejectRequest(req);
+			
+		}
+		catch(Exception e) {
+			throw new RuntimeException("Could not update request due to unknown error :(");
+		}
+		return req;
+		
 	}
 	
 }

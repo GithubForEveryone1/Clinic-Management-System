@@ -15,4 +15,8 @@ export class InventoryService {
   getInventoryList(): Observable<Inventory[]>{
     return this.httpClient.get<Inventory[]>(`${this.baseUrl}/inventory`);
   }
+
+  renewStockQty(request: any): Observable<Request>{
+    return this.httpClient.put<Request>(`${this.baseUrl}/inventory/renew-stock-qty`, request);
+  }
 }

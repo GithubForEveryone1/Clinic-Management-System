@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ncs.clinicmanagementsystem.entity.Inventory;
+import com.ncs.clinicmanagementsystem.entity.Request;
 
 @Repository
 public class InventoryDAOHibernateImpl implements InventoryDAO{
@@ -36,6 +37,23 @@ public class InventoryDAOHibernateImpl implements InventoryDAO{
 		
 		// return result 
 		return inventory;
+	}
+
+	@Override
+	public void renewStockQty(Inventory inv, int qty) {
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+					
+		Inventory existingInventory = currentSession.find(Inventory.class, inv.getInv_id());
+					
+		// change qty
+		int currentQty = existingInventory.getQty();
+		int newQty = currentQty + qty;
+		existingInventory.setQty(newQty);
+					
+		// update the request
+		currentSession.update(existingInventory);
+		
 	}
 
 }

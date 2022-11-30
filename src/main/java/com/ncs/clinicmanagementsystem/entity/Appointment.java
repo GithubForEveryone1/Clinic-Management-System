@@ -100,7 +100,6 @@ public class Appointment {
 		this.doctor = doctor;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return "Appointment [appt_id=" + appt_id + ", patient_id=" + patient_id + ", doctor_id=" + doctor_id
