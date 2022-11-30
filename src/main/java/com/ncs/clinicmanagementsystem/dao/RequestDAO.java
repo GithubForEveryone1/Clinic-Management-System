@@ -12,4 +12,6 @@ public interface RequestDAO {
 
 	public void approveRequest(Request req);
 
+	public void rejectRequest(Request req);
+
 }

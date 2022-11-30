@@ -39,4 +39,11 @@ public class RequestServiceImpl implements RequestService{
 		reqDAO.approveRequest(req);
 		
 	}
+
+	@Override
+	@Transactional
+	public void rejectRequest(Request req) {
+		reqDAO.rejectRequest(req);
+		
+	}
 }

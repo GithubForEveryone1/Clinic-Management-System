@@ -12,4 +12,6 @@ public interface RequestService {
 
 	public void approveRequest(Request req);
 
+	public void rejectRequest(Request req);
+
 }

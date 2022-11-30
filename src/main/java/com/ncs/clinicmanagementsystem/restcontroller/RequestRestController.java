@@ -65,11 +65,26 @@ public class RequestRestController {
 	}
 	
 	// change status from pending to approve
-	@PostMapping("/request/approve")
+	@PutMapping("/request/approve")
 	public Request approveRequest(@RequestBody Request req) {
-		System.out.println(req);
+		
 		try {
 			requestService.approveRequest(req);
+			
+		}
+		catch(Exception e) {
+			throw new RuntimeException("Could not update request due to unknown error :(");
+		}
+		return req;
+		
+	}
+	
+	// change status to reject
+	@PutMapping("/request/reject")
+	public Request rejectRequest(@RequestBody Request req) {
+		System.out.println(req);
+		try {
+			requestService.rejectRequest(req);
 			
 		}
 		catch(Exception e) {

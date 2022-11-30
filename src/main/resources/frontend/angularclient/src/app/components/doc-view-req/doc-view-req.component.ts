@@ -56,4 +56,17 @@ export class DocViewReqComponent implements OnInit {
       }
     )
   }
+
+  rejectRequest(request_id: number){
+    let req = {
+      "request_id": request_id,
+      "status": ""
+    }
+    this.requestService.rejectRequest(req).subscribe(
+      data=>{
+        console.log(data);
+        this.ngOnInit();
+      }
+    )
+  }
 }

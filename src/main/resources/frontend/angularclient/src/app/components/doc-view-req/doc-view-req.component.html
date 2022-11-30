@@ -21,7 +21,7 @@
                     <td>{{req.req_qty}}</td>
                     <td [ngClass]="checkStatus(req.status)">{{req.status}}</td>
                     <td><button type="button" class="btn btn-success mx-3" (click)="approveRequest(req.request_id)">Approve</button> 
-                        <button type="button" class="btn btn-danger">Reject</button></td>
+                        <button type="button" class="btn btn-danger" (click)="rejectRequest(req.request_id)">Reject</button></td>
                 </tr>
             </tbody>
         </table>

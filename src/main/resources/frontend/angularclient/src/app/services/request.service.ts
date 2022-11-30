@@ -21,6 +21,10 @@ export class RequestService {
   }
 
   approveRequest(request: any): Observable<Request>{
-    return this.httpClient.post<Request>(`${this.baseUrl}/request/approve`, request);
+    return this.httpClient.put<Request>(`${this.baseUrl}/request/approve`, request);
+  }
+
+  rejectRequest(request: any): Observable<Request>{
+    return this.httpClient.put<Request>(`${this.baseUrl}/request/reject`, request);
   }
 }

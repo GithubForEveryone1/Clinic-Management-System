@@ -62,4 +62,19 @@ public class RequestDAOHibernateImpl implements RequestDAO{
 			// update the request
 			currentSession.update(existingRequest);
 		}
+
+		@Override
+		public void rejectRequest(Request req) {
+			// get the current hibernate session
+			Session currentSession = entityManager.unwrap(Session.class);
+						
+			Request existingRequest = currentSession.find(Request.class, req.getRequest_id());
+						
+			// change the status to approve
+			existingRequest.setStatus("rejected");
+						
+			// update the request
+			currentSession.update(existingRequest);
+			
+		}
 }
