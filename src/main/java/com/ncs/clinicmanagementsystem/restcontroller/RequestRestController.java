@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,6 +62,19 @@ public class RequestRestController {
 		}
 
 		return requests;
+	}
+	
+	// change status from pending to approve
+	@PutMapping("/request/approve")
+	public Request approveRequest(@RequestBody Request req) {
+		try {
+			requestService.approveRequest(req);
+		}
+		catch(Exception e) {
+			
+		}
+		return req;
+		
 	}
 	
 }

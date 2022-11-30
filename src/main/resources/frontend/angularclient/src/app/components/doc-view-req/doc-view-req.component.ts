@@ -36,4 +36,8 @@ export class DocViewReqComponent implements OnInit {
     }
   }
 
+  // approveRequest(){
+
+  // }
+
 }

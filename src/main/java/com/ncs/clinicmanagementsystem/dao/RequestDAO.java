@@ -10,4 +10,6 @@ public interface RequestDAO {
 	
 	public void save(Request req);
 
+	public void approveRequest(Request req);
+
 }
