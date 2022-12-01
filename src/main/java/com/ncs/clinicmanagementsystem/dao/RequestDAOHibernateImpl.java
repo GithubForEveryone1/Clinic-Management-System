@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -76,5 +78,16 @@ public class RequestDAOHibernateImpl implements RequestDAO{
 			// update the request
 			currentSession.update(existingRequest);
 			
+		}
+
+		@Override
+		public List<Request> getRequestByNurseId(int nurseId) {
+			// get the current hibernate session
+			Session currentSession = entityManager.unwrap(Session.class);
+			
+			// get the requests for nurse
+			Criteria criteria = currentSession.createCriteria(Request.class);
+			List<Request> nurseRequests = criteria.add(Restrictions.eqOrIsNull("nurse_id", nurseId)).list();
+			return nurseRequests;
 		}
 }

@@ -27,4 +27,8 @@ export class RequestService {
   rejectRequest(request: any): Observable<Request>{
     return this.httpClient.put<Request>(`${this.baseUrl}/request/reject`, request);
   }
+
+  getRequestByNurseId(nurseId: number): Observable<Request[]>{
+    return this.httpClient.get<Request[]>(`${this.baseUrl}/request/` + nurseId);
+  }
 }

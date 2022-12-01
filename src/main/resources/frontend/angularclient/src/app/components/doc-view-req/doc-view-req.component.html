@@ -20,8 +20,8 @@
                     <td>{{req.product.product_name}}</td>
                     <td>{{req.req_qty}}</td>
                     <td [ngClass]="checkStatus(req.status)">{{req.status}}</td>
-                    <td><button type="button" class="btn btn-success mx-3" (click)="approveRequest(req)">Approve</button> 
-                        <button type="button" class="btn btn-danger" (click)="rejectRequest(req.request_id)">Reject</button></td>
+                    <td><button type="button" class="btn btn-success mx-3" [ngClass]="checkStatus(req.status) != 'pending' ? 'disabled' : '' " (click)="approveRequest(req)">Approve</button> 
+                        <button type="button" class="btn btn-danger" [ngClass]="checkStatus(req.status) != 'pending' ? 'disabled' : '' " (click)="rejectRequest(req.request_id)">Reject</button></td>
                 </tr>
             </tbody>
         </table>
