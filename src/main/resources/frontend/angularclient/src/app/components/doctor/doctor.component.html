@@ -309,9 +309,16 @@
                         <label for="docDiagnosis">Doctor's Diagnosis</label>
                         <textarea class="form-control" id="docDiagnosis" rows="4" name="diagnosis" [(ngModel)]="diagnosis"></textarea>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group mt-2">
                         <label for="docDiagnosis">Prescription</label>
-                        <textarea class="form-control" id="docPrescription" rows="4" name="prescription" [(ngModel)]="prescription"></textarea>
+                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search medicine" name="product_name" [(ngModel)]="product_name">
+                        <datalist id="datalistOptions">
+                          <option *ngFor="let med of meds" value="{{med.product_name}}">
+                        </datalist>
+                      </div>
+                      <div class="form-group mt-2">
+                        <label for="docDiagnosis">Quantity</label>
+                        <input class="form-control" type="number" name="quantity" [(ngModel)]="quantity">
                       </div>
                       <div class="mt-2">
                         <button type="submit" class="btn btn-primary" (click)="addDiagnosis()">Submit</button>
