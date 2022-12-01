@@ -117,7 +117,8 @@ export class DoctorComponent implements OnInit {
     let res = "false";
     
     this.tdyAppts.forEach((value) => {
-      if(value.timeslot === slot){
+      //check if apppointment completed i.e presccription is filled then change appointment color
+      if(value.timeslot === slot && value.prescription === null){
         // console.log(value.timeslot === slot);
         res = "true";
       }
@@ -186,12 +187,12 @@ export class DoctorComponent implements OnInit {
    }
    // End overlay
 
-    // display all medicine in inventory
-    showMeds(){
-      this.inventoryService.getInventoryList().subscribe(
-        data => {
-          this.meds = data;
-        }
-      )
-     }
+  // display all medicine in inventory
+  showMeds(){
+    this.inventoryService.getInventoryList().subscribe(
+      data => {
+        this.meds = data;
+      }
+    )
+    }
 }
