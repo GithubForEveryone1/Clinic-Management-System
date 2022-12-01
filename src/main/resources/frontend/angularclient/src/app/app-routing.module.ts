@@ -22,6 +22,7 @@ import { DocAddDiagnosisSuccessComponent } from './components/doc-add-diagnosis-
 import { DocAddDiagnosisFailureComponent } from './components/doc-add-diagnosis-failure/doc-add-diagnosis-failure.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { DocViewReqComponent } from './components/doc-view-req/doc-view-req.component';
+import { NurseViewReqComponent } from './components/nurse-view-req/nurse-view-req.component';
 
 
 const routes: Routes = [
@@ -45,6 +46,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent, canActivate: [RouteGuardService]},
   {path: 'inventory', component: InventoryComponent, canActivate: [RouteGuardService]},
   {path: 'requests', component: DocViewReqComponent, canActivate: [RouteGuardService]},
+  {path: 'requests/nurse', component: NurseViewReqComponent, canActivate: [RouteGuardService]},
   {path: '**', component: ErrorComponent},
   {path: 'error', component: ErrorComponent} 
 ];

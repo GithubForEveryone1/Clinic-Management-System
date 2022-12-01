@@ -34,6 +34,7 @@ import { PatientHistoryComponent } from './components/patient-history/patient-hi
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { NurseAddReqSuccessComponent } from './components/nurse-add-req-success/nurse-add-req-success.component';
 import { DocViewReqComponent } from './components/doc-view-req/doc-view-req.component';
+import { NurseViewReqComponent } from './components/nurse-view-req/nurse-view-req.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { DocViewReqComponent } from './components/doc-view-req/doc-view-req.comp
 		PatientHistoryComponent,
   InventoryComponent,
   NurseAddReqSuccessComponent,
-  DocViewReqComponent
+  DocViewReqComponent,
+  NurseViewReqComponent
 	],
 	imports: [
 		BrowserModule,

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -92,6 +93,19 @@ public class RequestRestController {
 		}
 		return req;
 		
+	}
+	
+	// get requests sent by Nurse
+	@GetMapping("/request/{nurseId}")
+	public List<Request> getRequestByNurseId(@PathVariable int nurseId) {
+		List<Request> theRequests;
+		try {
+			theRequests = requestService.getRequestByNurseId(nurseId);
+		}
+		catch(Exception e) {
+			throw new RuntimeException("Opps something happened. Please try again."); //throws error msg if error from db.
+		}
+		return theRequests;
 	}
 	
 }

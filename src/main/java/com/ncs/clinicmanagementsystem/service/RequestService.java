@@ -14,4 +14,6 @@ public interface RequestService {
 
 	public void rejectRequest(Request req);
 
+	public List<Request> getRequestByNurseId(int nurseId);
+
 }

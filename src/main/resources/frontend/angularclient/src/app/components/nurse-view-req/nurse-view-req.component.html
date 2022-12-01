@@ -1,0 +1,23 @@
+<div class="container" style="height:100vh">
+    <div class="row m-3">
+        <h1 class="text-center">These are all your requests</h1>
+        <table id="request" class="table table-striped mt-3" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Date of Request</th>
+                    <th>Drug Name</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let req of reqs">
+                    <td>{{req.date_created.split('T')[0]}}</td>
+                    <td>{{req.product.product_name}}</td>
+                    <td>{{req.req_qty}}</td>
+                    <td [ngClass]="checkStatus(req.status)">{{req.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

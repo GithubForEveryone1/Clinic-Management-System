@@ -1,4 +1,6 @@
-<div class="container" style="height:100vh">
+<h1 *ngIf="authenticationService.isUserLoggedIn()&& authenticationService.isUserPatient()">You have no access to this page</h1>
+<div *ngIf="authenticationService.isUserDoctor() || authenticationService.isUserNurse()" 
+    class="container" style="height:100vh">
     <div class="row m-3">
         <h1 class="text-center">Medicine Inventory List</h1>
         <div class="alert alert-success alert-dismissible fade show"

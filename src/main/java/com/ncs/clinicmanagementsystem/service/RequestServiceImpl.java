@@ -46,4 +46,10 @@ public class RequestServiceImpl implements RequestService{
 		reqDAO.rejectRequest(req);
 		
 	}
+
+	@Override
+	@Transactional
+	public List<Request> getRequestByNurseId(int nurseId) {
+		return reqDAO.getRequestByNurseId(nurseId);
+	}
 }
