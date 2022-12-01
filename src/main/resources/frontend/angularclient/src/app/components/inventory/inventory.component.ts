@@ -38,7 +38,7 @@ export class InventoryComponent implements OnInit {
     private router: Router, 
     private inventoryService: InventoryService, 
     private route: ActivatedRoute, 
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private requestService: RequestService) { }
 
   ngOnInit(): void {
